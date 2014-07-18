@@ -1,0 +1,22 @@
+" Vundle setup
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'Lucius'
+Plugin 'Zenburn'
+Plugin 'molokai'
+Plugin 'wombat256.vim'
+"" Plugins
+Plugin 'gmarik/Vundle.vim'
+Plugin 'ctrlp.vim'
+Plugin 'The-NERD-tree'
+Plugin 'taglist.vim'
+Plugin 'Mouse-Toggle'
+Plugin 'ctrlp.vim'
+Plugin 'vimwiki'
+Plugin 'bufexplorer.zip'
+Plugin 'fugitive.vim'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+call vundle#end()
