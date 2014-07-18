@@ -26,16 +26,16 @@ Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
 "" Plugins
-Plugin 'ctrlp.vim'
-Plugin 'fugitive.vim'
-Plugin 'Mouse-Toggle'
 Plugin 'The-NERD-tree'
-Plugin 'bufexplorer.zip'
 Plugin 'taglist.vim'
-Plugin 'vim-airline'
-Plugin 'vim-bufferline'
-Plugin 'vim-gitgutter'
+Plugin 'Mouse-Toggle'
+Plugin 'ctrlp.vim'
 Plugin 'vimwiki'
+Plugin 'bufexplorer.zip'
+Plugin 'fugitive.vim'
+Plugin 'vim-airline'
+Plugin 'vim-gitgutter'
+"Plugin 'vim-bufferline'
 "Plugin 'ShowMarks'
 call vundle#end()            " required
 
@@ -50,10 +50,21 @@ map <D-k> :tabnext<CR>
 map <D-j> :tabprevious<CR>
 map <D-/> :tabclose<CR>
 map <C-n> :NERDTreeToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
-map <Leader>tt :taglist<CR>
-map <Leader>nn :NERDTreeToggle<CR>
-map <Leader>bb :BufExplorer<CR>
+map <leader>tt :Tlist<CR>
+map <leader>nn :NERDTreeToggle<CR>
+map <leader>bb :BufExplorer<CR>
+map <leader>rc :e ~/.vimrc<CR>
+map <leader>rr :source ~/.vimrc<CR>  
+
+
+" " Plugin: taglist
+let tlist_php_settings = 'php;f:functions'
+let Tlist_WinWidth = 40
+let Tlist_Compact_Format = 1
+let Tlist_Use_Right_Window = 1
+let rlist_Show_One_File = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+
 
 " " Plugin: BufExplorer
 let g:bufExplorerDefaultHelp=0
@@ -65,12 +76,9 @@ let g:bufExplorerSortBy='number'
 
 
 " Plugin: NERDtree
-" autocmd vimenter * NERDTree
-"let NERDTreeShowBookmarks=1
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
-"let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
-"let NERDTreeKeepTreeInNewTab=1
-"let g:nerdtree_tabs_open_on_gui_startup=1
+let NERDTreeChDirMode = 0
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
+
+
