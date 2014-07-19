@@ -1,0 +1,7 @@
+#!/bin/bash
+
+INCLUDES=$HOME/includes
+# @todo should just path all files in the includes or scripts folder
+if [ -f $INCLUDES/network.sh ]; then
+    . $INCLUDES/network.sh
+fi

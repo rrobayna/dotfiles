@@ -2,6 +2,7 @@
 
 CONFIGS=$PWD"/dotfiles/"
 BREW=$PWD"/homebrew/"
+INCLUDES=$PWD"/includes/"
 
 # Install configs
 echo "Bootstraping configuration for $HOME"
@@ -9,15 +10,12 @@ ls $CONFIGS | while read _file; do
     cp $CONFIGS/$_file $HOME/.$_file
 done 
 
-if [[ $(uname) != 'Linux' ]]; then
-    # @todo check if homebrew is installed 
-    # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-    # Install brew configs
-    echo "Bootstrapping OS X commandline apps using Homebrew"
-    cp $BREW/Brewfile $HOME/Brewfile
-    echo "Bootstrapping OS X desktop apps using Homebrew Cask"
-    cp $BREW/Caskfile $HOME/Caskfile
+# Install include scripts
+echo "Installing bash includes..."
+if [ ! -d $HOME/includes ]; then
+    mkdir $HOME/includes
 fi
+cp -r $INCLUDES $HOME/includes/
 
 if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
     # Install Vundle Plugin Manager for Vim 
@@ -27,5 +25,19 @@ fi
 
 echo "Installing Vim plugins..."
 vim +PluginInstall +qall
+
+# Install homebrew files - must be run manually
+if [[ $(uname) != 'Linux' ]]; then
+    # @todo check if homebrew is installed and install if not
+    # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    # Install brew configs
+    echo "Bootstrapping OS X commandline apps using Homebrew"
+    echo "To install the apps listed in the brewfile run: "
+    echo "$ brew bundle Brewfile"
+    echo ""
+    echo "To install the apps listed in the Caskfile run: "
+    echo "$ brew bundle ~/Caskfile"
+    echo ""
+fi
 
 echo "Installation complete!"
