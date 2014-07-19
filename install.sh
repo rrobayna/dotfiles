@@ -1,12 +1,12 @@
 #!/bin/sh
 
-_configs=$PWD"/configs/"
+CONFIGS=$PWD"/configs/"
 
 # Install configs
 echo "Installing configs to $HOME"
 
-ls $_configs | while read _file; do
-    cp $_configs/$_file $HOME/.$_file
+ls $CONFIGS | while read _file; do
+    cp $CONFIGS/$_file $HOME/.$_file
 done 
 
 # Install Vundle Plugin Manager for Vim 

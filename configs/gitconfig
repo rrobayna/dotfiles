@@ -55,6 +55,7 @@
     cl = clean
     cldf = clean -df
 
+    doh = reset --soft HEAD~1
     res = reset
     resa = reset HEAD
     resh = "!f() { git stash && git reset --hard $@ && git stash apply; }; f"
