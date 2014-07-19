@@ -10,4 +10,22 @@ defutf8 on
 shell bash
 
 
-caption always "%{= kc}%?%-Lw%?%{= kY}%n*%f %t%?(%u)%?%{= kc}%?%+Lw%?"
+#caption always "%{= kc}%?%-Lw%?%{= kY}%n*%f %t%?(%u)%?%{= kc}%?%+Lw%?"
+#
+#caption always "%{=}%{+b kR}%H %{+b kY}%M %d %{+b kG}%0c %{+b kB}%?%-Lw%?%{+b kW}%n*%f %kt%?(%u)%?%{+bkB}%?%+Lw%? | %{kR} Load: %l %{kB}"
+# caption always "%=%c:%s %Y-%m-%d"
+# #
+#caption always "%>%{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw#caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+#caption always "%{rk}%H %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%? %=%c %Y-%m-%d | %{kR} Load: %l %{kB}"
+# # caption always "%{kG}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{kG}%?%+Lw%?"
+# # caption always "%{rk}%H %{gk}%c %{yk}%M%d %{wk}%?%-Lw% ?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+# # caption always "%{rk}%H%{gk} | %c %{yk}%d.%m.%Y | %?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%? | %{rk} Load: %l %{wk}"
+# # caption always "%{=}%{+b kR}%H %{+b kY}%M %d %{+b kG}%0c %{+b kB}%?%-Lw%?%{+b kW}%n*%f %kt%?(%u)%?%{+bkB}%?%+Lw%? | %{kR} Load: %l %{kB}"
+# # caption always "%{=}%{+b kR}%H %{+b kY}%M %d %{+b kG}%0c %{+b kB}%?%-Lw%?%{+b kW}%n*%f %kt%?(%u)%?%{+bkB}%?%+Lw%? | %{kR} Load: %l %{kB}"
+# # caption always '%{-b}%{= wb}%-Lw%{= wr}%{+b}%n%f %t%{= wb}%{-b}%+Lw %{= wr} %=%c %Y-%m-%d'
+#
+# # caption always "%{+b rk}%H%{gk} |%C%a %{yk}%Y.%m.%d | %{rw}%n%f%{bk} | %{rw} %t %{bk} | %?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%? | %{rk} Load: %l %{wk}"
+
+
+caption always "%?%{ Wk}%-Lw%?%{Rk}%n*%f %t%?(%u)%?%?%{Wk}%+Lw%? %{Rk}%=%c %{rk}%d/%M/%Y"
+hardstatus string "%{+b Rk}(%{-b g}$LOGNAME@%H%{+b R}) (%{-b g}%C %a%{+b R}) %{-b g} %n %t %h"

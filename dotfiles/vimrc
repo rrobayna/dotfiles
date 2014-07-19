@@ -4,7 +4,7 @@ set nocompatible        " Use vim rather than vi settings
 set shell=bash
 set shellpipe=2>/dev/null>
 
-" " Vundle Initialization 
+" " Vundle Initialization
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
@@ -25,11 +25,12 @@ Plugin 'fugitive.vim'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ShowMarks'
+Plugin 'trailing-whitespace'
 call vundle#end()
-filetype plugin indent on    
+filetype plugin indent on
 
 " " Configuration
-syntax enable           
+syntax enable
 let mapleader=","       " Set the leader
 let g:mapleader=","     " Set leader globally @needed?
 set encoding=utf-8      " Set default encoding to utf-8
@@ -43,7 +44,7 @@ set smartcase
 set lazyredraw          " Don't redraw while executing macros
 set showcmd
 set autoindent          " Auto indent
-set history=500         " Extend history to 500 
+set history=500         " Extend history to 500
 set splitright          " Opens vertical split right of current window
 set splitbelow          " Opens horizontal split below current window
 set expandtab
@@ -70,7 +71,7 @@ try
     colorscheme lucius
 catch /^Vim\%((\a\+)\)\=:E185/
     set background=light
-    colorscheme elflord 
+    colorscheme elflord
 endtry
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
@@ -93,10 +94,10 @@ nmap <leader>tt :Tlist<CR>
 nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>bb :BufExplorer<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
-nmap <leader>rr :source ~/.vimrc<CR>  
+nmap <leader>rr :source ~/.vimrc<CR>
 
 " Open Scratchpad Buffer
-map <leader>q :e ~/#scrachpad<cr>
+map <leader>q :e ~/.scrachpad<cr>
 
 
 " " Plugin: taglist
