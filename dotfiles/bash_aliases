@@ -25,6 +25,7 @@ alias gl='git log'
 alias glo='git log --oneline'
 alias gsh='git show'
 alias gb='git branch'
+alias gc='git commit'
 alias gch='git checkout'
 # gf 
 alias gd1='echo "git diff HEAD"; git diff HEAD'

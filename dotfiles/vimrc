@@ -15,7 +15,6 @@ Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
 " Tools
-"Plugin 'The-NERD-tree'
 Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
 Plugin 'ctrlp.vim'
@@ -23,11 +22,11 @@ Plugin 'vimwiki'
 Plugin 'bufexplorer.zip'
 Plugin 'fugitive.vim'
 Plugin 'maciakl/vim-neatstatus'
-"Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ShowMarks'
 Plugin 'trailing-whitespace'
-Plugin 'Rename'
+"Plugin 'The-NERD-tree'
+"Plugin 'bling/vim-airline'
 call vundle#end()
 filetype plugin indent on
 
@@ -89,10 +88,10 @@ map <C-S-Up> :tabnew<CR>
 map <C-S-Right> :tabnext<CR>
 map <C-S-Left> :tabprevious<CR>
 map <C-S-C> :tabclose<CR>
-map <C-S-Down> :NERDTreeToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
+"map <C-S-Down> :NERDTreeToggle<CR>
+"map <C-n> :NERDTreeToggle<CR>
 nmap <leader>tt :Tlist<CR>
-nmap <leader>nn :NERDTreeToggle<CR>
+"nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>bb :BufExplorer<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
@@ -118,10 +117,10 @@ let g:bufExplorerShowTabBuffer=1
 let g:bufExplorerSortBy='number'
 
 " " Plugin: NERDtree
-let NERDTreeChDirMode = 0
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden = 1
-let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
+"let NERDTreeChDirMode = 0
+"let NERDTreeQuitOnOpen = 1
+"let NERDTreeShowHidden = 1
+"let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
 " " Plugin: Showmarks
 let g:showmarks_enable=0
