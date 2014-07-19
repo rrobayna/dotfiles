@@ -1,11 +1,11 @@
 #!/bin/bash
 
 CONFIGS=$PWD"/dotfiles/"
-BREW=$PWD"/homebrew/"
 INCLUDES=$PWD"/includes/"
 
 # Install configs
 echo "Bootstraping configuration for $HOME"
+echo "Installing dotfiles..."
 ls $CONFIGS | while read _file; do
     cp $CONFIGS/$_file $HOME/.$_file
 done 
@@ -32,11 +32,12 @@ if [[ $(uname) != 'Linux' ]]; then
     # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     # Install brew configs
     echo "Bootstrapping OS X commandline apps using Homebrew"
-    echo "To install the apps listed in the brewfile run: "
-    echo "$ brew bundle Brewfile"
     echo ""
-    echo "To install the apps listed in the Caskfile run: "
-    echo "$ brew bundle ~/Caskfile"
+    echo "To install the commandline tools listed in the Brewfile run: "
+    echo "$ sudo brew bundle homebrew/Brewfile"
+    echo ""
+    echo "To install the desktop apps listed in the Caskfile run: "
+    echo "$ sudo brew bundle homebrew/Caskfile"
     echo ""
 fi
 

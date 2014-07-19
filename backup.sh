@@ -1,13 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-CONFIGS=$PWD/dotfiles
+CONFIGS=$PWD"/dotfiles/"
+INCLUDES=$PWD"/includes/"
 
 # Install configs
-echo "Backing up configs"
-
+echo "Backing up dotfiles..."
 ls $CONFIGS | while read _file; do
     cp $HOME/.$_file $CONFIGS/$_file 
 done 
+
+echo "Backing up includes..."
+cp -r $HOME/includes $INCLUDES
 
 _status=$(git status -s | wc -l)
 
@@ -22,4 +25,3 @@ if [ $_status -gt 0 ]; then
 else
     echo "No changes detected."
 fi
-
