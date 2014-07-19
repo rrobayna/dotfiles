@@ -1,6 +1,7 @@
 #!/bin/bash
 
-CONFIGS=$PWD"/configs/"
+CONFIGS=$PWD"/dotfiles/"
+BREW=$PWD"/homebrew/"
 
 # Install configs
 echo "Bootstraping configuration for $HOME"
@@ -13,9 +14,9 @@ if [[ $(uname) != 'Linux' ]]; then
     # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     # Install brew configs
     echo "Bootstrapping OS X commandline apps using Homebrew"
-    cp $PWD/Brewfile $HOME/Brewfile
+    cp $BREW/Brewfile $HOME/Brewfile
     echo "Bootstrapping OS X desktop apps using Homebrew Cask"
-    cp $PWD/Caskfile $HOME/Caskfile
+    cp $BREW/Caskfile $HOME/Caskfile
 fi
 
 if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then

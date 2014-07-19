@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONFIGS=$PWD/configs
+CONFIGS=$PWD/dotfiles
 
 # Install configs
 echo "Backing up configs"
