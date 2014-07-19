@@ -9,12 +9,25 @@ alias -- -="cd -"
 # Shortcuts
 alias d="cd ~/Downloads"
 alias dt="cd ~/Desktop"
-alias w="cd ~/working"
+alias work="cd ~/working"
 alias h="history"
-alias g="git"
 alias dl="docker ps -l -q"
 alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
 alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
+
+# Git Aliases
+alias gs='git status; git submodule status'
+alias ga='git add'
+alias gull='git pull'
+alias gush='git push'
+alias gsh='git show'
+alias gl='git log'
+alias gb='git branch'
+alias gco='git checkout'
+alias gd='git diff'
+alias gd1='echo "git diff HEAD"; git diff HEAD'
+alias gd2='echo "git diff HEAD^"; git diff HEAD^'
+alias grmall="git status | grep 'deleted:' | awk '{print \$3}' | xargs git rm -f"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`

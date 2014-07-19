@@ -57,6 +57,7 @@ install sshfs
 #install network tools
 install tcpflow
 install nmap
+install ngrep
 install htop-osx
 install iftop
 
