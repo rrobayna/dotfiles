@@ -15,17 +15,19 @@ Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
 " Tools
-Plugin 'The-NERD-tree'
+"Plugin 'The-NERD-tree'
 Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
 Plugin 'ctrlp.vim'
 Plugin 'vimwiki'
 Plugin 'bufexplorer.zip'
 Plugin 'fugitive.vim'
-Plugin 'bling/vim-airline'
+Plugin 'maciakl/vim-neatstatus'
+"Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ShowMarks'
 Plugin 'trailing-whitespace'
+Plugin 'Rename'
 call vundle#end()
 filetype plugin indent on
 
@@ -55,7 +57,6 @@ set softtabstop=4
 set laststatus=2        " Always show the status line
 set backspace=2         " Fix delete/backspace behavior
 set backspace=indent,eol,start
-
 
 " Set extra options when running in GUI mode
 if has("gui_running")
