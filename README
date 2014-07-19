@@ -1,2 +1,15 @@
-vimrc configuration files with install and backup scripts
+Configs
+==
+
+Some basic config file for linux and bsd systems:
+
+#### Included
+
+- gitconfig
+- vimrc
+- tmux.conf
+
+## Installation
+
+Just clone it into your home folder and run install.sh
 

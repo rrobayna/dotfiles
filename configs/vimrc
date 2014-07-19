@@ -19,7 +19,7 @@ set softtabstop=4
 " " Vundle Initialization 
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
-Plugin 'Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 "" ColorSchemes
 Plugin 'Lucius'
 Plugin 'Zenburn'
