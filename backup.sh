@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CONFIGS=$PWD"/dotfiles/"
-INCLUDES=$PWD"/includes/"
 
 # Install configs
 echo "Backing up dotfiles..."
@@ -10,7 +9,7 @@ ls $CONFIGS | while read _file; do
 done 
 
 echo "Backing up includes..."
-cp -r $HOME/includes $INCLUDES
+cp -r $HOME/includes/* $PWD/includes/
 
 _status=$(git status -s | wc -l)
 
