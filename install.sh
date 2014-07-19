@@ -1,10 +1,13 @@
 #!/bin/sh
 
+_configs=$PWD"/configs/"
+
 # Install configs
 echo "Installing configs to $HOME"
-cp $PWD/configs/vimrc $HOME/.vimrc
-cp $PWD/configs/tmux.conf $HOME/.tmux.conf
-cp $PWD/configs/gitconfig $HOME/.gitconfig
+
+ls $_configs | while read _file; do
+    cp $_configs/$_file $HOME/.$_file
+done 
 
 # Install Vundle Plugin Manager for Vim 
 echo "Installing Vundle Plugin Manager for Vim..."
