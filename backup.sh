@@ -19,6 +19,7 @@ if [ $_status -gt 0 ]; then
         git status -s
         git add .
         git commit -m "AutoBackup"
+        git push 
         echo "Configs saved to local git repo."
     fi
 else
