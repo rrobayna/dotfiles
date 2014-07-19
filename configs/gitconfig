@@ -22,7 +22,7 @@
 
 [core]
     #pager = less -FiR # -F is necessary but has problems with tmux and regular shells
-    pager = most
+    #pager = most
     #pager = vimpager
     #pager = more -p
 
