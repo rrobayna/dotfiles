@@ -33,16 +33,21 @@ Plugin 'ctrlp.vim'
 Plugin 'vimwiki'
 Plugin 'bufexplorer.zip'
 Plugin 'fugitive.vim'
-Plugin 'vim-airline'
-Plugin 'vim-gitgutter'
-"Plugin 'vim-bufferline'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
 "Plugin 'ShowMarks'
-call vundle#end()            " required
+call vundle#end()
 
 
-" " Set DefualtColorscheme
-set background=dark
-colorscheme lucius
+" " Set Default Colorscheme
+try
+    set background=dark
+    colorscheme lucius
+catch /^Vim\%((\a\+)\)\=:E185/
+    set background=light
+    colorscheme elflord 
+endtry
+
 
 " " Keyboard Shortcuts
 map <C-t> :tabnew<CR>
