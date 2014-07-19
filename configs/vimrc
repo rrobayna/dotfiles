@@ -4,24 +4,6 @@ set nocompatible        " Use vim rather than vi settings
 set shell=bash
 set shellpipe=2>/dev/null>
 
-syntax enable           
-let mapleader=","       " Set the leader
-set encoding=utf-8      " Set default encoding to utf-8
-set number              " Enable line numbers
-set hlsearch
-set showmatch
-set incsearch
-set ignorecase
-set showcmd
-set autoindent
-set history=1000        " Extend history to 1000 
-set splitright          " Opens vertical split right of current window
-set splitbelow          " Opens horizontal split below current window
-set expandtab
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
-
 " " Vundle Initialization 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -46,8 +28,41 @@ Plugin 'ShowMarks'
 call vundle#end()
 filetype plugin indent on    
 
+" " Configuration
+syntax enable           
+let mapleader=","       " Set the leader
+let g:mapleader=","     " Set leader globally @needed?
+set encoding=utf-8      " Set default encoding to utf-8
+set ffs=unix,dos,mac    " Set unix as the standard file type
+set number              " Enable line numbers
+set hlsearch
+set showmatch
+set incsearch           " Incremental search
+set ignorecase          " Ignore case with search
+set smartcase
+set lazyredraw          " Don't redraw while executing macros
+set showcmd
+set autoindent          " Auto indent
+set history=500         " Extend history to 500 
+set splitright          " Opens vertical split right of current window
+set splitbelow          " Opens horizontal split below current window
+set expandtab
+set noerrorbells        " Disable audible errors
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set laststatus=2        " Always show the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
-" " Set Default Colorscheme
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions+=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Set Default Colorscheme
 try
     set background=dark
     colorscheme lucius
@@ -56,6 +71,14 @@ catch /^Vim\%((\a\+)\)\=:E185/
     colorscheme elflord 
 endtry
 
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+
+" " Modified Mappings
+map 0 ^
 
 " " Keyboard Shortcuts
 map <C-S-Up> :tabnew<CR>
@@ -64,11 +87,14 @@ map <C-S-Left> :tabprevious<CR>
 map <C-S-C> :tabclose<CR>
 map <C-S-Down> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
-map <leader>tt :Tlist<CR>
-map <leader>nn :NERDTreeToggle<CR>
-map <leader>bb :BufExplorer<CR>
-map <leader>rc :e ~/.vimrc<CR>
-map <leader>rr :source ~/.vimrc<CR>  
+nmap <leader>tt :Tlist<CR>
+nmap <leader>nn :NERDTreeToggle<CR>
+nmap <leader>bb :BufExplorer<CR>
+nmap <leader>rc :e ~/.vimrc<CR>
+nmap <leader>rr :source ~/.vimrc<CR>  
+
+map <leader>q :e ~/#scrachpad<cr>
+"map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
 
 " " Plugin: taglist
