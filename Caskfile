@@ -4,13 +4,32 @@
 install caskroom/cask/brew-cask
 tap caskroom/versions
 
+## Browsers and Email
 cask install google-chrome 2> /dev/null
+cask install firefox 2> /dev/null
+cask install thunderbird 2> /dev/null
 
+## Development Tools
 cask install iterm2 2> /dev/null
 cask install sublime-text 2> /dev/null
-cask install the-unarchiver 2> /dev/null
-cask install torbrowser 2> /dev/null
-cask install transmission 2> /dev/null
-cask install ukelele 2> /dev/null
+cask install netbeans 2> /dev/null
+cask install dash 2> /dev/null
+cask install sequel-pro 2> /dev/null
 cask install virtualbox 2> /dev/null
+cask install vagrant 2> /dev/null
+cask install robomongo 2> /dev/null
+
+## Utilities 
+cask install spectacle 2> /dev/null
+cask install the-unarchiver 2> /dev/null
 cask install vlc 2> /dev/null
+#cask install calibre 2> /dev/null
+#cask install xact 2> /dev/null
+#cask install simple-comic 2> /dev/null
+#cask install appcleaner 2> /dev/null
+#cask install ccleaner 2> /dev/null
+#cask install utorrent 2> /dev/null
+
+## Services 
+#cask install evernote 2> /dev/null
+#cask install spotify 2> /dev/null

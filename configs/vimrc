@@ -1,4 +1,4 @@
-"Rafael Robayna's vimrc
+" Rafael Robayna's vimrc
 
 set nocompatible        " Use vim rather than vi settings
 set shell=bash
@@ -15,26 +15,24 @@ set ignorecase
 set showcmd
 set autoindent
 set history=1000        " Extend history to 1000 
-"set hidden
 set splitright          " Opens vertical split right of current window
 set splitbelow          " Opens horizontal split below current window
 set expandtab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-"set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 
 " " Vundle Initialization 
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-"" ColorSchemes
+" Themes
 Plugin 'Lucius'
 Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
-"" Plugins
+" Tools
 Plugin 'The-NERD-tree'
 Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
@@ -48,6 +46,7 @@ Plugin 'ShowMarks'
 call vundle#end()
 filetype plugin indent on    
 
+
 " " Set Default Colorscheme
 try
     set background=dark
@@ -59,10 +58,11 @@ endtry
 
 
 " " Keyboard Shortcuts
-map <C-t> :tabnew<CR>
-map <D-k> :tabnext<CR>
-map <D-j> :tabprevious<CR>
-map <D-/> :tabclose<CR>
+map <C-S-Up> :tabnew<CR>
+map <C-S-Right> :tabnext<CR>
+map <C-S-Left> :tabprevious<CR>
+map <C-S-C> :tabclose<CR>
+map <C-S-Down> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <leader>tt :Tlist<CR>
 map <leader>nn :NERDTreeToggle<CR>
@@ -79,7 +79,6 @@ let Tlist_Use_Right_Window = 1
 let rlist_Show_One_File = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
 
-
 " " Plugin: BufExplorer
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerDisableDefaultKeyMapping=1
@@ -88,11 +87,17 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerShowTabBuffer=1
 let g:bufExplorerSortBy='number'
 
-
-" Plugin: NERDtree
+" " Plugin: NERDtree
 let NERDTreeChDirMode = 0
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
-
+" " Plugin: Showmarks
+let g:showmarks_enable=0
+let g:showmarks_textlower="\t"
+let g:showmarks_textupper=">"
+let g:showmarks_textother=">"
+let g:showmarks_hlline_lower=1
+let g:showmarks_hlline_upper=0
+let g:showmarks_hlline_other=0
