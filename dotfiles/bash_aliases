@@ -56,10 +56,10 @@ alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; su
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # View HTTP traffic
-alias sniff="sudo tcpdump -A -i en1"
-alias lnet="lsof -i tcp"
-#alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-#alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) '" 
+alias sniff2="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias httpdump="sudo tcpdump -A -i en1"
+alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # Canonical hex dump; some systems have this symlinked
 command -v hd > /dev/null || alias hd="hexdump -C"
