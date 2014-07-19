@@ -93,6 +93,7 @@
     plr = pull --rebase
 
     st = status
+    ss = status -s
 
     unmerged = !git ls-files --unmerged | cut -f2 | uniq
     untracked = ls-files --other --exclude-standard

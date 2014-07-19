@@ -13,10 +13,13 @@ _status=$(git status -s | wc -l)
 
 if [ $_status -gt 0 ]; then
     echo "Changes detected..." 
-    git status -s
-    git add .
-    git commit -m "AutoBackup"
-    echo "Configs saved to local git repo."
+    if [ $# -gt 0 ] && [[ $1 == "-a" ]]; then
+        git status -s
+        git add .
+        git commit -m "AutoBackup"
+        echo "Configs saved to local git repo."
+    fi
 else
     echo "No changes detected."
 fi
+
