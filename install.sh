@@ -3,12 +3,12 @@
 CONFIGS=$PWD"/configs/"
 
 # Install configs
-echo "Bootstraping configuration dotfiles for $HOME"
+echo "Bootstraping configuration for $HOME"
 ls $CONFIGS | while read _file; do
     cp $CONFIGS/$_file $HOME/.$_file
 done 
 
-if [[ $(uname) == 'Linux' ]]; then
+if [[ $(uname) != 'Linux' ]]; then
     # @todo check if homebrew is installed 
     # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     # Install brew configs
@@ -18,9 +18,11 @@ if [[ $(uname) == 'Linux' ]]; then
     cp $PWD/Caskfile $HOME/Caskfile
 fi
 
-# Install Vundle Plugin Manager for Vim 
-echo "Installing Vundle Plugin Manager for Vim..."
-git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
+    # Install Vundle Plugin Manager for Vim 
+    echo "Installing Vundle Plugin Manager for Vim..."
+    git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+fi
 
 echo "Installing Vim plugins..."
 vim +PluginInstall +qall
