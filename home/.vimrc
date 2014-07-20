@@ -97,8 +97,13 @@ nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
 
 " Open Scratchpad Buffer
-map <leader>q :e ~/.scrachpad<cr>
+map <leader>q :e ~/.scrachpad<CR>
 
+" Execute current line in bash
+nmap <F2> :.w !bash<CR> 
+
+" Execute current file in bash (must have correct permissions on disk)
+nmap <F3> :! %:p
 
 " " Plugin: taglist
 let tlist_php_settings = 'php;f:functions'

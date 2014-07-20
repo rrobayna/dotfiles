@@ -6,12 +6,13 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+# here
+
 # General
 alias h="history"
 
 # Tmux
 #alias tmux="TERM=screen-256color-bce tmux"
-alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
 
 # Docker
 alias dl="docker ps -l -q"
@@ -27,7 +28,6 @@ alias gsh='git show'
 alias gb='git branch'
 alias gc='git commit'
 alias gch='git checkout'
-# gf 
 alias gd1='echo "git diff HEAD"; git diff HEAD'
 alias gd2='echo "git diff HEAD^"; git diff HEAD^'
 alias grmall="git status | grep 'deleted:' | awk '{print \$3}' | xargs git rm -f"

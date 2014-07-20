@@ -39,16 +39,13 @@ function backupDotFiles() {
 
 function autoCommit() {
     _status=$(git status -s | wc -l)
-
     if [ $_status -gt 0 ]; then
         echo "Changes detected..."
-        if [ $# -gt 0 ] && [[ $2 == "-a" ]]; then
-            git status -s
-            git add .
-            git commit -m "Backing up dotfiles"
-            git push
-            echo "Configs saved and pushed upstream."
-        fi
+        git status -s
+        git add .
+        git commit -m "Backing up dotfiles"
+        git push
+        echo "Configs saved and pushed upstream."
     else
         echo "No changes detected."
     fi
@@ -72,7 +69,6 @@ function displayBrewInfo() {
     fi
 }
 
-
 function displayHelp() {
     echo "Bootstrap your dotfiles"
     echo "Usage: bootstrap.sh [OPTION]"
@@ -86,9 +82,12 @@ function displayHelp() {
 }
 
 # Check for parameters
-[ -n "$1" ] && displayHelp; exit 1
+if [ $# -lt 1 ]; then 
+    displayHelp 
+    exit 1
+fi
 
-case $_action in
+case $1 in
     "install"|"-i")
         installDotFiles ;;
     "backup"|"-b")
