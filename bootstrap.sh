@@ -9,9 +9,9 @@ function installDotFiles() {
     echo "Installing dotfiles..."
     rsync --exclude ".DS_Store" -avh --no-perms $PWD/home/. ~
 
-    echo "Installing bash includes..."
-    [ ! -d $HOME/includes ] && mkdir $HOME/includes
-    rsync --exclude ".DS_Store" -avh --no-perms $PWD/includes/. $HOME/includes/
+    echo "Installing scripts to $HOME/bin"
+    [ ! -d $HOME/bin ] && mkdir $HOME/bin
+    rsync --exclude ".DS_Store" -avh --no-perms $PWD/bin/. $HOME/bin/
 
     if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
         echo "Installing Vundle Plugin Manager for Vim..."
@@ -52,16 +52,15 @@ function autoCommit() {
 }
 
 function displayBrewInfo() {
-    # Install homebrew files - must be run manually
     if [[ $(uname) != 'Linux' ]]; then
-        # @todo check if homebrew is installed and install if not
-        # ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-        # Install brew configs
         echo ""
-        echo "To install the commandline tools listed in the Brewfile run: "
+        echo "To install homebrew run:"
+        echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
+        echo ""
+        echo "To install the commandline tools listed in the Brewfile run:"
         echo "$ sudo brew bundle osx/Brewfile"
         echo ""
-        echo "To install the desktop apps listed in the Caskfile run: "
+        echo "To install the desktop apps listed in the Caskfile run:"
         echo "$ sudo brew bundle osx/Caskfile"
         echo ""
     else
@@ -77,7 +76,9 @@ function displayHelp() {
     echo "-i or install         install dotfiles, vim plugins and more"
     echo "-b or backup          backup dotfiles"
     echo "-c or commit          auto-commit a backup of your dotfiles to your upstream repo"
-    echo "-br or brew           display homebrew install info"
+    if [[ $(uname) != "Linux" ]]; then
+        echo "-br or brew           display homebrew install info"
+    fi
     exit 0;
 }
 

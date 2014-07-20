@@ -1,0 +1,25 @@
+# Install command-line tools using Homebrew
+# Usage: `brew bundle Brewfile`
+
+# Make sure we’re using the latest Homebrew
+update
+
+# Upgrade any already-installed formulae
+upgrade
+
+# ffmpeg
+install ffmpeg
+install x264
+install xvid
+install webp
+install flac
+install lame
+install faac
+install libpng
+install jpeg
+install libogg
+install libtiff
+install libvorbis
+
+# Remove outdated versions from the cellar
+cleanup

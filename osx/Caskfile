@@ -23,13 +23,7 @@ cask install robomongo 2> /dev/null
 cask install spectacle 2> /dev/null
 cask install the-unarchiver 2> /dev/null
 cask install vlc 2> /dev/null
-#cask install calibre 2> /dev/null
-#cask install xact 2> /dev/null
-#cask install simple-comic 2> /dev/null
-#cask install appcleaner 2> /dev/null
-#cask install ccleaner 2> /dev/null
-#cask install utorrent 2> /dev/null
 
 ## Services 
-#cask install evernote 2> /dev/null
-#cask install spotify 2> /dev/null
+cask install evernote 2> /dev/null
+cask install spotify 2> /dev/null
