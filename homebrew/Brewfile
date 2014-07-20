@@ -28,6 +28,7 @@ install homebrew/dupes/grep
 install homebrew/php/php55 --with-gmp
 
 # Install other useful binaries
+install composer
 install node
 install maven
 install jsawk
