@@ -51,22 +51,22 @@ function autoCommit() {
     fi
 }
 
-function displayBrewInfo() {
-    if [[ $(uname) != 'Linux' ]]; then
-        echo ""
-        echo "To install homebrew run:"
-        echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
-        echo ""
-        echo "To install the commandline tools listed in the Brewfile run:"
-        echo "$ sudo brew bundle osx/Brewfile"
-        echo ""
-        echo "To install the desktop apps listed in the Caskfile run:"
-        echo "$ sudo brew bundle osx/Caskfile"
-        echo ""
-    else
-        echo "Homebrew configurations are only availible for OS X"
-    fi
-}
+#function displayBrewInfo() {
+#    if [[ $(uname) != 'Linux' ]]; then
+#        echo ""
+#        echo "To install homebrew run:"
+#        echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
+#        echo ""
+#        echo "To install the commandline tools listed in the Brewfile run:"
+#        echo "$ sudo brew bundle osx/Brewfile"
+#        echo ""
+#        echo "To install the desktop apps listed in the Caskfile run:"
+#        echo "$ sudo brew bundle osx/Caskfile"
+#        echo ""
+#    else
+#        echo "Homebrew configurations are only availible for OS X"
+#    fi
+#}
 
 function displayHelp() {
     echo "Bootstrap your dotfiles"
@@ -76,9 +76,6 @@ function displayHelp() {
     echo "-i or install         install dotfiles, vim plugins and more"
     echo "-b or backup          backup dotfiles"
     echo "-c or commit          auto-commit a backup of your dotfiles to your upstream repo"
-    if [[ $(uname) != "Linux" ]]; then
-        echo "-br or brew           display homebrew install info"
-    fi
     exit 0;
 }
 
@@ -93,8 +90,6 @@ case $1 in
         installDotFiles ;;
     "backup"|"-b")
         backupDotFiles ;;
-    "brew"|"-br")
-        displayBrewInfo ;;
     "commit"|"-c")
         autoCommit ;; 
     "help"|"--help")
@@ -103,5 +98,3 @@ case $1 in
         echo "Error: unrecognized command"
         displayHelp
 esac
-
-
