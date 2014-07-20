@@ -6,13 +6,12 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
-# here
-
 # General
 alias h="history"
 
 # Tmux
 #alias tmux="TERM=screen-256color-bce tmux"
+alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
 
 # Docker
 alias dl="docker ps -l -q"
