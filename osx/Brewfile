@@ -28,27 +28,25 @@ install homebrew/dupes/grep
 install homebrew/php/php55 --with-gmp
 
 # Install other useful binaries
+install git
+install tmux
 install composer
-install node
 install maven
-install jsawk
+install node
+install ctags
 install automake
 install autoconf
-install ctags
 install atk
 install ack
 install bfg
-install git
 install imagemagick --with-webp
-install lynx
-install node # This installs `npm` too using the recommended installation method
 install p7zip
 install rename
 install tree
 install webkit2png
 install xpdf
-install tmux
 install watch
+install jsawk
 install xz
 
 #install fuse
@@ -61,6 +59,7 @@ install nmap
 install ngrep
 install htop-osx
 install iftop
+install lynx
 
 # ffmpeg
 install ffmpeg

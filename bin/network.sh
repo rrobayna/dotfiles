@@ -24,5 +24,3 @@ function PCount {
     echo "=========================================="
     echo -e $output
 }
-
-alias pcount Pcount
