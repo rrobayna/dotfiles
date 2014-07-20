@@ -1,10 +1,11 @@
 #!/bin/bash
-
+# Maintained by Rafael Robayna <rrobayna@gmail.com>
 # Bootstrap your dotfiles
+# Helper script to perform quick install, backup and commit actions to save your dotfiles
 
 # Install configs
 function installDotFiles() {
-    echo "Bootstraping configuration for $HOME"
+    echo "Bootstraping $HOME"
     echo "Installing dotfiles..."
     rsync --exclude ".DS_Store" -avh --no-perms $PWD/home/. ~
 
@@ -24,30 +25,33 @@ function installDotFiles() {
 }
 
 function backupDotFiles() {
-    _dotfiles=$PWD"/home/"
     echo "Backing up dotfiles..."
-    # only backup the files already listed in the home folder
-    ls $_dotfiles | while read _file; do
-        rsync -avh --no-perms $HOME/$_file $_dotfiles/$_file
+    # limit backup to files already in the dotfiles/home folder
+    _dotfiles=$(ls -A home/ | egrep '^\.')
+    for _file in $_dotfiles; do
+        _diff=$(diff $HOME/$_file $PWD/home/$_file)
+        if [ -n "$_diff" ]; then
+            rsync -ah --no-perms $HOME/$_file $PWD/home/$_file > /dev/null 2>&1
+            echo $_file
+        fi
     done
+}
 
-    echo "Backing up includes..."
-    #cp -r $HOME/includes/* $PWD/includes/
+function autoCommit() {
+    _status=$(git status -s | wc -l)
 
-    #_status=$(git status -s | wc -l)
-
-   # if [ $_status -gt 0 ]; then
-   #     echo "Changes detected..."
-   #     if [ $# -gt 0 ] && [[ $2 == "-a" ]]; then
-   #         git status -s
-   #         git add .
-   #         git commit -m "AutoBackup"
-   #         git push
-   #         echo "Configs saved to local git repo."
-   #     fi
-   # else
-   #     echo "No changes detected."
-   # fi
+    if [ $_status -gt 0 ]; then
+        echo "Changes detected..."
+        if [ $# -gt 0 ] && [[ $2 == "-a" ]]; then
+            git status -s
+            git add .
+            git commit -m "Backing up dotfiles"
+            git push
+            echo "Configs saved and pushed upstream."
+        fi
+    else
+        echo "No changes detected."
+    fi
 }
 
 function displayBrewInfo() {
@@ -69,19 +73,35 @@ function displayBrewInfo() {
 }
 
 
+function displayHelp() {
+    echo "Bootstrap your dotfiles"
+    echo "Usage: bootstrap.sh [OPTION]"
+    echo ""
+    echo "Options:"
+    echo "-i or install         install dotfiles, vim plugins and more"
+    echo "-b or backup          backup dotfiles"
+    echo "-c or commit          auto-commit a backup of your dotfiles to your upstream repo"
+    echo "-br or brew           display homebrew install info"
+    exit 0;
+}
+
 # Check for parameters
-# this should probably return a list of commands instead of performing a default action
-[ -n "$1" ] && _action=$1 || _action="install"
+[ -n "$1" ] && displayHelp; exit 1
 
 case $_action in
     "install"|"-i")
         installDotFiles ;;
     "backup"|"-b")
         backupDotFiles ;;
-    "brew")
+    "brew"|"-br")
         displayBrewInfo ;;
+    "commit"|"-c")
+        autoCommit ;; 
+    "help"|"--help")
+        displayHelp ;;
     *)
         echo "Error: unrecognized command"
+        displayHelp
 esac
 
 
