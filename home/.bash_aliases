@@ -14,8 +14,11 @@ alias h="history"
 alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
 
 # Docker
+alias d="docker"
 alias dl="docker ps -l -q"
 alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
+alias di="docker images"
+alias dps="docker ps -a"
 
 # Git Aliases
 alias gs='git status -s; git submodule status'
