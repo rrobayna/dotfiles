@@ -14,11 +14,11 @@ Plugin 'Lucius'
 Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
-" Layout Enhancements
+" Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'ShowMarks'
 Plugin 'trailing-whitespace'
+Plugin 'vim-scripts/ShowMarks'
 " Tools
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/unite.vim'
@@ -27,9 +27,7 @@ Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
 Plugin 'vimwiki'
 Plugin 'fugitive.vim'
-"Plugin 'ctrlp.vim'
 "Plugin 'tomtom/tcomment_vim'
-"Plugin 'inside/vim-search-pulse'
 "Plugin 'The-NERD-tree'
 call vundle#end()
 filetype plugin indent on
@@ -157,7 +155,7 @@ let g:showmarks_hlline_other=0
 
 " " Plugin: Search Pulse
 let g:vim_search_pulse_mode = 'cursor_line'
-let g:vim_search_pulse_duration = 400
+"let g:vim_search_pulse_duration = 400
 
 " " Plugin: Unite
 let g:unite_enable_start_insert = 1
