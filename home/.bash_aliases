@@ -19,14 +19,16 @@ alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
 
 # Git Aliases
 alias gs='git status -s; git submodule status'
+alias gp='git pull'
 alias ga='git add'
 alias gd='git diff'
-alias gl='git log' 
+alias gl='git log'
 alias glo='git log --oneline'
 alias gsh='git show'
-alias gb='git branch'
 alias gc='git commit'
+alias gb='git branch'
 alias gch='git checkout'
+alias gsh='git show'
 alias gd1='echo "git diff HEAD"; git diff HEAD'
 alias gd2='echo "git diff HEAD^"; git diff HEAD^'
 alias grmall="git status | grep 'deleted:' | awk '{print \$3}' | xargs git rm -f"
@@ -46,6 +48,8 @@ alias la="ls -laF ${colorflag}"
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
+# Show hidden
+alias lh='ls -ld .??*'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -58,7 +62,7 @@ alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; su
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # View HTTP traffic
-alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) '" 
+alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) '"
 alias sniff2="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
 alias httpdump="sudo tcpdump -A -i en1"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
