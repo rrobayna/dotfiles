@@ -1,8 +1,6 @@
 [core]
-
-    # Use custom `.gitignore` and `.gitattributes`
+    # Use custom global gitignore
     excludesfile = ~/.gitignore
-    #attributesfile = ~/.gitattributes
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
     # [default] trailing-space: looks for spaces at the end of a line
@@ -12,6 +10,12 @@
     # Make `git rebase` safer on OS X
     # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
     trustctime = false
+
+[apply]
+    whitespace = fix
+
+[push]
+    default = upstream
 
 [help]
     # Automatically correct and execute mistyped commands
@@ -25,33 +29,27 @@
     # Include summaries of merged commits in newly created merge commit messages
     log = true
 
-[apply]
-    whitespace = fix
-
-[push]
-    default = upstream
-
-[color]
-    #interactive = true
-    #branch = true
-    #status = true
-    ui = auto
-
-[color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
-
-[color "diff"]
-    meta = yellow bold
-    frag = magenta bold # line info
-    old = red # deletions
-    new = green # additions
-
-[color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+#[color]
+#    #interactive = true
+#    #branch = true
+#    #status = true
+#    ui = auto
+#
+#[color "branch"]
+#    current = yellow reverse
+#    local = yellow
+#    remote = green
+#
+#[color "diff"]
+#    meta = yellow bold
+#    frag = magenta bold # line info
+#    old = red # deletions
+#    new = green # additions
+#
+#[color "status"]
+#    added = yellow
+#    changed = green
+#    untracked = cyan
 
 [url "git@github.com:"]
     insteadOf = "gh:"
@@ -71,7 +69,7 @@
 
 [alias]
     root = rev-parse --show-toplevel
-    #cdroot = !cd `git root`
+    cdroot = !cd `git root`
 
     upstream = !git for-each-ref --format='%(upstream:short)' $(git symbolic-ref -q HEAD)
     upstream-remote = !git upstream | sed -e 's/\\/.*$//g'
@@ -265,3 +263,6 @@
     prm = !git rfe && git gcp
 
     fsize = git ls-tree -r -t -l --full-name HEAD | sort -rn -k 4 | less
+[user]
+	name = Rafael Robayna
+	email = rrobayna@gmail.com

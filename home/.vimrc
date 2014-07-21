@@ -17,7 +17,7 @@ Plugin 'wombat256.vim'
 " Tools
 Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
-Plugin 'ctrlp.vim'
+"Plugin 'ctrlp.vim'
 Plugin 'vimwiki'
 Plugin 'bufexplorer.zip'
 Plugin 'fugitive.vim'
@@ -25,6 +25,10 @@ Plugin 'maciakl/vim-neatstatus'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ShowMarks'
 Plugin 'trailing-whitespace'
+"Plugin 'tomtom/tcomment_vim'
+"Plugin 'inside/vim-search-pulse'
+Plugin 'Shougo/neomru.vim'
+Plugin 'Shougo/unite.vim'
 "Plugin 'The-NERD-tree'
 "Plugin 'bling/vim-airline'
 call vundle#end()
@@ -92,7 +96,7 @@ map <C-S-C> :tabclose<CR>
 "map <C-n> :NERDTreeToggle<CR>
 nmap <leader>tt :Tlist<CR>
 "nmap <leader>nn :NERDTreeToggle<CR>
-nmap <leader>bb :BufExplorer<CR>
+"nmap <leader>bb :BufExplorer<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
 
@@ -104,6 +108,19 @@ nmap <F2> :.w !bash<CR>
 
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
+
+" Unite Shortcuts
+"nnoremap <silent> <Leader>re :Unite -buffer-name=recent -winheight=10 file_mru<cr>
+nnoremap <silent> <Leader>re :Unite -buffer-name=recent -winheight=10 file_mru<cr>
+nnoremap <Leader>bb :Unite -buffer-name=buffers -winheight=10 buffer<cr>
+nnoremap <leader>f :<C-u>Unite -start-insert file<CR>
+"nnoremap <Leader>f :Unite grep:%<cr>
+" CtrlP search
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#custom#source('file_rec/async','sorters','sorter_rank')
+" replacing unite with ctrl-p
+"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
 
 " " Plugin: taglist
 let tlist_php_settings = 'php;f:functions'
@@ -135,3 +152,9 @@ let g:showmarks_textother=">"
 let g:showmarks_hlline_lower=1
 let g:showmarks_hlline_upper=0
 let g:showmarks_hlline_other=0
+
+" " Plugin: Search Pulse
+let g:vim_search_pulse_mode = 'cursor_line'
+let g:vim_search_pulse_duration = 400
+
+" " Plugin: Unite

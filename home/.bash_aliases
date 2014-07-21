@@ -4,7 +4,6 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
 
 # General
 alias h="history"
@@ -13,14 +12,8 @@ alias h="history"
 #alias tmux="TERM=screen-256color-bce tmux"
 alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
 
-# Docker
-alias d="docker"
-alias dl="docker ps -l -q"
-alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
-alias di="docker images"
-alias dps="docker ps -a"
-
-# Git Aliases
+# Git
+alias g='git'
 alias gs='git status -s; git submodule status'
 alias gp='git pull'
 alias ga='git add'
@@ -31,10 +24,15 @@ alias gsh='git show'
 alias gc='git commit'
 alias gb='git branch'
 alias gch='git checkout'
-alias gsh='git show'
 alias gd1='echo "git diff HEAD"; git diff HEAD'
 alias gd2='echo "git diff HEAD^"; git diff HEAD^'
-alias grmall="git status | grep 'deleted:' | awk '{print \$3}' | xargs git rm -f"
+
+# Docker
+alias d="docker"
+alias dl="docker ps -l -q"
+alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
+alias di="docker images"
+alias dps="docker ps -a"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -43,16 +41,16 @@ else # OS X `ls`
     colorflag="-G"
 fi
 
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
 # List all files colorized in long format
 alias l="ls -lF ${colorflag}"
 # List all files colorized in long format, including dot files
-alias la="ls -laF ${colorflag}"
+alias ll="ls -laF ${colorflag}"
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
 # Show hidden
-alias lh='ls -ld .??*'
+alias lsh='ls -ld .??*'
 
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
@@ -66,8 +64,8 @@ alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) '"
-alias sniff2="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
-alias httpdump="sudo tcpdump -A -i en1"
+alias sniff80="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
+alias tcpd="sudo tcpdump -A -i en1"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
 
 # Canonical hex dump; some systems have this symlinked
@@ -91,4 +89,4 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
-alias rr="source $HOME/.bashrc"
+alias reloadrc="source $HOME/.bashrc"
