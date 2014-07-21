@@ -11,8 +11,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " Themes
 Plugin 'Lucius'
+Plugin 'obsidian'
 Plugin 'Zenburn'
-Plugin 'molokai'
+Plugin 'simple-dark'
 Plugin 'wombat256.vim'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'
@@ -92,6 +93,8 @@ map <C-S-Right> :tabnext<CR>
 map <C-S-Left> :tabprevious<CR>
 map <C-S-C> :tabclose<CR>
 nmap <leader>tt :Tlist<CR>
+nmap <leader>ss :ShowMarksToggle<CR>
+nmap <leader>d :bd<CR>
 "map <C-S-Down> :NERDTreeToggle<CR>
 "map <C-n> :NERDTreeToggle<CR>
 "nmap <leader>nn :NERDTreeToggle<CR>
@@ -111,16 +114,19 @@ nmap <F3> :! %:p
 nnoremap [unite] <Nop>
 nmap f [unite]
 
-" Unite Shortcuts used f+
+" Unite Shortcuts
 nnoremap <silent> [unite]f :<C-u>UniteWithCurrentDir
-\ -start-insert -buffer-name=files file_rec<CR>
-nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
-\ -start-insert -buffer-name=buffers buffer<CR>
+\ -start-insert -winheight=25 -no-split -auto-preview -sync -buffer-name=files file_rec/async<CR>
+nnoremap <silent> [unite]g :<C-u>Unite 
+\ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
+nnoremap <silent> [unite]b :<C-u>Unite
+\ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
+nmap <leader>bb :Unite
+\ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 nnoremap <silent> [unite]r :<C-u>Unite
-\ -start-insert -buffer-name=recent file_mru<CR>
-nnoremap <silent> [unite]o :<C-u>Unite 
-\ -start-insert -buffer-name=outline outline<CR>
-
+\ -start-insert -no-split -auto-preview -buffer-name=recent file_mru<CR>
+nnoremap <silent> [unite]w :<C-u>UniteWithCursorWord
+\ -winheight=30 -buffer-name=grep grep<CR>
 nmap <C-R> :Unite -start-insert -buffer-name=outline outline<CR>
 
 " " Plugin: taglist
@@ -154,35 +160,25 @@ let g:showmarks_hlline_lower=1
 let g:showmarks_hlline_upper=0
 let g:showmarks_hlline_other=0
 
-" " Plugin: Search Pulse
-let g:vim_search_pulse_mode = 'cursor_line'
-"let g:vim_search_pulse_duration = 400
-
 " " Plugin: Unite
-let g:unite_enable_start_insert = 1
-let g:unite_split_rule = "botright"
-let g:unite_force_overwrite_statusline = 0
-let g:unite_winheight = 10
-
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-      \ 'ignore_pattern', join([
-      \ '\.git/',
-      \ ], '\|'))
+"
+"call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"      \ 'ignore_pattern', join([
+"      \ '\.git/',
+"      \ ], '\|'))
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-
-nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec:!<cr>
-
-autocmd FileType unite call s:unite_settings()
-
-function! s:unite_settings()
-  let b:SuperTabDisabled=1
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-
-  nmap <buffer> <ESC> <Plug>(unite_exit)
-endfunction
+"call unite#filters#sorter_default#use(['sorter_rank'])
+"
+"autocmd FileType unite call s:unite_settings()
+"
+"function! s:unite_settings()
+"  let b:SuperTabDisabled=1
+"  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+"  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+"  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+"  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+"  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+"
+"  nmap <buffer> <ESC> <Plug>(unite_exit)
+"endfunction
