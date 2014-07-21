@@ -14,23 +14,23 @@ Plugin 'Lucius'
 Plugin 'Zenburn'
 Plugin 'molokai'
 Plugin 'wombat256.vim'
-" Tools
-Plugin 'taglist.vim'
-Plugin 'Mouse-Toggle'
-"Plugin 'ctrlp.vim'
-Plugin 'vimwiki'
-Plugin 'bufexplorer.zip'
-Plugin 'fugitive.vim'
+" Layout Enhancements
 Plugin 'maciakl/vim-neatstatus'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ShowMarks'
 Plugin 'trailing-whitespace'
-"Plugin 'tomtom/tcomment_vim'
-"Plugin 'inside/vim-search-pulse'
+" Tools
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/unite-outline'
+Plugin 'taglist.vim'
+Plugin 'Mouse-Toggle'
+Plugin 'vimwiki'
+Plugin 'fugitive.vim'
+"Plugin 'ctrlp.vim'
+"Plugin 'tomtom/tcomment_vim'
+"Plugin 'inside/vim-search-pulse'
 "Plugin 'The-NERD-tree'
-"Plugin 'bling/vim-airline'
 call vundle#end()
 filetype plugin indent on
 
@@ -92,11 +92,10 @@ map <C-S-Up> :tabnew<CR>
 map <C-S-Right> :tabnext<CR>
 map <C-S-Left> :tabprevious<CR>
 map <C-S-C> :tabclose<CR>
+nmap <leader>tt :Tlist<CR>
 "map <C-S-Down> :NERDTreeToggle<CR>
 "map <C-n> :NERDTreeToggle<CR>
-nmap <leader>tt :Tlist<CR>
 "nmap <leader>nn :NERDTreeToggle<CR>
-"nmap <leader>bb :BufExplorer<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
 
@@ -109,18 +108,21 @@ nmap <F2> :.w !bash<CR>
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
 
-" Unite Shortcuts
-"nnoremap <silent> <Leader>re :Unite -buffer-name=recent -winheight=10 file_mru<cr>
-nnoremap <silent> <Leader>re :Unite -buffer-name=recent -winheight=10 file_mru<cr>
-nnoremap <Leader>bb :Unite -buffer-name=buffers -winheight=10 buffer<cr>
-nnoremap <leader>f :<C-u>Unite -start-insert file<CR>
-"nnoremap <Leader>f :Unite grep:%<cr>
-" CtrlP search
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#custom#source('file_rec/async','sorters','sorter_rank')
-" replacing unite with ctrl-p
-"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+" Unite - Set a prefix key [f] 
+nnoremap [unite] <Nop>
+nmap f [unite]
+
+" Unite Shortcuts used f+
+nnoremap <silent> [unite]f :<C-u>UniteWithCurrentDir
+\ -start-insert -buffer-name=files file_rec<CR>
+nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
+\ -start-insert -buffer-name=buffers buffer<CR>
+nnoremap <silent> [unite]r :<C-u>Unite
+\ -start-insert -buffer-name=recent file_mru<CR>
+nnoremap <silent> [unite]o :<C-u>Unite 
+\ -start-insert -buffer-name=outline outline<CR>
+
+nmap <C-R> :Unite -start-insert -buffer-name=outline outline<CR>
 
 " " Plugin: taglist
 let tlist_php_settings = 'php;f:functions'
@@ -158,3 +160,30 @@ let g:vim_search_pulse_mode = 'cursor_line'
 let g:vim_search_pulse_duration = 400
 
 " " Plugin: Unite
+let g:unite_enable_start_insert = 1
+let g:unite_split_rule = "botright"
+let g:unite_force_overwrite_statusline = 0
+let g:unite_winheight = 10
+
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+      \ 'ignore_pattern', join([
+      \ '\.git/',
+      \ ], '\|'))
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+nnoremap <C-P> :<C-u>Unite -buffer-name=files -start-insert buffer file_rec:!<cr>
+
+autocmd FileType unite call s:unite_settings()
+
+function! s:unite_settings()
+  let b:SuperTabDisabled=1
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+
+  nmap <buffer> <ESC> <Plug>(unite_exit)
+endfunction
