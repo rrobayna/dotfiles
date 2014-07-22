@@ -1,0 +1,239 @@
+#!/bin/bash
+
+##
+# VBoxer Command Line Management Interface
+# written by Rafael Robayna
+#
+# This script provides some helpful shortcuts for using virtualbox
+# @todo could look into reducing this to a set of aliases for vboxmanage
+##
+
+VERSION="0.4"
+
+echo "VBoxer Command Line Management Interface"
+echo "Version $VERSION"
+
+
+##
+# Display usage information
+##
+function displayHelp() {
+	echo ""
+	echo "Running VBox VMs:"
+	vboxmanage list runningvms
+	echo ""
+	echo "Usage:"
+	echo "vboxer <server> <command>"
+	echo ""
+	echo "Commands:"
+	echo "start or up		start the virtual machine if not already running"
+	echo "stop				stop the virtual machine if running"
+	echo "ssh				ssh into the virtual machine"
+	echo "mount 			mount the home directory"
+	echo "umount            unmount the home directory"
+    echo "tunnel            tunnel on port"
+	#echo "status           display the status of the virtual machine"
+	echo "-l or list        list all virtual machines"
+	echo ""
+}
+
+
+##
+# Display the list of Virtual Machines
+##
+function displayVMs() {
+	echo "Virtual Machines:"
+	echo ""
+	echo "dev              general development vm"
+	echo "data            primary data warehouse vm"
+	echo "java            java development vm"
+	echo "storm          apache storm testing vm"
+	echo ""
+}
+
+function displayList() {
+    vms=$(vboxmanage list vms)
+
+    for vm in $vms; do
+        name=$(echo $vm | awk '{print $1}')
+        echo $name
+    done
+}
+
+##
+# Requires at least one parameter
+##
+if [ $# -eq 0 ]
+then
+	displayHelp
+	exit 1
+fi
+
+
+##
+# List availible virtual machines
+##
+if [ $# -eq 1 ] && [ $1 == "list" ] || [ $1 == "-l" ]
+then
+	#displayVMs
+    displayList
+	exit 0
+fi
+
+
+##
+# Virtual Machines Definitions
+##
+case "$1" in
+
+"dev")		vmName="CaimanDev2"
+			sshName="caimandev2"
+			;;
+"data")		vmName="CaimanData"
+			sshName="caimandata"
+			;;
+"java")		vmName="CaimanJava"
+			sshName="caimanjava"
+			;;
+"storm")	vmName="CStorm"
+			sshName="caimanstorm"
+			;;
+esac
+
+if [ -z $vmName ]
+then
+	echo "Error: The Virtual Machine '$1' is not recognized"
+	exit 1
+fi
+
+
+
+##
+# Start the specified Virtual Machine
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 == "start" ] || [ $2 == "up" ]
+then
+	echo "Starting VirtualBox VM: $vmName"
+	VBoxManage startvm $vmName --type headless
+	exit 0
+fi
+
+
+##
+# Stop the specified Virtual Machine
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 == "stop" ]
+then
+	echo "Stopping VirtualBox VM: $vmName"
+	VBoxManage controlvm $vmName poweroff
+	exit 0
+fi
+
+
+##
+# Mount the home directory of the specified Virtual Machine
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 == "mount" ]
+then
+	MOUNTPATH="/Volumes/$sshName"
+	MOUNTEXISTS=`mount | grep "on $MOUNTPATH"`
+
+	if [[ $MOUNTEXISTS ]]
+	then
+		echo "Error: Mount already exists at $MOUNTPATH"
+		exit 1
+	else
+		echo "Mounting $vmName to $MOUNTPATH"
+		if [ ! -d "$MOUNTPATH" ]
+		then
+			mkdir $MOUNTPATH
+		fi
+		sshfs $sshName:/home/rafael/ $MOUNTPATH
+		exit 0
+	fi
+fi
+
+
+##
+# Unmount the home directory of the specified Virtual Machine
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 == "umount" ]
+then
+	MOUNTPATH="/Volumes/$sshName"
+	MOUNTEXISTS=`mount | grep "on $MOUNTPATH"`
+
+	if [[ ! $MOUNTEXISTS ]]
+	then
+		echo "Error: Mount does not exist at $MOUNTPATH"
+		if [ -d "$MOUNTPATH" ]
+		then
+			echo "Removing mount directory at $MOUNTPATH"
+			rmdir $MOUNTPATH
+		fi
+		exit 1
+	else
+		echo "Unmounting $MOUNTPATH"
+		umount $MOUNTPATH
+		exit 0
+	fi
+fi
+
+
+## @todo add open mount functionaity
+
+
+##
+# Initiate a secure shell session with the specified Virtual Machine
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 = "ssh" ]
+then
+	ssh $sshName
+	exit 0
+fi
+
+
+##
+# Initiate a secure tunnel with the specified Virtual Machine
+##
+if [ $# -eq 3 ] && [ -n $vmName ] && [ $2 = "tunnel" ]
+then
+    port=$3
+    ssh -N $sshName -L $port/localhost/$port
+	ssh $sshName
+	exit 0
+fi
+
+
+##
+# Get the status of the specified Virtual Machine
+# @todo Fix the check for ssh session
+##
+if [ $# -eq 2 ] && [ -n $vmName ] && [ $2 = "status" ]
+then
+	echo "Status for '$1':"
+	echo "-------------------------"
+   	RUNNING=$(vboxmanage list runningvms | grep $vmName | awk '{print $1 }')
+	if [[ $RUNNING ]]
+	then
+		echo "Running" $(vboxmanage list runningvms | grep $vmName)
+		MOUNTPATH="/Volumes/$sshName"
+		MOUNTEXISTS=`mount | grep "on $MOUNTPATH"`
+		if [[ $MOUNTEXISTS ]]
+		then
+			echo "Mounted at $MOUNTPATH"
+		fi
+
+		#SSH_ACTIVE=`ps aux | grep ssh | grep "vboxer $1 ssh" | grep -n grep`
+		#if [[ $SSH_ACTIVE ]]
+		#then
+		#	echo "SSH active"
+		#fi
+		echo "-------------------------"
+		exit
+	else
+		echo "Inactive"
+		exit
+	fi
+
+fi
+

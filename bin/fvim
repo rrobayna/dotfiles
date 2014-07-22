@@ -1,0 +1,19 @@
+#! /bin/sh
+## fvim: finds files and opens them in vim
+listfile=$HOME/tmp/fvim.tmp
+
+## Check for empty arguments
+[ $# -eq 0 ] && exit 0
+
+## Find files and store them in a list
+find . -d -maxdepth 5 -iname "$1" > $listfile
+
+findcount=`cat $listfile | wc -l`
+
+if [ $findcount -ge 2 ]; then
+    vim $listfile
+elif [ $findcount -eq 1 ]; then
+    vim `cat $listfile`
+else
+    echo "No matches for: $1"
+fi
