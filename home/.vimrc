@@ -29,6 +29,9 @@ Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
 Plugin 'vimwiki'
 Plugin 'fugitive.vim'
+Plugin 'git-cheat'
+Plugin 'tpope/vim-git'
+
 "Plugin 'tomtom/tcomment_vim'
 "Plugin 'The-NERD-tree'
 call vundle#end()
@@ -100,6 +103,7 @@ nmap <leader>d :bd<CR>
 "nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
+nmap <leader>gc :tab help git-cheat<CR>
 
 " Open Scratchpad Buffer
 map <leader>q :e ~/.scrachpad<CR>
@@ -159,26 +163,3 @@ let g:showmarks_textother=">"
 let g:showmarks_hlline_lower=1
 let g:showmarks_hlline_upper=0
 let g:showmarks_hlline_other=0
-
-" " Plugin: Unite
-"
-"call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-"      \ 'ignore_pattern', join([
-"      \ '\.git/',
-"      \ ], '\|'))
-
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-"
-"autocmd FileType unite call s:unite_settings()
-"
-"function! s:unite_settings()
-"  let b:SuperTabDisabled=1
-"  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-"  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-"  imap <silent><buffer><expr> <C-x> unite#do_action('split')
-"  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-"  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-"
-"  nmap <buffer> <ESC> <Plug>(unite_exit)
-"endfunction
