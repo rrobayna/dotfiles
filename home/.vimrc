@@ -12,9 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 " Themes
 Plugin 'Lucius'
 Plugin 'obsidian'
-Plugin 'Zenburn'
 Plugin 'simple-dark'
-Plugin 'wombat256.vim'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'
 Plugin 'airblade/vim-gitgutter'
@@ -31,16 +29,13 @@ Plugin 'Mouse-Toggle'
 Plugin 'vimwiki'
 Plugin 'tpope/vim-fugitive'
 Plugin 'git-cheat'
-"Plugin 'bufexplorer.zip'
-"Plugin 'ctrlp.vim'
-
 "Plugin 'tomtom/tcomment_vim'
 call vundle#end()
 filetype plugin indent on
 
 " " Configuration
 syntax enable
-let mapleader=","       " Set the leader
+"let mapleader=","       " Set the leader
 let g:mapleader=","     " Set leader globally @needed?
 set encoding=utf-8      " Set default encoding to utf-8
 set ffs=unix,dos,mac    " Set unix as the standard file type
@@ -90,10 +85,6 @@ set nobackup
 set nowb
 set noswapfile
 
-" Command Aliases
-"cmap cdh lcd %:p:h " Not needed with nerdtree
-cmap rr source ~/.vimrc
-
 " " Modified Mappings
 map 0 ^
 
@@ -104,6 +95,7 @@ map <C-S-Right> :tabnext<CR>
 map <C-S-Left> :tabprevious<CR>
 nmap <leader>tt :Tlist<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
+nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>d :bd<CR>
 nmap <C-P> :CtrlPRoot<CR>
 map <C-S-Down> :NERDTreeToggle<CR>
@@ -118,7 +110,7 @@ nmap <leader>n :bn<CR>
 map <leader>q :e ~/.scrachpad<CR>
 
 " Execute current line in bash
-nmap <F2> :.w !bash<CR> 
+nmap <F2> :.w !bash<CR>
 
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
@@ -127,24 +119,18 @@ nmap <F3> :! %:p
 nnoremap [fuzzy] <Nop>
 nmap f [fuzzy]
 
-" CtrlP Shortcuts
-"nnoremap <silent> [fuzzy]f :<C-u>CtrlPRoot<CR>
-"nnoremap <silent> [fuzzy]b :<C-u>CtrlPBuffer<CR>
-"nnoremap <silent> [fuzzy]t :<C-u>CtrlPBufTag<CR>
-"nnoremap <silent> [fuzzy]c :<C-u>CtrlPChange<CR>
-
 " Unite Shortcuts
 nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
 \ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
-nnoremap <silent> [fuzzy]r :<C-u>Unite 
+nnoremap <silent> [fuzzy]r :<C-u>Unite
 \ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
-nmap <C-R> :Unite 
+nmap <C-R> :Unite
 \ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
 nnoremap <silent> [fuzzy]b :<C-u>Unite
 \ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
 nmap <leader>bb :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
-nnoremap <silent> [fuzzy]g :<C-u>Unite 
+nnoremap <silent> [fuzzy]g :<C-u>Unite
 \ -start-insert -winheight=25 -no-split -buffer-name=grep grep<CR>
 nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
 \ -winheight=30 -buffer-name=grep grep<CR>
@@ -171,14 +157,7 @@ let g:bufExplorerSortBy='number'
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
-"let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
-
-" " Plugin: CtrlP
-let g:ctrlp_cmd = 'CtrlPRoot'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_max_height = 16
-let g:ctrlp_max_depth = 20
-let g:ctrlp_open_new_file = 'r'
+let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.hg','\.svn','\.bzr']
 
 " " Plugin: Showmarks
 let g:showmarks_enable=0
