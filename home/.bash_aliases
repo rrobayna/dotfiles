@@ -19,6 +19,7 @@ alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %
 alias gp='git pull'
 alias ga='git add'
 alias gd='git diff'
+alias gds='git diff --staged'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gb='git branch'
