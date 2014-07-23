@@ -21,6 +21,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'trailing-whitespace'
 Plugin 'vim-scripts/ShowMarks'
 " Tools
+Plugin 'The-NERD-tree'
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
@@ -28,12 +29,12 @@ Plugin 'Shougo/unite.vim'
 Plugin 'taglist.vim'
 Plugin 'Mouse-Toggle'
 Plugin 'vimwiki'
-Plugin 'fugitive.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'git-cheat'
-Plugin 'tpope/vim-git'
+"Plugin 'bufexplorer.zip'
+"Plugin 'ctrlp.vim'
 
 "Plugin 'tomtom/tcomment_vim'
-"Plugin 'The-NERD-tree'
 call vundle#end()
 filetype plugin indent on
 
@@ -64,6 +65,9 @@ set laststatus=2        " Always show the status line
 set backspace=2         " Fix delete/backspace behavior
 set backspace=indent,eol,start
 
+set wildmenu
+set wildmode=list:longest,full
+
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
@@ -86,24 +90,29 @@ set nobackup
 set nowb
 set noswapfile
 
+" Command Aliases
+"cmap cdh lcd %:p:h " Not needed with nerdtree
+cmap rr source ~/.vimrc
 
 " " Modified Mappings
 map 0 ^
 
 " " Keyboard Shortcuts
+map <C-W>t :tabnew<CR>
 map <C-S-Up> :tabnew<CR>
 map <C-S-Right> :tabnext<CR>
 map <C-S-Left> :tabprevious<CR>
-map <C-S-C> :tabclose<CR>
 nmap <leader>tt :Tlist<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>d :bd<CR>
-"map <C-S-Down> :NERDTreeToggle<CR>
-"map <C-n> :NERDTreeToggle<CR>
-"nmap <leader>nn :NERDTreeToggle<CR>
+nmap <C-P> :CtrlPRoot<CR>
+map <C-S-Down> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 nmap <leader>rc :e ~/.vimrc<CR>
 nmap <leader>rr :source ~/.vimrc<CR>
 nmap <leader>gc :tab help git-cheat<CR>
+nmap <leader>bb :BufExplorer<CR>
+nmap <leader>n :bn<CR>
 
 " Open Scratchpad Buffer
 map <leader>q :e ~/.scrachpad<CR>
@@ -114,24 +123,33 @@ nmap <F2> :.w !bash<CR>
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
 
-" Unite - Set a prefix key [f] 
-nnoremap [unite] <Nop>
-nmap f [unite]
+" Fuzzy - Set a prefix key [f]
+nnoremap [fuzzy] <Nop>
+nmap f [fuzzy]
+
+" CtrlP Shortcuts
+"nnoremap <silent> [fuzzy]f :<C-u>CtrlPRoot<CR>
+"nnoremap <silent> [fuzzy]b :<C-u>CtrlPBuffer<CR>
+"nnoremap <silent> [fuzzy]t :<C-u>CtrlPBufTag<CR>
+"nnoremap <silent> [fuzzy]c :<C-u>CtrlPChange<CR>
 
 " Unite Shortcuts
-nnoremap <silent> [unite]f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -no-split -auto-preview -sync -buffer-name=files file_rec/async<CR>
-nnoremap <silent> [unite]g :<C-u>Unite 
+nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
+\ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
+nnoremap <silent> [fuzzy]r :<C-u>Unite 
 \ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
-nnoremap <silent> [unite]b :<C-u>Unite
+nmap <C-R> :Unite 
+\ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
+nnoremap <silent> [fuzzy]b :<C-u>Unite
 \ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
 nmap <leader>bb :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
-nnoremap <silent> [unite]r :<C-u>Unite
-\ -start-insert -no-split -auto-preview -buffer-name=recent file_mru<CR>
-nnoremap <silent> [unite]w :<C-u>UniteWithCursorWord
+nnoremap <silent> [fuzzy]g :<C-u>Unite 
+\ -start-insert -winheight=25 -no-split -buffer-name=grep grep<CR>
+nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
 \ -winheight=30 -buffer-name=grep grep<CR>
-nmap <C-R> :Unite -start-insert -buffer-name=outline outline<CR>
+nnoremap <silent> [fuzzy]h :<C-u>Unite
+\ -start-insert -no-split -buffer-name=recent file_mru<CR>
 
 " " Plugin: taglist
 let tlist_php_settings = 'php;f:functions'
@@ -150,10 +168,17 @@ let g:bufExplorerShowTabBuffer=1
 let g:bufExplorerSortBy='number'
 
 " " Plugin: NERDtree
-"let NERDTreeChDirMode = 0
-"let NERDTreeQuitOnOpen = 1
-"let NERDTreeShowHidden = 1
+let NERDTreeChDirMode = 2
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden = 1
 "let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
+
+" " Plugin: CtrlP
+let g:ctrlp_cmd = 'CtrlPRoot'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_max_height = 16
+let g:ctrlp_max_depth = 20
+let g:ctrlp_open_new_file = 'r'
 
 " " Plugin: Showmarks
 let g:showmarks_enable=0
