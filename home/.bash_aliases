@@ -1,38 +1,39 @@
 # Easier navigation: .., ..., ...., ....., ~ and -
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias ~="cd ~" # `cd` is probably faster to type though
 
 # General
-alias h="history"
+alias h='history'
 
 # Tmux
-#alias tmux="TERM=screen-256color-bce tmux"
-alias ltmux="if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi"
+alias ltmux='if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi'
 
 # Git
 alias g='git'
-alias gs='git status -s; git submodule status'
+alias gs='printf "* "; tput setaf 2; printf "%s\n" $(git rev-parse --abbrev-ref HEAD); tput sgr0; git status -s; git submodule status'
 alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %s %Cgreen(%cr) %Cblue%an <%ae>%Creset" --abbrev-commit --date=relative'
+alias gch='git checkout'
+alias gb='git branch'
 alias gp='git pull'
 alias ga='git add'
-alias gd='git diff'
-alias gds='git diff --staged'
 alias gc='git commit'
 alias gcm='git commit -m'
-alias gb='git branch'
-alias gch='git checkout'
-alias gd1='echo "git diff HEAD"; git diff HEAD'
-alias gd2='echo "git diff HEAD^"; git diff HEAD^'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gdh='git diff HEAD^'
+alias gsh='git show'
+alias grs='git reset --soft'
+alias grl='git reflog'
 
 # Docker
-alias d="docker"
-alias dl="docker ps -l -q"
-alias dip="boot2docker ssh ip addr show dev eth1 | grep inet"
-alias di="docker images"
-alias dps="docker ps -a"
+alias d='docker'
+alias dl='docker ps -l -q'
+alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
+alias di='docker images'
+alias dps='docker ps -a'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
