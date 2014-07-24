@@ -12,5 +12,7 @@ git clone https://github.com/rrobayna/dotfiles.git && cd dotfiles && source boot
 Just clone it into your home folder and run install.sh
 
 ## Sources
-The configs were taking from various sources including:
+Thanks to mathiasbynens for osx config and lots of other useful bits
 https://github.com/mathiasbynens/dotfiles
+Thanks to skwp for: ctags, gitignore
+https://github.com/skwp/dotfiles
