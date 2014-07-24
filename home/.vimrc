@@ -1,11 +1,8 @@
 " Rafael Robayna's vimrc
 
 set nocompatible
-set shell=bash						" @checkNeeded
-set shellpipe=2>/dev/null>			" @checkNeeded
-
-" " Get The OS Type
-let os = substitute(system('uname'), "\n", "", "")
+set shell=bash
+set shellpipe=2>/dev/null>
 
 " " Vundle Initialization
 filetype off
@@ -23,10 +20,11 @@ Plugin 'vim-scripts/ShowMarks'
 Plugin 'trailing-whitespace'
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
-"Plugin 'tpope/vim-surround'		" @test
-"" Tools
+Plugin 'tpope/vim-surround'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'nvie/vim-togglemouse'
+" Tools
 Plugin 'The-NERD-tree'
-Plugin 'Mouse-Toggle'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki'
 Plugin 'Shougo/neomru.vim'
@@ -34,8 +32,7 @@ Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'taglist.vim'
-"Plugin 'tomtom/tcomment_vim'		" @test
-" Help Tools
+" Cheats
 Plugin 'git-cheat'
 call vundle#end()
 filetype plugin indent on
@@ -47,7 +44,7 @@ set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
 set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trail char
 set lcs+=eol:¬					" Set the lcs end of line char
-set lcs+=precedes:<				" Set the lcs precedes char
+set lcs+=precedes:<				" Set lcs char
 set lcs+=extends:>				" Set lcs char
 set lcs+=nbsp:%					" Set lcs char
 set ffs=unix,dos,mac			" Set unix as the standard file type
@@ -60,7 +57,7 @@ set smartcase					" Allow search case matching
 set lazyredraw					" Don't redraw while executing macros
 set showcmd						" Display command as used
 set autoindent					" Auto indent
-set history=500					" Extend history to 500
+set history=1000				" Extend history to 1000
 set splitright					" Opens vertical split right of current window
 set splitbelow					" Opens horizontal split below current window
 set noexpandtab
@@ -71,6 +68,9 @@ set softtabstop=4
 set laststatus=2				" Always show the status line
 set backspace=2					" Fix delete/backspace behavior
 set backspace=indent,eol,start
+
+" " Get The OS Type
+let os = substitute(system('uname'), "\n", "", "")
 
 " Set External File Browser for OS X
 if os == "Darwin"
@@ -106,17 +106,18 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" " Shortcuts: Commands
+" Modify 0 so that it repositions the cursor
+" at the first string character instead of COL 0
+map 0 ^
+
+" " Commands
 command! Reload source ~/.vimrc
 command! FTabs %retab!
 "command! FWhitespace %s/\s\+$//
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
 
-" " Modified Mappings
-map 0 ^
-
-" " Keyboard Shortcuts
+" " Shortcuts
 map <C-W>t :tabnew<CR>
 map <C-S-Up> :tabnew<CR>
 map <C-S-Right> :tabnext<CR>
@@ -124,20 +125,16 @@ map <C-S-Left> :tabprevious<CR>
 map <C-S-Down> :NERDTreeToggle<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>tt :Tlist<CR>
-
 " Quick Access to vimrc
 nmap <leader>rc :e ~/.vimrc<CR>
-
 " Open Scratchpad Buffer
 map <leader>q :e ~/.scrachpad<CR>
-
 " Execute current line in bash
 nmap <F2> :.w !bash<CR>
-
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
 
-" Fuzzy - Define prefix combo [Ctrl-f]
+" " Define Fuzzy prefix combo [Ctrl-f]
 nnoremap [fuzzy] <Nop>
 nmap <C-f> [fuzzy]
 
@@ -166,13 +163,11 @@ nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
 nnoremap <silent> [fuzzy]h :<C-u>Unite
 \ -start-insert -no-split -buffer-name=recent file_mru<CR>
 
-
 " " Plugin: NERDtree
 let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
-let NERDTreeShowBookmarks = 0
-let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.hg','\.svn','\.bzr']
+let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
 " " Plugin: Showmarks
 let g:showmarks_enable=0
