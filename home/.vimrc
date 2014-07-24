@@ -37,12 +37,13 @@ Plugin 'git-cheat'
 call vundle#end()
 filetype plugin indent on
 
-" " Configuration
+" " Settings
 syntax enable
+map \ ,							" Shuffle comma mapping
 let mapleader=","				" Set the leader
 set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
-set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trail char
+set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trailing space char
 set lcs+=eol:¬					" Set the lcs end of line char
 set lcs+=precedes:<				" Set lcs char
 set lcs+=extends:>				" Set lcs char
@@ -69,7 +70,7 @@ set laststatus=2				" Always show the status line
 set backspace=2					" Fix delete/backspace behavior
 set backspace=indent,eol,start
 
-" " Get The OS Type
+" Get The OS Type
 let os = substitute(system('uname'), "\n", "", "")
 
 " Set External File Browser for OS X
@@ -89,7 +90,7 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest,full
 
-" Set extra options when running in GUI mode
+" Display: Set extra options when running in GUI mode
 if has("gui_running")
 	set guioptions-=T
 	set guioptions+=e
@@ -97,7 +98,7 @@ if has("gui_running")
 	set guitablabel=%M\ %t
 endif
 
-" Set Default Colorscheme
+" Display: Set Default Colorscheme
 try
 	set background=dark
 	colorscheme lucius
@@ -106,9 +107,26 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" Modify 0 so that it repositions the cursor
-" at the first string character instead of COL 0
+" Display: 80-character line coloring 
+if exists('+colorcolumn')
+	set colorcolumn=81
+else
+	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
+endif
+
+
+" " Mappings
+" Remap 0 to move to the first string character instead of COL 0
 map 0 ^
+" Make Y behave like other capitals - http://vimbits.com/bits/11
+nnoremap Y y$
+" Keep search pattern at the center of the screen - http://vimbits.com/bits/92
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+nnoremap <silent> g# g#zz
 
 " " Commands
 command! Reload source ~/.vimrc
@@ -125,6 +143,7 @@ map <C-S-Left> :tabprevious<CR>
 map <C-S-Down> :NERDTreeToggle<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>tt :Tlist<CR>
+noremap <silent><Leader><space> :nohls<CR>
 " Quick Access to vimrc
 nmap <leader>rc :e ~/.vimrc<CR>
 " Open Scratchpad Buffer
@@ -134,11 +153,10 @@ nmap <F2> :.w !bash<CR>
 " Execute current file in bash (must have correct permissions on disk)
 nmap <F3> :! %:p
 
-" " Define Fuzzy prefix combo [Ctrl-f]
+" " Shortcuts: Unite
+" Define Fuzzy prefix combo [Ctrl-f]
 nnoremap [fuzzy] <Nop>
 nmap <C-f> [fuzzy]
-
-" " Shortcuts: Unite
 " Fuzzy File Search with Async Load
 nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
 \ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
