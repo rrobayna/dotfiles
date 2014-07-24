@@ -220,6 +220,7 @@
     vim-unmerged = !git vm # deprecated
 
     current = rev-parse --abbrev-ref HEAD
+	ch = rev-parse --verify HEAD 
     br = branch
     brt = branch --track
     brup = branch --set-upstream
@@ -262,7 +263,6 @@
     pr = prune
     prm = !git rfe && git gcp
 
-    fsize = git ls-tree -r -t -l --full-name HEAD | sort -rn -k 4 | less
 [user]
 	name = Rafael Robayna
 	email = rrobayna@gmail.com
