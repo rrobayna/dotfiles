@@ -1,7 +1,6 @@
 #!/bin/bash
-# Maintained by Rafael Robayna <rrobayna@gmail.com>
-# Bootstrap your dotfiles
-# Helper script to perform quick install, backup and commit actions to save your dotfiles
+# Written by Rafael Robayna <rrobayna@gmail.com>
+# Helper script to quick backup and install your dotfiles
 
 # Install configs
 function installDotFiles() {
@@ -34,6 +33,7 @@ function backupDotFiles() {
 	# limit backup to files already in the dotfiles/home folder
 	_dotfiles=$(ls -A home/ | egrep '^\.')
 	for _file in $_dotfiles; do
+		[ ! -f $HOME/$_file ] && continue
 		_diff=$(diff $HOME/$_file $PWD/home/$_file)
 		if [ -n "$_diff" ]; then
 			rsync -ah --no-perms $HOME/$_file $PWD/home/$_file > /dev/null 2>&1
@@ -42,17 +42,26 @@ function backupDotFiles() {
 	done
 }
 
-function autoCommit() {
-	_status=$(git status -s | wc -l)
-	if [ $_status -gt 0 ]; then
-		echo "Changes detected..."
-		git status -s
-		git add .
-		git commit -m "Backing up dotfiles"
-		git push
-		echo "Configs saved and pushed upstream."
+function installBrew() {
+	if [ `uname` = 'Darwin' ]; then
+		if [ ! -f /usr/local/bin/brew ]; then
+	 		echo "Homebrew is not installed."
+			while true; do
+				read -p "Would you like the script to install it? (y/n) " yn
+				case $yn in
+					[Yy]* )
+						echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
+						break
+						;;
+					* ) exit;;
+				esac
+			done
+		fi
+
+		echo "Installing Brewfile"
+		sudo brew bundle osx/Brewfile
 	else
-		echo "No changes detected."
+		echo "Homebrew configurations are only availible for OS X"
 	fi
 }
 
@@ -80,7 +89,7 @@ function displayHelp() {
 	echo "Options:"
 	echo "install or i			install dotfiles, vim plugins and more"
 	echo "backup or b			backup dotfiles"
-	echo "commit or c			auto-commit a backup of your dotfiles to your upstream repo"
+	echo "homebrew or br			install tools listed in the Brewfile"
 	exit 0;
 }
 
@@ -92,13 +101,17 @@ fi
 
 case $1 in
 	"install"|"i")
-		installDotFiles ;;
+		installDotFiles
+		;;
 	"backup"|"b")
-		backupDotFiles ;;
-	"commit"|"c")
-		autoCommit ;;
+		backupDotFiles
+		;;
+	"homebrew"|"br")
+		installBrew
+		;;
 	"help"|"--help")
-		displayHelp ;;
+		displayHelp
+		;;
 	*)
 		echo "Error: unrecognized command"
 		displayHelp
