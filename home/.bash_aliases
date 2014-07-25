@@ -13,7 +13,7 @@ alias ltmux='if tmux has-session -t $USER; then tmux attach -t $USER; else tmux 
 
 # Git
 alias g='git'
-alias gs='printf "* "; tput setaf 2; printf "%s\n" $(git rev-parse --abbrev-ref HEAD); tput sgr0; git status -s; git submodule status'
+alias gs='git status -s; git submodule status'
 alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %s %Cgreen(%cr) %Cblue%an <%ae>%Creset" --abbrev-commit --date=relative'
 alias gch='git checkout'
 alias gb='git branch'
