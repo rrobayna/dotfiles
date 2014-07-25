@@ -9,20 +9,20 @@ function installDotFiles() {
 	rsync --exclude ".DS_Store" -avh --no-perms $PWD/home/. ~
 
 	echo "Installing scripts to $HOME/bin"
-	[ ! -d $HOME/bin ] && mkdir $HOME/bin
+	[ ! -d "$HOME"/bin ] && mkdir "$HOME"/bin
 	rsync --exclude ".DS_Store" -avh --no-perms $PWD/bin/. $HOME/bin/
 
-	if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
+	if [ ! -d "$HOME"/.vim/bundle/Vundle.vim ]; then
 		echo "Installing Vundle Plugin Manager for Vim..."
-		git clone https://github.com/gmarik/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+		git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
 	fi
 
 	echo "Installing Vim plugins..."
 	vim +PluginInstall +qall
 
-	if [ -d $HOME/.vim/bundle/vimproc.vim ]; then
+	if [ -d "$HOME"/.vim/bundle/vimproc.vim ]; then
 		echo "Building vimproc..."
-		cd $_HOME/.vim/bundle/vimproc.vim && make
+		cd "$HOME"/.vim/bundle/vimproc.vim && make
 	fi
 
 	echo "Installation complete!"
@@ -32,11 +32,11 @@ function backupDotFiles() {
 	echo "Backing up dotfiles..."
 	# limit backup to files already in the dotfiles/home folder
 	_dotfiles=$(ls -A home/ | egrep '^\.')
-	for _file in $_dotfiles; do
-		[ ! -f $HOME/$_file ] && continue
-		_diff=$(diff $HOME/$_file $PWD/home/$_file)
+	for _file in "$_dotfiles"; do
+		[ ! -f "$HOME"/"$_file" ] && continue
+		_diff=$(diff "$HOME"/"$_file" "$PWD"/home/"$_file")
 		if [ -n "$_diff" ]; then
-			rsync -ah --no-perms $HOME/$_file $PWD/home/$_file > /dev/null 2>&1
+			rsync -ah --no-perms "$HOME"/"$_file" "$PWD"/home/"$_file" > /dev/null 2>&1
 			echo $_file
 		fi
 	done
