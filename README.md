@@ -2,13 +2,14 @@
 
 This dotfiles repo contains:
 - a collection of dotfiles (vim, bash, tmux...)
-- bash scripts
-- Brewfiles (for installing commandline tools in OS X)
-- Caskfiles (for installing apps in OS X using brew)
-- OS X configs
+- shell scripts
+- Brewfiles (install OS X libs and commandline tools)
+- Caskfiles (install OS X apps using brew)
+- OS X configuration script
 - assorted extras
 
-It also contains a dotfiles bootstrap script to simplify installation and backups of dotfiles and bash scripts.
+It also contains a bootstrap script to simplify installation and backup actions
+for dotfiles and shell scripts.
 
 
 ## Installation
@@ -19,20 +20,22 @@ It also contains a dotfiles bootstrap script to simplify installation and backup
 git clone https://github.com/rrobayna/dotfiles.git
 ```
 
-### Install dotfiles, bash scripts and vim plugins
+### Install dotfiles, scripts and vim plugins
 
-**Warning: This operation with overwrite existing dotfiles and bash scripts.**
+**Warning: This operation will overwrite existing dotfiles and shell scripts.
+Proceed with caution! If you want to retain any of your personal dotfiles and scripts
+you might want to perform a backup before installing.**
 
 ```bash
 cd dotfiles && ./bootstrap.sh install
 ```
 
-This will copy over all the dotfiles from the repos home/ directory to your ~/.  It will also copy all the bash scripts in the repos bin/ directory to your ~/bin and will install all the vim plugins in the .vimrc using Vundle magic.
-
 
 ### Add custom commands without creating a new fork
 
-If `~/.extra` exists, it will be sourced along with the other files. You can use this to add a few custom commands without the need to fork this entire repository, or to add commands you don’t want to commit to a public repository.
+If `~/.extra` exists, it will be sourced along with the other files. You can use
+this to add a few custom commands without the need to fork this entire repository,
+or to add commands you don’t want to commit to a public repository.
 
 My `~/.extra` looks something like this:
 
@@ -54,9 +57,9 @@ git config --global user.email "$GIT_AUTHOR_EMAIL"
 ./bootstrap brew
 ```
 
-This will install Homebrew if it's not already installed and install all the packages listed in the main Brewfile.
+This will install Homebrew and all the packages listed in the main Brewfile.
 
-To install the additional packages listed in Brewfile.home just run:
+To install brew packages manually run:
 
 ```bash
 brew bundle osx/Brewfile.home
@@ -69,7 +72,9 @@ brew bundle osx/Brewfile.home
 brew bundle osx/Caskfile
 ```
 
-This will install all the apps listed in the Caskfile and link them to your Applications directory. Again, I've seperated additional packages for my home system into Caskfile.home.
+This will install all the Apps listed in the Caskfile and link them to your
+Applications directory. I've seperated additional packages for my home system
+into Caskfile.home.
 
 
 ### Sensible OS X defaults
@@ -77,20 +82,23 @@ This will install all the apps listed in the Caskfile and link them to your Appl
 When setting up a new Mac, you may want to set some sensible OS X defaults:
 
 ```bash
-./.osx
+./osx/defaults.osx
 ```
 
-## Backing Up
+## Backup
 
 ### Using bootstrap.sh
 
-Once you've made changes to your dotfiles and bash script, you can run:
+To backup changes to you dotfiles and shell script:
 
 ```bash
 ./bootstrap.sh backup
 ```
 
-from the repo's home folder to backup all your updates. If you want to add a new script or dotfile, copy it over to the repo's home or bin directory and it will be included in any future backups.
+This will only backup the files currently included in the projects home/ directory.
+To add new dotfiles and scripts, just copy the file into the appropriate
+directory.
+If you want to add a new script or dotfile, copy it over to the repo's home or bin directory and it will be included in any future backups.
 
 
 ## Sources
