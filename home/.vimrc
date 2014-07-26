@@ -107,13 +107,12 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" Display: 80-character line coloring 
+" Display: 80-character line coloring
 if exists('+colorcolumn')
 	set colorcolumn=81
 else
 	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 endif
-
 
 " " Mappings
 " Remap 0 to move to the first string character instead of COL 0
@@ -137,10 +136,15 @@ command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
 
 " " Shortcuts
 map <C-W>t :tabnew<CR>
-map <C-S-Up> :tabnew<CR>
-map <C-S-Right> :tabnext<CR>
-map <C-S-Left> :tabprevious<CR>
-map <C-S-Down> :NERDTreeToggle<CR>
+map <C-W>l :tabnext<CR>
+map <C-W>h :tabprevious<CR>
+map <C-W>j :bn<CR>
+map <C-W>k :bp<CR>
+map <C-W>e :NERDTreeToggle<CR>
+map <C-W>_ :split<CR>
+map <C-W>\| :vsplit<CR>
+nmap gbn :bn<CR>
+nmap gbp :bp<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>tt :Tlist<CR>
 noremap <silent><Leader><space> :nohls<CR>
@@ -171,6 +175,8 @@ nmap <C-R> :Unite
 nnoremap <silent> [fuzzy]b :<C-u>Unite
 \ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
 nmap <leader>bb :Unite
+\ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
+nmap <C-W>b :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 " Unite Grep
 nnoremap <silent> [fuzzy]g :<C-u>Unite
