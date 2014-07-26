@@ -1,6 +1,6 @@
 #!/bin/bash
-# Written by Rafael Robayna <rrobayna@gmail.com>
-# Helper script to quick backup and install your dotfiles
+# written by Rafael Robayna <rrobayna@gmail.com>
+# Quickly backup and install your dotfiles
 
 # Install configs
 function installDotFiles() {
@@ -12,17 +12,20 @@ function installDotFiles() {
 	[ ! -d "$HOME"/bin ] && mkdir "$HOME"/bin
 	rsync --exclude ".DS_Store" -avh --no-perms $PWD/bin/. $HOME/bin/
 
-	if [ ! -d "$HOME"/.vim/bundle/Vundle.vim ]; then
-		echo "Installing Vundle Plugin Manager for Vim..."
-		git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
-	fi
+	if hash vim 2>/dev/null; then
+		echo "Installing Vim Plugins..."
 
-	echo "Installing Vim plugins..."
-	vim +PluginInstall +qall
+		if [ ! -d "$HOME"/.vim/bundle/Vundle.vim ]; then
+			echo "Installing Vundle Plugin Manager for Vim..."
+			git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
+		fi
 
-	if [ -d "$HOME"/.vim/bundle/vimproc.vim ]; then
-		echo "Building vimproc..."
-		cd "$HOME"/.vim/bundle/vimproc.vim && make
+		vim +PluginInstall +qall
+
+		if [ -d "$HOME"/.vim/bundle/vimproc.vim ]; then
+			echo "Building vimproc..."
+			cd "$HOME"/.vim/bundle/vimproc.vim && make
+		fi
 	fi
 
 	echo "Installation complete!"
@@ -44,13 +47,13 @@ function backupDotFiles() {
 
 function installBrew() {
 	if [ `uname` = 'Darwin' ]; then
-		if [ ! -f /usr/local/bin/brew ]; then
+		if hash brew 2>/dev/null; then
 	 		echo "Homebrew is not installed."
 			while true; do
 				read -p "Would you like the script to install it? (y/n) " yn
 				case $yn in
 					[Yy]* )
-						echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
+						ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 						break
 						;;
 					* ) exit;;
@@ -58,29 +61,12 @@ function installBrew() {
 			done
 		fi
 
-		echo "Installing Brewfile"
+		echo "Installing Brewfile..."
 		sudo brew bundle osx/Brewfile
 	else
-		echo "Homebrew configurations are only availible for OS X"
+		echo "Nothing to do here..."
 	fi
 }
-
-#function displayBrewInfo() {
-#	 if [[ $(uname) != 'Linux' ]]; then
-#		 echo ""
-#		 echo "To install homebrew run:"
-#		 echo "$ ruby -e \"$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)\""
-#		 echo ""
-#		 echo "To install the commandline tools listed in the Brewfile run:"
-#		 echo "$ sudo brew bundle osx/Brewfile"
-#		 echo ""
-#		 echo "To install the desktop apps listed in the Caskfile run:"
-#		 echo "$ sudo brew bundle osx/Caskfile"
-#		 echo ""
-#	 else
-#		 echo "Homebrew configurations are only availible for OS X"
-#	 fi
-#}
 
 function displayHelp() {
 	echo "Bootstrap your dotfiles"
