@@ -35,7 +35,7 @@ function backupDotFiles() {
 	echo "Backing up dotfiles..."
 	# limit backup to files already in the dotfiles/home folder
 	_dotfiles=$(ls -A home/ | egrep '^\.')
-	for _file in "$_dotfiles"; do
+	for _file in $_dotfiles; do
 		[ ! -f "$HOME"/"$_file" ] && continue
 		_diff=$(diff "$HOME"/"$_file" "$PWD"/home/"$_file")
 		if [ -n "$_diff" ]; then
