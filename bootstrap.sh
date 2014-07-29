@@ -22,7 +22,7 @@ function installDotFiles() {
 
 		vim +PluginInstall +qall
 
-		if [ -d "$HOME"/.vim/bundle/vimproc.vim ]; then
+		if [ -d "$HOME"/.vim/bundle/vimproc.vim ] && hash make 2>/dev/null; then
 			echo "Building vimproc..."
 			cd "$HOME"/.vim/bundle/vimproc.vim && make
 		fi
