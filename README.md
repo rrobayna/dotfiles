@@ -108,8 +108,11 @@ Thanks to skwp for: ctags, gitignore
 https://github.com/skwp/dotfiles
 
 ## Vim Resources
-@todo add more repources here
+@todo add more resources here
 Lots of useful bits vim bits were lifted from:
-- Vim Wikia (https://vim.wikia.com)
-- Steve Losh's amazing \"Learn Vim The Hard Way\"
+
+Vim Wikia 
+https://vim.wikia.com
+
+Steve Losh's amazing \"Learn Vim The Hard Way\"
 http://learnvimscriptthehardway.stevelosh.com/
