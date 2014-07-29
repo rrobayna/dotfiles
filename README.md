@@ -102,12 +102,13 @@ If you want to add a new script or dotfile, copy it over to the repo's home or b
 
 
 ## Sources
-This repo is primarily a modified fork of mathiasbynens' dootfiles repo:
+This repo is primarily a modified fork of mathiasbynens' dotfiles repo:
 https://github.com/mathiasbynens/dotfiles
 Thanks to skwp for: ctags, gitignore
 https://github.com/skwp/dotfiles
 
 ## Vim Resources
+@todo add more repources here
 Lots of useful bits vim bits were lifted from:
 - Vim Wikia (https://vim.wikia.com)
 - Steve Losh's amazing \"Learn Vim The Hard Way\"
