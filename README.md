@@ -1,6 +1,7 @@
 # Rafael’s dotfiles
 
 This dotfiles repo contains:
+
 - a collection of dotfiles (vim, bash, tmux...)
 - shell scripts
 - Brewfiles (install OS X libs and commandline tools)
@@ -11,7 +12,6 @@ This dotfiles repo contains:
 It also contains a bootstrap script to simplify installation and backup actions
 for dotfiles and shell scripts.
 
-
 ## Installation
 
 ### Clone the repository
@@ -20,11 +20,11 @@ for dotfiles and shell scripts.
 git clone https://github.com/rrobayna/dotfiles.git
 ```
 
-### Install dotfiles, scripts and vim plugins
-
-**Warning: This operation will overwrite existing dotfiles and shell scripts.
-Proceed with caution! If you want to retain any of your personal dotfiles and scripts
+**Warning: Using the bootstrap.sh script to install dotfiles will overwrite existing dotfiles and shell scripts. Proceed with caution! If you want to retain any of your personal dotfiles and scripts
 you might want to perform a backup before installing.**
+
+
+### Install dotfiles, scripts and vim plugins
 
 ```bash
 cd dotfiles && ./bootstrap.sh install
