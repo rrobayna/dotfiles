@@ -1,8 +1,6 @@
 " Rafael Robayna's vimrc
 
 set nocompatible
-set shell=bash
-set shellpipe=2>/dev/null>
 
 " " Vundle Initialization
 filetype off
@@ -45,9 +43,6 @@ set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
 set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trailing space char
 set lcs+=eol:¬					" Set the lcs end of line char
-set lcs+=precedes:<				" Set lcs char
-set lcs+=extends:>				" Set lcs char
-set lcs+=nbsp:%					" Set lcs char
 set ffs=unix,dos,mac			" Set unix as the standard file type
 set number						" Line Numbers
 set hlsearch					" Highlight Search
@@ -78,7 +73,7 @@ if os == "Darwin"
 	let g:netrw_browsex_viewer='open'
 endif
 
-" Set Encryption Method
+" Set File Encryption Method
 set cryptmethod=blowfish
 
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
@@ -107,7 +102,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" Display: 80-character line coloring
+" Display: 80-character wrap bar line 
 if exists('+colorcolumn')
 	set colorcolumn=81
 else
@@ -130,7 +125,6 @@ nnoremap <silent> g# g#zz
 " " Commands
 command! Reload source ~/.vimrc
 command! FTabs %retab!
-"command! FWhitespace %s/\s\+$//
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
 
@@ -141,10 +135,6 @@ map <C-W>h :tabprevious<CR>
 map <C-W>j :bn<CR>
 map <C-W>k :bp<CR>
 map <C-W>e :NERDTreeToggle<CR>
-map <C-W>_ :split<CR>
-map <C-W>\| :vsplit<CR>
-nmap gbn :bn<CR>
-nmap gbp :bp<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>tt :Tlist<CR>
 noremap <silent><Leader><space> :nohls<CR>
@@ -168,8 +158,6 @@ nnoremap <silent> <leader>ff :<C-u>UniteWithCurrentDir
 \ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
 " Unite Outline
 nnoremap <silent> [fuzzy]r :<C-u>Unite
-\ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
-nmap <C-R> :Unite
 \ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
 " Unite Buffers
 nnoremap <silent> [fuzzy]b :<C-u>Unite
