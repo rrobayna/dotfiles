@@ -20,8 +20,14 @@ export LANG="en_US.UTF-8"
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto"
 
-# Highlight section titles in manual pages
-export LESS_TERMCAP_md="${yellow}"
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;32m'			# begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;60m'	# begin bold
+export LESS_TERMCAP_me=$'\E[0m'				# end mode
+export LESS_TERMCAP_se=$'\E[0m'				# end standout-mode
+export LESS_TERMCAP_so=$'\E[01;44;33m'		# begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'				# end underline
+export LESS_TERMCAP_us=$'\E[02;31;4;40m'	# begin underline
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
@@ -31,9 +37,10 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Define Application Paths
 export NODE_PATH="/usr/local/lib/node"
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-export DOCKER_HOST=tcp://$(boot2docker ip 2>/dev/null):2375
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+
 ## Extend PATH
-export PATH="$HOME/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/share/npm/bin:$PATH"
 #export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
