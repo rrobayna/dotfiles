@@ -12,10 +12,11 @@ Plugin 'Lucius'
 Plugin 'obsidian'
 Plugin 'simple-dark'
 " Visual Enhancements
-Plugin 'maciakl/vim-neatstatus'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-scripts/ShowMarks'
-Plugin 'trailing-whitespace'
+Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
+Plugin 'airblade/vim-gitgutter'			" Display git diff in sidebar
+Plugin 'vim-scripts/ShowMarks'			" Display marks in sidebar
+Plugin 'trailing-whitespace'			" Highlight trailing whitespace
+Plugin 'junegunn/goyo.vim'				" Distraction Free Editing
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
@@ -30,6 +31,8 @@ Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'taglist.vim'
+" Syntax
+Plugin 'plasticboy/vim-markdown'
 " Cheats
 Plugin 'git-cheat'
 call vundle#end()
@@ -64,6 +67,8 @@ set softtabstop=4
 set laststatus=2				" Always show the status line
 set backspace=2					" Fix delete/backspace behavior
 set backspace=indent,eol,start
+set foldmethod=syntax
+set foldlevel=20
 
 " Get The OS Type
 let os = substitute(system('uname'), "\n", "", "")
@@ -197,3 +202,9 @@ let Tlist_Compact_Format = 1
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let Tlist_GainFocus_On_ToggleOpen = 1
+
+" " Plugin: vimwiki
+let g:vimwiki_folding = "expr"
+
+" " Plugin: markdown
+let g:vim_markdown_initial_foldlevel=4
