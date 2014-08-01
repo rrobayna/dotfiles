@@ -6,10 +6,10 @@ This dotfiles repo contains:
 - shell scripts
 - Brewfiles (install OS X libs and commandline tools)
 - Caskfiles (install OS X apps using brew)
-- OS X configuration script
+- an OS X configuration script
 - assorted extras
 
-It also contains a bootstrap script to simplify installation and backup actions
+The included bootstrap.sh script is intended to simplify installation and backup actions
 for dotfiles and shell scripts.
 
 ## Installation
@@ -30,7 +30,6 @@ you might want to perform a backup before installing.**
 cd dotfiles && ./bootstrap.sh install
 ```
 
-
 ### Add custom commands without creating a new fork
 
 If `~/.extra` exists, it will be sourced along with the other files. You can use
@@ -50,16 +49,16 @@ GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 git config --global user.email "$GIT_AUTHOR_EMAIL"
 ```
 
-
 ### Installing Homebrew and the Brewfile
+
+To install homebrew if it's not already installed and all the packages listed
+in the main Brewfile run:
 
 ```bash
 ./bootstrap brew
 ```
 
-This will install Homebrew and all the packages listed in the main Brewfile.
-
-To install brew packages manually run:
+The syntax for installing Brewfiles packages manually is:
 
 ```bash
 brew bundle osx/Brewfile.home
@@ -104,15 +103,21 @@ If you want to add a new script or dotfile, copy it over to the repo's home or b
 ## Sources
 This repo is primarily a modified fork of mathiasbynens' dotfiles repo:
 https://github.com/mathiasbynens/dotfiles
+
 Thanks to skwp for: ctags, gitignore
 https://github.com/skwp/dotfiles
 
 ## Vim Resources
-@todo add more resources here
 Lots of useful bits vim bits were lifted from:
 
-Vim Wikia 
+Vim Wikia
 https://vim.wikia.com
+
+Vim Bits
+http://vimbits.com/
 
 Steve Losh's amazing \"Learn Vim The Hard Way\"
 http://learnvimscriptthehardway.stevelosh.com/
+
+Drew Neil's "Vimcats" Series
+http://vimcasts.org/
