@@ -4,13 +4,15 @@ This dotfiles repo contains:
 
 - a collection of dotfiles (vim, bash, tmux...)
 - shell scripts
-- Brewfiles (install OS X libs and commandline tools)
+- Brewfiles (install OS X libs and command-line tools)
 - Caskfiles (install OS X apps using brew)
 - an OS X configuration script
 - assorted extras
 
-The included bootstrap.sh script is intended to simplify installation and backup actions
+The bootstrap.sh script is intended to simplify installation and backup actions
 for dotfiles and shell scripts.
+
+*Warning: Using the bootstrap.sh script to install dotfiles will overwrite existing dotfiles and shell scripts. Proceed with caution! If you want to retain any of your personal dotfiles and scripts, you might want to perform a backup before installing.*
 
 ## Installation
 
@@ -20,8 +22,6 @@ for dotfiles and shell scripts.
 git clone https://github.com/rrobayna/dotfiles.git
 ```
 
-**Warning: Using the bootstrap.sh script to install dotfiles will overwrite existing dotfiles and shell scripts. Proceed with caution! If you want to retain any of your personal dotfiles and scripts
-you might want to perform a backup before installing.**
 
 
 ### Install dotfiles, scripts and vim plugins
@@ -58,23 +58,26 @@ in the main Brewfile run:
 ./bootstrap brew
 ```
 
-The syntax for installing Brewfiles packages manually is:
+To install additional Brewfiles, use the following syntax:
 
 ```bash
 brew bundle osx/Brewfile.home
 ```
 
-
 ### Installing OS X Applications using the Homebrew Cask bundler
+
+To install all the OS X desktop apps listed in the Caskfile and link them to your
+Applications directory:
 
 ```bash
 brew bundle osx/Caskfile
 ```
 
-This will install all the Apps listed in the Caskfile and link them to your
-Applications directory. I've seperated additional packages for my home system
-into Caskfile.home.
+I created a separate Caskfile with apps for my home system:
 
+```bash
+brew bundle osx/Caskfile.home
+```
 
 ### Sensible OS X defaults
 
@@ -96,28 +99,28 @@ To backup changes to you dotfiles and shell script:
 
 This will only backup the files currently included in the projects home/ directory.
 To add new dotfiles and scripts, just copy the file into the appropriate
-directory.
-If you want to add a new script or dotfile, copy it over to the repo's home or bin directory and it will be included in any future backups.
+directory. If you want to add a new script or dotfile, copy it over to the repo's home or bin directory and it will be included in any future backups.
 
 
 ## Sources
-This repo is primarily a modified fork of mathiasbynens' dotfiles repo:
+This repo is primarily a modified fork of mathiasbynens' dotfiles repo:  
 https://github.com/mathiasbynens/dotfiles
 
-Thanks to skwp for: ctags, gitignore
+Thanks to skwp for: ctags, gitignore  
 https://github.com/skwp/dotfiles
+
 
 ## Vim Resources
 Lots of useful bits vim bits were lifted from:
 
-Vim Wikia
+Vim Wikia  
 https://vim.wikia.com
 
-Vim Bits
+Vim Bits  
 http://vimbits.com/
 
-Steve Losh's amazing \"Learn Vim The Hard Way\"
+Steve Losh's amazing "Learn Vim The Hard Way"  
 http://learnvimscriptthehardway.stevelosh.com/
 
-Drew Neil's "Vimcats" Series
+Drew Neil's "Vimcats" Series  
 http://vimcasts.org/
