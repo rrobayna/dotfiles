@@ -1,4 +1,4 @@
-# Rafael’s dotfiles
+# rrobayna's dotfiles
 
 This dotfiles repo contains:
 
