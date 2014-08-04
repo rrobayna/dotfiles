@@ -53,6 +53,9 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 # Show hidden
 alias lsh='ls -ld .??*'
 
+# Display the total size of a directory in MB
+alias duh="du --max-depth=1 -h . | sort -hr"
+
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
