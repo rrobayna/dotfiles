@@ -88,6 +88,9 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
+# Sync ntp (useful when working with vms that get halted)
+alias synctime="sudo ntpdate -s pool.ntp.org"
+
 # Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
