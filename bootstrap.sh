@@ -40,7 +40,7 @@ function backupDotFiles() {
 		_diff=$(diff "$HOME"/"$_file" "$PWD"/home/"$_file")
 		if [ -n "$_diff" ]; then
 			rsync -ah --no-perms "$HOME"/"$_file" "$PWD"/home/"$_file" > /dev/null 2>&1
-			echo $_file
+			echo "M home/$_file"
 		fi
 	done
 }
