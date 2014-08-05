@@ -63,6 +63,9 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
 #alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup; sudo npm update npm -g; sudo npm update -g'
 
+# Open vimwiki
+alias wiki='vim +VimwikiIndex'
+
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
