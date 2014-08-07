@@ -9,8 +9,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " Themes
 Plugin 'Lucius'
-Plugin 'obsidian'
-Plugin 'simple-dark'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
 Plugin 'airblade/vim-gitgutter'			" Display git diff in sidebar
@@ -25,7 +23,7 @@ Plugin 'nvie/vim-togglemouse'
 " Tools
 Plugin 'The-NERD-tree'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vimwiki'
+Plugin 'vimwiki/vimwiki'
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
@@ -107,7 +105,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" Display: 80-character wrap bar line 
+" Display: 80-character wrap bar line
 if exists('+colorcolumn')
 	set colorcolumn=81
 else
@@ -132,6 +130,7 @@ command! Reload source ~/.vimrc
 command! FTabs %retab!
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
+command! Bdall :execute "1," . bufnr("$") . "bd"
 
 " " Shortcuts
 map <C-W>t :tabnew<CR>
@@ -149,8 +148,10 @@ nmap <leader>rc :e ~/.vimrc<CR>
 map <leader>q :e ~/.scrachpad<CR>
 " Execute current line in bash
 nmap <F2> :.w !bash<CR>
-" Execute current file in bash (must have correct permissions on disk)
+" Execute current shell script (must have correct permissions and shell definition)
 nmap <F3> :! %:p
+" Execute current file in bash (permissions not needed)
+nmap <F4> :!bash %:p
 
 " " Shortcuts: Unite
 " Define Fuzzy prefix combo [Ctrl-f]
@@ -209,3 +210,61 @@ source ~/.vimwikirc
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
+
+
+" " Functions: Session
+
+function! FindProjectName()
+  let s:name = getcwd()
+  if !isdirectory(".git")
+    let s:name = substitute(finddir(".git", ".;"), "/.git", "", "")
+  end
+  if s:name != ""
+    let s:name = matchstr(s:name, ".*", strridx(s:name, "/") + 1)
+  end
+  return s:name
+endfunction
+
+" Sessions only restored if we start Vim without args.
+function! RestoreSession(name)
+  if a:name != ""
+    if filereadable($HOME . "/.vim/sessions/" . a:name)
+      execute 'source ' . $HOME . "/.vim/sessions/" . a:name
+    end
+  end
+endfunction
+
+" Sessions only saved if we start Vim without args.
+function! SaveSession(name, create)
+	if a:name != ""
+		if filereadable($HOME . "/.vim/sessions/" . a:name) || a:create == 1
+			execute 'mksession! ' . $HOME . '/.vim/sessions/' . a:name
+		end
+	end
+endfunction
+
+" Delete session
+function! DeleteSession(name)
+	if a:name != "" && filereadable($HOME . "/.vim/sessions/" . a:name)
+		call delete($HOME . '/.vim/sessions/' . a:name)
+		echom 'Session deleted: ' . a:name
+	end
+endfunction
+
+function! Session(flag)
+	if a:flag == "d" || a:flag == "delete"
+		call DeleteSession(FindProjectName())
+	elseif a:flag == "s" || a:flag == "save"
+		call SaveSession(FindProjectName(), 1)
+	else
+		echom "Error: unrecognized flag"
+	end
+endfunction
+
+command! -nargs=* Session call Session(<q-args>)
+
+" Restore and save sessions.
+if argc() == 0
+  autocmd VimEnter * call RestoreSession(FindProjectName())
+  "autocmd VimLeave * call SaveSession(FindProjectName(), 0)
+end
