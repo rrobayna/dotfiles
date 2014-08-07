@@ -11,12 +11,8 @@ IFS=$'\n' && for line in $list
 do
     conn_count=$(echo $line | awk '{print $1}')
     conn_app=$(echo $line | awk '{print $2}')
-
     # Exclude COMMAND line
     [[ $conn_app == "COMMAND" ]] && continue
-    # Exclude VirtualBox
-    [[ $conn_app == "VBoxHeadl" ]] && continue
-
     count=$(expr $count + $conn_count)
     output="${output}${line}\n"
 done
