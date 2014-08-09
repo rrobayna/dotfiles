@@ -71,7 +71,7 @@ alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; su
 #alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup; sudo npm update npm -g; sudo npm update -g'
 
 # Open vimwiki
-alias wiki='vim +VimwikiIndex'
+alias wiki='vim --cmd "cd ~" +VimwikiIndex'
 
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
