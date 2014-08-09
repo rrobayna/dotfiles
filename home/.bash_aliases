@@ -35,6 +35,13 @@ alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
 alias di='docker images'
 alias dps='docker ps -a'
 
+# ncmpcpp - ncurses client for mpd
+alias m='ncmpcpp'
+alias m.='mpc toggle --no-status'
+alias m,='mpc'
+alias mn='mpc next'
+alias mp='mpc previous'
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
     colorflag="--color"
