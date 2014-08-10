@@ -68,6 +68,10 @@ set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevel=20
 
+" Default file locations
+let g:todo_path = '~/.todo'
+let g:scratch_path = '~/.scratchpad'
+
 " Get The OS Type
 let os = substitute(system('uname'), "\n", "", "")
 
@@ -131,6 +135,8 @@ command! FTabs %retab!
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
 command! Bdall :execute "1," . bufnr("$") . "bd"
+command! Todo execute 'e ' . g:todo_path
+command! Scratch execute 'e ' . g:scratch_path
 
 " " Shortcuts
 map <C-W>t :tabnew<CR>
@@ -139,13 +145,14 @@ map <C-W>h :tabprevious<CR>
 map <C-W>j :bn<CR>
 map <C-W>k :bp<CR>
 map <C-W>e :NERDTreeToggle<CR>
+map <leader>. :bd<CR>
+map <leader>a :Todo<CR>
+map <leader>q :Scratch<CR>
 nmap <leader>ss :ShowMarksToggle<CR>
 nmap <leader>tt :Tlist<CR>
 noremap <silent><Leader><space> :nohls<CR>
 " Quick Access to vimrc
 nmap <leader>rc :e ~/.vimrc<CR>
-" Open Scratchpad Buffer
-map <leader>q :e ~/.scrachpad<CR>
 " Execute current line in bash
 nmap <F2> :.w !bash<CR>
 " Execute current shell script (must have correct permissions and shell definition)
@@ -206,7 +213,7 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
-source ~/.vimwikirc
+source ~/.vimwikirc.vim
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
