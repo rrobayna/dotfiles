@@ -26,8 +26,10 @@ install wget --enable-iri
 install vim --override-system-vi
 install homebrew/dupes/grep
 install homebrew/php/php55 --with-gmp
-
-# Install other useful binaries
+# PHP Tools
+install homebrew/php/phpunit
+install php-code-sniffer
+# Other useful binaries
 install git
 install tmux
 install composer
@@ -48,32 +50,16 @@ install xpdf
 install watch
 install jsawk
 install xz
-
-#install fuse
+# Fuse
 install osxfuse
 install sshfs
-
-#install network tools
+# Network Tools
 install tcpflow
 install nmap
 install ngrep
 install htop-osx
 install iftop
 install lynx
-
-# ffmpeg
-install ffmpeg
-install x264
-install xvid
-install webp
-install flac
-install lame
-install faac
-install libpng
-install jpeg
-install libogg
-install libtiff
-install libvorbis
 
 # Remove outdated versions from the cellar
 cleanup
