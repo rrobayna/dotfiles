@@ -35,12 +35,16 @@ alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
 alias di='docker images'
 alias dps='docker ps -a'
 
-# ncmpcpp - ncurses client for mpd
+# mpd, mpc and ncmpcpp
 alias m='ncmpcpp'
 alias m.='mpc toggle --no-status'
-alias m,='mpc'
-alias mn='mpc next'
-alias mp='mpc previous'
+alias m,='mpc next'
+alias ml='mpc prev'
+
+# vim
+alias wiki='vim --cmd "cd ~" +VimwikiIndex'
+alias todo='vim --cmd "cd ~" +Todo'
+alias note='vim --cmd "cd ~" +Scratch'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -70,8 +74,6 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
 #alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup; sudo npm update npm -g; sudo npm update -g'
 
-# Open vimwiki
-alias wiki='vim --cmd "cd ~" +VimwikiIndex'
 
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
