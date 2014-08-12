@@ -45,6 +45,7 @@ alias ml='mpc prev'
 alias wiki='vim --cmd "cd ~" +VimwikiIndex'
 alias todo='vim --cmd "cd ~" +Todo'
 alias note='vim --cmd "cd ~" +Scratch'
+alias today='vim --cmd "cd ~" +Today'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
