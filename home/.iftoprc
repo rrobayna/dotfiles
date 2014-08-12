@@ -1,0 +1,11 @@
+log-scale: no			# Use a logarithmic scale for bar graphs.
+max-bandwidth: 30M		# Fixes the maximum for the bar graph scale to bw, e.g. "10M". In bits
+dns-resolution: no 		# Controls reverse lookup of IP addresses.
+port-display: on 		# Controls display of port numbers.
+port-resolution: yes 	# Controls conversion of port numbers to service names.
+show-bars: yes
+show-totals: yes
+line-display: one-line-both
+use-bytes: yes
+promiscuous: yes
+
