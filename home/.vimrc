@@ -112,7 +112,7 @@ endtry
 " Display: 80-character wrap bar line
 if exists('+colorcolumn')
 	set colorcolumn=81
-else
+elseif exists('*matchadd')
 	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 endif
 
@@ -134,31 +134,34 @@ command! Reload source ~/.vimrc
 command! FTabs %retab!
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
-command! Bdall :execute "1," . bufnr("$") . "bd"
+command! Bdall execute "1," . bufnr("$") . "bd"
 command! Todo execute 'e ' . g:todo_path
 command! Scratch execute 'e ' . g:scratch_path
+command! Today VimwikiMakeDiaryNote
+command! Diary VimwikiDiaryIndex
 
 " " Shortcuts
-map <C-W>t :tabnew<CR>
-map <C-W>l :tabnext<CR>
-map <C-W>h :tabprevious<CR>
-map <C-W>j :bn<CR>
-map <C-W>k :bp<CR>
-map <C-W>e :NERDTreeToggle<CR>
-map <leader>. :bd<CR>
-map <leader>a :Todo<CR>
-map <leader>q :Scratch<CR>
-nmap <leader>ss :ShowMarksToggle<CR>
-nmap <leader>tt :Tlist<CR>
-noremap <silent><Leader><space> :nohls<CR>
+nmap <C-W>t :tabnew<CR>
+nmap <C-W>l :tabnext<CR>
+nmap <C-W>h :tabprevious<CR>
+nmap <C-W>j :bn<CR>
+nmap <C-W>k :bp<CR>
+nnoremap <C-W>s :VimwikiSearch<space>
+nmap <C-W>e :NERDTreeToggle<CR>
+nmap <leader>. :bd<CR>
+nmap <leader>a :Todo<CR>
+nmap <leader>q :Scratch<CR>
+map <leader>ss :ShowMarksToggle<CR>
+map <leader>tt :Tlist<CR>
+nmap <silent><Leader><space> :nohls<CR>
 " Quick Access to vimrc
 nmap <leader>rc :e ~/.vimrc<CR>
 " Execute current line in bash
-nmap <F2> :.w !bash<CR>
+nnoremap <F2> :.w !bash<CR>
 " Execute current shell script (must have correct permissions and shell definition)
-nmap <F3> :! %:p
+nnoremap <F3> :! %:p
 " Execute current file in bash (permissions not needed)
-nmap <F4> :!bash %:p
+nnoremap <F4> :!bash %:p
 
 " " Shortcuts: Unite
 " Define Fuzzy prefix combo [Ctrl-f]
@@ -175,9 +178,9 @@ nnoremap <silent> [fuzzy]r :<C-u>Unite
 " Unite Buffers
 nnoremap <silent> [fuzzy]b :<C-u>Unite
 \ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
-nmap <leader>bb :Unite
+nnoremap <leader>bb :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
-nmap <C-W>b :Unite
+nnoremap <C-W>b :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 " Unite Grep
 nnoremap <silent> [fuzzy]g :<C-u>Unite
