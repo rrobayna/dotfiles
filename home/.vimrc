@@ -216,7 +216,7 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
-if filereadable('~/.vimwikirc.vim')
+if !empty(glob('~/.vimwikirc.vim'))
 	source ~/.vimwikirc.vim
 endif
 
