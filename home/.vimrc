@@ -216,14 +216,14 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
-source ~/.vimwikirc.vim
+if filereadable('~/.vimwikirc.vim')
+	source ~/.vimwikirc.vim
+endif
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
 
-
 " " Functions: Session
-
 function! FindProjectName()
   let s:name = getcwd()
   if !isdirectory(".git")
