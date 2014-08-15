@@ -29,8 +29,10 @@ Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 Plugin 'taglist.vim'
+Plugin 'rizzatti/dash.vim'
 " Syntax
 Plugin 'plasticboy/vim-markdown'
+Plugin 'shawncplus/php.vim'
 " Cheats
 Plugin 'git-cheat'
 call vundle#end()
@@ -68,9 +70,10 @@ set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevel=20
 
-" Default file locations
-let g:todo_path = '~/.todo'
-let g:scratch_path = '~/.scratchpad'
+" Default wiki locations
+let g:wikis_folder = '~/.wikis'
+let g:todo_path = g:wikis_folder . '/todo.wiki'
+let g:scratch_path = g:wikis_folder . '/scratch.wiki'
 
 " Get The OS Type
 let os = substitute(system('uname'), "\n", "", "")
@@ -176,9 +179,7 @@ nnoremap <silent> <leader>ff :<C-u>UniteWithCurrentDir
 nnoremap <silent> [fuzzy]r :<C-u>Unite
 \ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
 " Unite Buffers
-nnoremap <silent> [fuzzy]b :<C-u>Unite
-\ -winheight=20 -no-split -buffer-name=buffers buffer<CR>
-nnoremap <leader>bb :Unite
+nnoremap <leader>, :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 nnoremap <C-W>b :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
@@ -190,6 +191,9 @@ nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
 " Unite recent files
 nnoremap <silent> [fuzzy]h :<C-u>Unite
 \ -start-insert -no-split -buffer-name=recent file_mru<CR>
+" Unite Search for vimwiki
+nnoremap <silent> [fuzzy]v :<C-u>Unite
+\ -buffer-name=vimwiki grep:~/.wikis<CR>
 
 " " Plugin: NERDtree
 let NERDTreeChDirMode = 2
@@ -216,6 +220,10 @@ let Tlist_GainFocus_On_ToggleOpen = 1
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
+let notes = {}
+let notes.path = g:wikis_folder . '/notes/'
+let notes.path_html = g:wikis_folder . '/notes_html/'
+let g:vimwiki_list = [notes]
 if !empty(glob('~/.vimwikirc.vim'))
 	source ~/.vimwikirc.vim
 endif
