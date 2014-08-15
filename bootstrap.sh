@@ -26,6 +26,10 @@ function installDotFiles() {
 			echo "Building vimproc..."
 			cd "$HOME"/.vim/bundle/vimproc.vim && make
 		fi
+
+		if [ ! -d "$HOME"/.wikis ]; then
+			mkdir -p "$HOME"/.wikis/notes
+		fi
 	fi
 
 	echo "Installation complete!"
