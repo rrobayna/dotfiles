@@ -71,10 +71,15 @@ alias duh="du -d 1 -h | sort -gr"
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
-#alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup; sudo npm update npm -g; sudo npm update -g'
-
+# Run os updates manually
+os_base=$(uname)
+os_issue=$(cat /etc/issue | awk '{print $1}')
+if [ $os_base == "Darwin" ]; then
+	alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
+elif [ $os_issue == "Ubuntu" ] || [ $os_issue == "Debian" ]; then
+	alias update='sudo apt-get update; sudo aptitude safe-upgrade'
+fi
+alias update_tools='sudo npm update npm -g; sudo npm update -g; vim +PluginInstall +qall'
 
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
