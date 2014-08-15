@@ -20,6 +20,9 @@ export LANG="en_US.UTF-8"
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto"
 
+# Colors for ls
+export LS_COLORS="ow=103;30;01:di=31;1:ln=36;1:ex=31;1:*~=31;1"
+
 # Less Colors for Man Pages
 export LESS_TERMCAP_mb=$'\E[01;32m'			# begin blinking
 export LESS_TERMCAP_md=$'\E[01;38;5;60m'	# begin bold
@@ -42,4 +45,4 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 ## Extend PATH
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$PATH:/usr/local/share/npm/bin"
-#export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
