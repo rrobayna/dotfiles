@@ -60,6 +60,10 @@ install ngrep
 install htop-osx
 install iftop
 install lynx
+# Local Cache and Proxies
+dnsmasq
+squid
+privoxy
 
 # Remove outdated versions from the cellar
 cleanup
