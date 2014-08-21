@@ -17,16 +17,14 @@ alias gs='git status -s; git submodule status'
 alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %s %Cgreen(%cr) %Cblue%an <%ae>%Creset" --abbrev-commit --date=relative'
 alias gch='git checkout'
 alias gb='git branch'
-alias gp='git pull'
 alias ga='git add'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gdh='git diff HEAD^'
+alias gref='git reflog'
 alias gsh='git show'
-alias grs='git reset --soft'
-alias grl='git reflog'
 
 # Docker
 alias d='docker'
@@ -71,16 +69,6 @@ alias duh="du -d 1 -h | sort -gr"
 # Stopwatch
 alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 
-# Run os updates manually
-os_base=$(uname)
-os_issue=$(cat /etc/issue | awk '{print $1}')
-if [ $os_base == "Darwin" ]; then
-	alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
-elif [ $os_issue == "Ubuntu" ] || [ $os_issue == "Debian" ]; then
-	alias update='sudo apt-get update; sudo aptitude safe-upgrade'
-fi
-alias update_tools='sudo npm update npm -g; sudo npm update -g; vim +PluginInstall +qall'
-
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
@@ -99,17 +87,23 @@ command -v md5sum > /dev/null || alias md5sum="md5"
 # OS X has no `sha1sum`, so use `shasum` as a fallback
 command -v sha1sum > /dev/null || alias sha1sum="shasum"
 
-# Show/hide hidden files in Finder
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
 # Sync ntp (useful when working with vms that get halted)
 alias synctime="sudo ntpdate -s pool.ntp.org"
 
-# Lock the screen (when going AFK)
+# OSX: Lookup definition in dictionary
+function dict { open dict://"$@"; }
+
+# OSX: Run OS updates manually
+alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
+
+# OSX: Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# OSX: Lock the screen (when going AFK)
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Reload the shell (i.e. invoke as a login shell)
