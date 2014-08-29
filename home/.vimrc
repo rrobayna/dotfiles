@@ -182,11 +182,9 @@ nnoremap <silent> <leader>ff :<C-u>UniteWithCurrentDir
 \ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
 " Unite Outline
 nnoremap <silent> [fuzzy]r :<C-u>Unite
-\ -start-insert -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
+\ -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
 " Unite Buffers
 nnoremap <leader>, :Unite
-\ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
-nnoremap <C-W>b :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 " Unite Grep
 nnoremap <silent> [fuzzy]g :<C-u>Unite
