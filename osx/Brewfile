@@ -23,7 +23,7 @@ install bash-completion
 # Install wget with IRI support
 install wget --enable-iri
 # Install more recent versions of some OS X tools
-install vim --override-system-vi
+install vim --with-lua --override-system-vi
 install homebrew/dupes/grep
 install homebrew/php/php55 --with-gmp
 # PHP Tools
@@ -59,11 +59,11 @@ install nmap
 install ngrep
 install htop-osx
 install iftop
-install lynx
+install w3m
 # Local Cache and Proxies
-dnsmasq
-squid
-privoxy
+install dnsmasq
+install squid
+install privoxy
 
 # Remove outdated versions from the cellar
 cleanup
