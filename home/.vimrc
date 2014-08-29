@@ -165,9 +165,14 @@ nnoremap <F2> :.w !bash<CR>
 nnoremap <F3> :! %:p
 " Execute current file in bash (permissions not needed)
 nnoremap <F4> :!bash %:p
+" Git Gutter Hulking shortcuts
+nnoremap [gutter] <Nop>
+nmap <C-x> [gutter]
+nnoremap [gutter]n :GitGutterNextHunk<CR>
+nnoremap [gutter]p :GitGutterPrevHunk<CR>
+nnoremap [gutter]s :GitGutterStageHunk<CR>
 
 " " Shortcuts: Unite
-" Define Fuzzy prefix combo [Ctrl-f]
 nnoremap [fuzzy] <Nop>
 nmap <C-f> [fuzzy]
 " Fuzzy File Search with Async Load
