@@ -48,7 +48,6 @@ install tree
 install webkit2png
 install xpdf
 install watch
-install jsawk
 install xz
 # Fuse
 install osxfuse

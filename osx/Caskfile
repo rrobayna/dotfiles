@@ -12,18 +12,18 @@ cask install thunderbird 2> /dev/null
 ## Development Tools
 cask install iterm2 2> /dev/null
 cask install sublime-text 2> /dev/null
-cask install netbeans 2> /dev/null
+cask install virtualbox 2> /dev/null
 cask install dash 2> /dev/null
 cask install sequel-pro 2> /dev/null
-cask install virtualbox 2> /dev/null
-cask install vagrant 2> /dev/null
 cask install robomongo 2> /dev/null
+cask install vagrant 2> /dev/null
+cask install netbeans 2> /dev/null
 
-## Utilities 
+## Utilities
 cask install spectacle 2> /dev/null
 cask install the-unarchiver 2> /dev/null
 cask install vlc 2> /dev/null
 
-## Services 
+## Services
 cask install evernote 2> /dev/null
 cask install spotify 2> /dev/null
