@@ -113,6 +113,7 @@ try
 	colorscheme lucius
 catch /^Vim\%((\a\+)\)\=:E185/
 	set background=light
+	exec 'LuciusDark'
 	colorscheme elflord
 endtry
 
