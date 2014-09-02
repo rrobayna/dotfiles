@@ -138,8 +138,7 @@ nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
 
 " " Commands
-command! Reload source ~/.vimrc
-command! FTabs %retab!
+command! Reload source $MYVIMRC
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
 command! Bdall execute "1," . bufnr("$") . "bd"
@@ -163,7 +162,7 @@ map <leader>ss :ShowMarksToggle<CR>
 map <leader>tt :Tlist<CR>
 nmap <silent><Leader><space> :nohls<CR>
 " Quick Access to vimrc
-nmap <leader>rc :e ~/.vimrc<CR>
+nmap <leader>rc :e $MYVIMRC<CR>
 " Execute current line in bash
 nnoremap <F2> :.w !bash<CR>
 " Execute current shell script (must have correct permissions and shell definition)
