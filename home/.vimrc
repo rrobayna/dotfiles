@@ -13,8 +13,7 @@ Plugin 'Lucius'
 Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
 Plugin 'airblade/vim-gitgutter'			" Display git diff in sidebar
 Plugin 'vim-scripts/ShowMarks'			" Display marks in sidebar
-Plugin 'trailing-whitespace'			" Highlight trailing whitespace
-Plugin 'junegunn/goyo.vim'				" Distraction Free Editing
+Plugin 'trailing-whitespace'			" Highlight/Fix trailing whitespace
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-surround'
@@ -25,11 +24,16 @@ Plugin 'The-NERD-tree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vimwiki/vimwiki'
 Plugin 'Shougo/neomru.vim'
-Plugin 'Shougo/unite-outline'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'taglist.vim'
+Plugin 'Shougo/unite-outline'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-php/tagbar-phpctags.vim'
 Plugin 'rizzatti/dash.vim'
+Plugin 'renamer.vim'					" File renamer
 " Syntax
 Plugin 'plasticboy/vim-markdown'
 Plugin 'shawncplus/php.vim'
@@ -213,13 +217,8 @@ let g:showmarks_hlline_lower=1
 let g:showmarks_hlline_upper=0
 let g:showmarks_hlline_other=0
 
-" " Plugin: taglist
-let tlist_php_settings = 'php;f:functions'
-let Tlist_WinWidth = 40
-let Tlist_Compact_Format = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
-let Tlist_GainFocus_On_ToggleOpen = 1
+" " Plugin: phpctagsbar
+let g:tagbar_phpctags_memory_limit = '512M'
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
