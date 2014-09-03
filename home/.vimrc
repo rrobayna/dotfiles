@@ -129,6 +129,9 @@ endif
 map 0 ^
 " Make Y behave like other capitals - http://vimbits.com/bits/11
 nnoremap Y y$
+" Make H and L move to beginning and end of line
+nnoremap H ^
+nnoremap L $
 " Keep search pattern at the center of the screen - http://vimbits.com/bits/92
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
