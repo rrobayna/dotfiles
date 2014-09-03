@@ -46,11 +46,13 @@ filetype plugin indent on
 syntax enable
 map \ ,							" Shuffle comma mapping
 let mapleader=","				" Set the leader
+let maplocalleader=' '			" Set the localleader to <space>
 set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
 set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trailing space char
 set lcs+=eol:¬					" Set the lcs end of line char
 set ffs=unix,dos,mac			" Set unix as the standard file type
+set foldcolumn=0				" Explicitly unset foldcolumn
 set number						" Line Numbers
 set hlsearch					" Highlight Search
 set showmatch					" Show matching bracket
@@ -111,9 +113,9 @@ endif
 try
 	set background=dark
 	colorscheme lucius
+	exec 'LuciusDark'
 catch /^Vim\%((\a\+)\)\=:E185/
 	set background=light
-	exec 'LuciusDark'
 	colorscheme elflord
 endtry
 
@@ -144,6 +146,7 @@ nnoremap <silent> g# g#zz
 command! Reload source $MYVIMRC
 command! CheatGit tab help git-cheat
 command! CheatVim !open http://www.viemu.com/vi-vim-cheat-sheet.gif
+command! FTabs %retab!
 command! Bdall execute "1," . bufnr("$") . "bd"
 command! Todo execute 'e ' . g:todo_path
 command! Scratch execute 'e ' . g:scratch_path
@@ -156,14 +159,16 @@ nmap <C-W>l :tabnext<CR>
 nmap <C-W>h :tabprevious<CR>
 nmap <C-W>j :bn<CR>
 nmap <C-W>k :bp<CR>
-nnoremap <C-W>s :VimwikiSearch<space>
 nmap <C-W>e :NERDTreeToggle<CR>
 nmap <leader>. :bd<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
-map <leader>ss :ShowMarksToggle<CR>
-map <leader>tt :Tlist<CR>
+nmap <leader>s :ShowMarksToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
+map <leader>d :Dash<CR>
 nmap <silent><Leader><space> :nohls<CR>
+" Insert maps
+imap <c-d> <esc>ddi
 " Quick Access to vimrc
 nmap <leader>rc :e $MYVIMRC<CR>
 " Execute current line in bash
@@ -172,35 +177,38 @@ nnoremap <F2> :.w !bash<CR>
 nnoremap <F3> :! %:p
 " Execute current file in bash (permissions not needed)
 nnoremap <F4> :!bash %:p
-" Git Gutter Hulking shortcuts
-nnoremap [gutter] <Nop>
-nmap <C-x> [gutter]
-nnoremap [gutter]n :GitGutterNextHunk<CR>
-nnoremap [gutter]p :GitGutterPrevHunk<CR>
-nnoremap [gutter]s :GitGutterStageHunk<CR>
+" Git Command Shortcuts
+nnoremap [gitter] <Nop>
+nmap <C-x> [gitter]
+nnoremap [gitter]n :GitGutterNextHunk<CR>
+nnoremap [gitter]p :GitGutterPrevHunk<CR>
+nnoremap [gitter]s :GitGutterStageHunk<CR>
+nnoremap [gitter]b :Gblame<CR>
+
+"let g:unite_source_menu_menus = {bookmarks}
 
 " " Shortcuts: Unite
+" Define Fuzzy prefix
 nnoremap [fuzzy] <Nop>
-nmap <C-f> [fuzzy]
-" Fuzzy File Search with Async Load
-nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
-nnoremap <silent> <leader>ff :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
-" Unite Outline
-nnoremap <silent> [fuzzy]r :<C-u>Unite
-\ -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
+nmap <LocalLeader> [fuzzy]
+nnoremap <silent>[fuzzy]e :NERDTreeToggle<CR>
+nnoremap <silent>[fuzzy]t :TagbarToggle<CR>
+nnoremap <silent>[fuzzy]c :tabclose<CR>
 " Unite Buffers
 nnoremap <leader>, :Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
+" Unite Fuzzy File Filter
+nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
+\ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
 " Unite Grep
 nnoremap <silent> [fuzzy]g :<C-u>Unite
 \ -start-insert -winheight=25 -no-split -buffer-name=grep grep<CR>
+" Unite Grep Current Word
 nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
 \ -winheight=30 -buffer-name=grep grep<CR>
-" Unite recent files
-nnoremap <silent> [fuzzy]h :<C-u>Unite
-\ -start-insert -no-split -buffer-name=recent file_mru<CR>
+" Unite Outline/Tags
+nnoremap <silent> [fuzzy]r :<C-u>Unite
+\ -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
 " Unite Search for vimwiki
 nnoremap <silent> [fuzzy]v :<C-u>Unite
 \ -buffer-name=vimwiki grep:~/.wikis<CR>
