@@ -246,23 +246,31 @@ let g:vim_markdown_initial_foldlevel=4
 
 " " Functions: Session
 function! FindProjectName()
-  let s:name = getcwd()
-  if !isdirectory(".git")
-    let s:name = substitute(finddir(".git", ".;"), "/.git", "", "")
-  end
-  if s:name != ""
-    let s:name = matchstr(s:name, ".*", strridx(s:name, "/") + 1)
-  end
-  return s:name
+	let s:name = getcwd()
+	if s:name != ""
+		let s:name = matchstr(s:name, ".*", strridx(s:name, "/") + 1)
+	end
+	return s:name
 endfunction
 
 " Sessions only restored if we start Vim without args.
 function! RestoreSession(name)
-  if a:name != ""
-    if filereadable($HOME . "/.vim/sessions/" . a:name)
-      execute 'source ' . $HOME . "/.vim/sessions/" . a:name
-    end
-  end
+	if a:name != ""
+		if filereadable($HOME . "/.vim/sessions/" . a:name)
+			execute 'source ' . $HOME . "/.vim/sessions/" . a:name
+		end
+	end
+endfunction
+
+" Check if a session exists
+function! ExistsSession(name)
+	if a:name != ""
+		if filereadable($HOME . "/.vim/sessions/" . a:name)
+			echom 'Session exists for ' . a:name
+		else
+			echom 'No session exists for ' . a:name
+		end
+	end
 endfunction
 
 " Sessions only saved if we start Vim without args.
@@ -270,6 +278,7 @@ function! SaveSession(name, create)
 	if a:name != ""
 		if filereadable($HOME . "/.vim/sessions/" . a:name) || a:create == 1
 			execute 'mksession! ' . $HOME . '/.vim/sessions/' . a:name
+			echom 'Session saved ' . a:name
 		end
 	end
 endfunction
@@ -287,15 +296,17 @@ function! Session(flag)
 		call DeleteSession(FindProjectName())
 	elseif a:flag == "s" || a:flag == "save"
 		call SaveSession(FindProjectName(), 1)
+	elseif a:flag == "r" || a:flag == "restore"
+		call RestoreSession(FindProjectName())
 	else
-		echom "Error: unrecognized flag"
+		call ExistsSession(FindProjectName())
 	end
 endfunction
 
 command! -nargs=* Session call Session(<q-args>)
 
-" Restore and save sessions.
+" Restore and save sessions automaticaly
 if argc() == 0
-  autocmd VimEnter * call RestoreSession(FindProjectName())
-  "autocmd VimLeave * call SaveSession(FindProjectName(), 0)
+	autocmd VimEnter * call RestoreSession(FindProjectName())
+	"autocmd VimLeave * call SaveSession(FindProjectName(), 0)
 end
