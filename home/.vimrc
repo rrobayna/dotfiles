@@ -310,3 +310,30 @@ if argc() == 0
 	autocmd VimEnter * call RestoreSession(FindProjectName())
 	"autocmd VimLeave * call SaveSession(FindProjectName(), 0)
 end
+
+function! LayoutProfile(flag)
+	if a:flag == "write" || a:flag == "w"
+		set nonumber
+		set colorcolumn=0
+		set laststatus=0
+		set foldcolumn=4
+		set foldmethod=marker
+		set foldlevel=0
+		set wrap linebreak nolist
+		set spell
+		set mouse=a
+		exec 'LuciusBlackLowContrast'
+	elseif a:flag == "dev" || a:flag == "d"
+		set number
+		set colorcolumn=81
+		set laststatus=2
+		set foldcolumn=0
+		set foldmethod=syntax
+		set foldlevel=-1 " or 20
+		set nowrap nolinebreak nolist
+		set nospell
+		set mouse=
+		exec 'LuciusDark'
+	end
+endfunction
+command! -nargs=* Layout call LayoutProfile(<q-args>)
