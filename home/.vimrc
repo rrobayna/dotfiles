@@ -130,6 +130,8 @@ endif
 " " Mappings
 " Remap 0 to move to the first string character instead of COL 0
 map 0 ^
+" Close all buffers
+nnoremap <silent> ZA :qa<CR>
 " Make Y behave like other capitals - http://vimbits.com/bits/11
 nnoremap Y y$
 " Make H and L move to beginning and end of line
@@ -142,7 +144,6 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
-
 " " Commands
 command! Reload source $MYVIMRC
 command! CheatGit tab help git-cheat
@@ -153,21 +154,26 @@ command! Todo execute 'e ' . g:todo_path
 command! Scratch execute 'e ' . g:scratch_path
 command! Today VimwikiMakeDiaryNote
 command! Diary VimwikiDiaryIndex
-
+command! Gs Gstatus
+command! Gc Gcommit
+command! Gd Git diff
+command! Gds Git diff --staged
+command! Grl Git reflog
 " " Shortcuts
 nmap <C-W>t :tabnew<CR>
 nmap <C-W>l :tabnext<CR>
 nmap <C-W>h :tabprevious<CR>
-nmap <C-W>j :bn<CR>
-nmap <C-W>k :bp<CR>
-nmap <C-W>e :NERDTreeToggle<CR>
-nmap <leader>. :bd<CR>
+nmap <leader>j :bn<CR>
+nmap <leader>k :bp<CR>
+nnoremap <C-W>e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
+nmap <silent>.. :bd<CR>
+nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
-nmap <leader>s :ShowMarksToggle<CR>
-nmap <leader>t :TagbarToggle<CR>
+nnoremap <silent><leader>t :TagbarToggle<CR>
 map <leader>d :Dash<CR>
-nmap <silent><Leader><space> :nohls<CR>
+nnoremap <silent><leader>c :close<CR>
 " Insert maps
 imap <c-d> <esc>ddi
 " Quick Access to vimrc
@@ -186,32 +192,29 @@ nnoremap [gitter]p :GitGutterPrevHunk<CR>
 nnoremap [gitter]s :GitGutterStageHunk<CR>
 nnoremap [gitter]b :Gblame<CR>
 
-"let g:unite_source_menu_menus = {bookmarks}
-
 " " Shortcuts: Unite
-" Define Fuzzy prefix
-nnoremap [fuzzy] <Nop>
-nmap <LocalLeader> [fuzzy]
-nnoremap <silent>[fuzzy]e :NERDTreeToggle<CR>
-nnoremap <silent>[fuzzy]t :TagbarToggle<CR>
-nnoremap <silent>[fuzzy]c :tabclose<CR>
 " Unite Buffers
-nnoremap <leader>, :Unite
+nnoremap <silent>,, :<C-u>Unite
 \ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
 " Unite Fuzzy File Filter
-nnoremap <silent> [fuzzy]f :<C-u>UniteWithCurrentDir
+nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
 \ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
+" Unite Bookmarks
+nnoremap <silent><leader>b :<C-u>Unite
+\ -no-split -buffer-name=bookmarks bookmark<CR>
 " Unite Grep
-nnoremap <silent> [fuzzy]g :<C-u>Unite
+nnoremap <silent><leader>g :<C-u>Unite
 \ -start-insert -winheight=25 -no-split -buffer-name=grep grep<CR>
 " Unite Grep Current Word
-nnoremap <silent> [fuzzy]w :<C-u>UniteWithCursorWord
+nnoremap <silent><leader>w :<C-u>UniteWithCursorWord
 \ -winheight=30 -buffer-name=grep grep<CR>
 " Unite Outline/Tags
-nnoremap <silent> [fuzzy]r :<C-u>Unite
+nnoremap <silent><leader>r :<C-u>Unite
 \ -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
+nnoremap <silent><leader>hh :<C-u>Unite
+\ -winheight=25 -no-split -auto-preview -buffer-name=change change<CR>
 " Unite Search for vimwiki
-nnoremap <silent> [fuzzy]v :<C-u>Unite
+nnoremap <silent><leader>s :<C-u>Unite
 \ -buffer-name=vimwiki grep:~/.wikis<CR>
 
 " " Plugin: NERDtree
@@ -219,15 +222,6 @@ let NERDTreeChDirMode = 2
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
-
-" " Plugin: Showmarks
-let g:showmarks_enable=0
-let g:showmarks_textlower="\t"
-let g:showmarks_textupper=">"
-let g:showmarks_textother=">"
-let g:showmarks_hlline_lower=1
-let g:showmarks_hlline_upper=0
-let g:showmarks_hlline_other=0
 
 " " Plugin: phpctagsbar
 let g:tagbar_phpctags_memory_limit = '512M'
