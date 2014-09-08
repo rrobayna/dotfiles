@@ -12,7 +12,7 @@ Plugin 'Lucius'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
 Plugin 'airblade/vim-gitgutter'			" Display git diff in sidebar
-Plugin 'vim-scripts/ShowMarks'			" Display marks in sidebar
+Plugin 'kshenoy/vim-signature'
 Plugin 'trailing-whitespace'			" Highlight/Fix trailing whitespace
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
@@ -34,6 +34,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'vim-php/tagbar-phpctags.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'renamer.vim'					" File renamer
+Plugin 'Shutnik/jshint2.vim'
 " Syntax
 Plugin 'plasticboy/vim-markdown'
 Plugin 'shawncplus/php.vim'
