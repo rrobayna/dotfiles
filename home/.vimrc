@@ -329,6 +329,8 @@ function! LayoutProfile(flag)
 		set nospell
 		set mouse=
 		exec 'LuciusDark'
+	else
+		echo "Specify a display layout: [(w)rite|(d)ev]"
 	end
 endfunction
 command! -nargs=* Layout call LayoutProfile(<q-args>)
