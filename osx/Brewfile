@@ -63,6 +63,9 @@ install w3m
 install dnsmasq
 install squid
 install privoxy
+# Email
+install mutt
+install urlview
 
 # Remove outdated versions from the cellar
 cleanup
