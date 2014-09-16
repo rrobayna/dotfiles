@@ -45,7 +45,7 @@ filetype plugin indent on
 
 " " Settings
 syntax enable
-map \ ,							" Shuffle leader mapping
+"map '\' ' '						" Shuffle leader mapping
 let mapleader=' '				" Set the leader
 let maplocalleader=','			" Set the localleader
 set encoding=utf-8				" Set default encoding to utf-8
@@ -167,7 +167,7 @@ nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
 nnoremap <leader>e :NERDTreeToggle<CR>
-nmap <silent>.. :bd<CR>
+nmap <silent><localleader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
