@@ -125,15 +125,15 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
-" Display: Force transparent background
-hi NonText ctermfg=105 ctermbg=None cterm=Bold
-
 " Display: 80-character wrap bar line
 if exists('+colorcolumn')
 	set colorcolumn=81
 elseif exists('*matchadd')
 	au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>81v.\+', -1)
 endif
+
+" Display: Force transparent background
+hi NonText ctermfg=105 ctermbg=None cterm=Bold
 
 " " Mappings
 " Remap 0 to move to the first string character instead of COL 0
@@ -233,11 +233,12 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
-" " Plugin: phpctagsbar
-let g:tagbar_left = 0
+" " Plugin: tagbar
 let g:tagbar_width = 40
 let g:tagbar_singleclick = 1
 let g:tagbar_phpctags_memory_limit = '512M'
+" Enable cursorline for plugin panes
+autocmd FileType tagbar setlocal cursorline
 
 " " Plugin: vimwiki
 let g:vimwiki_folding = "expr"
