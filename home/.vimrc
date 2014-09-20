@@ -11,8 +11,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Lucius'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
-Plugin 'airblade/vim-gitgutter'			" Display git diff in sidebar
-Plugin 'kshenoy/vim-signature'
+Plugin 'airblade/vim-gitgutter'			" Display git diff in gutter
+Plugin 'kshenoy/vim-signature'			" Display marks in gutter
 Plugin 'trailing-whitespace'			" Highlight/Fix trailing whitespace
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
@@ -20,9 +20,13 @@ Plugin 'tpope/vim-surround'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'nvie/vim-togglemouse'
 " Tools
-Plugin 'The-NERD-tree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vimwiki/vimwiki'
+Plugin 'The-NERD-tree'					" File browser
+Plugin 'tpope/vim-fugitive'				" Git interface
+Plugin 'vimwiki/vimwiki'				" Wiki
+Plugin 'renamer.vim'					" File renamer
+Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
+Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
+" <Plugins:LUA>
 Plugin 'Shougo/neomru.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
@@ -32,12 +36,13 @@ Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-php/tagbar-phpctags.vim'
+" </Plugins:LUA>
+" <Plugins:OSX>
 Plugin 'rizzatti/dash.vim'
-Plugin 'renamer.vim'					" File renamer
-Plugin 'Shutnik/jshint2.vim'
+" </Plugins:OSX>
 " Syntax
 Plugin 'plasticboy/vim-markdown'
-Plugin 'shawncplus/php.vim'
+"Plugin 'shawncplus/php.vim'
 " Cheats
 Plugin 'git-cheat'
 call vundle#end()
@@ -120,6 +125,9 @@ catch /^Vim\%((\a\+)\)\=:E185/
 	colorscheme elflord
 endtry
 
+" Display: Force transparent background
+hi NonText ctermfg=105 ctermbg=None cterm=Bold
+
 " Display: 80-character wrap bar line
 if exists('+colorcolumn')
 	set colorcolumn=81
@@ -144,6 +152,8 @@ nnoremap <silent> * *zz
 nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
+" " Abbreviations
+cabbrev th tab help
 " " Commands
 command! Reload source $MYVIMRC
 command! CheatGit tab help git-cheat
@@ -224,6 +234,9 @@ let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
 " " Plugin: phpctagsbar
+let g:tagbar_left = 0
+let g:tagbar_width = 40
+let g:tagbar_singleclick = 1
 let g:tagbar_phpctags_memory_limit = '512M'
 
 " " Plugin: vimwiki
@@ -238,6 +251,11 @@ endif
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
+
+" " Plugin: phpcs
+let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
+let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
+let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
 
 " " Functions: Session
 function! FindProjectName()
