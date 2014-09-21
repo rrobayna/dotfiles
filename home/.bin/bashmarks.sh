@@ -21,22 +21,15 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# Modified by Rafael Robayna
-# @todo move the installer so that it moves the files to more agnostic ~/.bin
-# @todo change the mark function to something longer
-# @todo convert to a script instead of sourced function?
-# @todo use the script to maintain aliases as well so they can be used in copy mv commands?
-# @todo make it more of a dumb tool, adding and going are all accomplished with b
-
 # USAGE:
-# bmn bookmarkname - saves the curr dir as bookmarkname
-# bmg bookmarkname - jumps to the that bookmark
-# bmg b[TAB] - tab completion is available
-# bmp bookmarkname - prints the bookmark
-# bmp b[TAB] - tab completion is available
-# bmd bookmarkname - deletes the bookmark
-# bmd [TAB] - tab completion is available
-# bml - list all bookmarks
+# bashmarks new bookmarkname - saves the curr dir as bookmarkname
+# bashmarks jump bookmarkname - jumps to the that bookmark
+# bashmarks jump b[TAB] - tab completion is available
+# bashmarks print bookmarkname - prints the bookmark
+# bashmarks print b[TAB] - tab completion is available
+# bashmarks delete bookmarkname - deletes the bookmark
+# bashmarks delete [TAB] - tab completion is available
+# bashmarks list - list all bookmarks
 
 # setup file to store bookmarks
 if [ ! -n "$SDIRS" ]; then
@@ -47,9 +40,28 @@ touch $SDIRS
 RED="0;31m"
 GREEN="0;33m"
 
+function bashmarks {
+	if [ $# -eq 0 ]; then
+		_bashmarks_list
+	elif [ "$1" = "list" ] || [ "$1" = "l" ]; then
+		_bashmarks_list
+	elif [ "$1" = "help" ] || [ "$1" = "h" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+		_bashmarks_help
+	elif [ "$1" = "print" ] || [ "$1" = "p" ]; then
+		_bashmarks_print $2
+	elif [ "$1" = "new" ] || [ "$1" = "n" ]; then
+		_bashmarks_new $2
+	elif [ "$1" = "delete" ] || [ "$1" = "d" ]; then
+		_bashmarks_delete $2
+	elif [ "$1" = "go" ] || [ "$1" = "g" ]; then
+		_bashmarks_jump $2
+	else
+		_bashmarks_jump $@
+	fi
+}
+
 # save current directory to bookmarks
-function bmn {
-    check_help $1
+function _bashmarks_new {
     _bookmark_name_valid "$@"
     if [ -z "$exit_message" ]; then
         _purge_line "$SDIRS" "export DIR_$1="
@@ -59,8 +71,7 @@ function bmn {
 }
 
 # jump to bookmark
-function bmg {
-    check_help $1
+function _bashmarks_jump {
     source $SDIRS
     target="$(eval $(echo echo $(echo \$DIR_$1)))"
     if [ -d "$target" ]; then
@@ -73,15 +84,13 @@ function bmg {
 }
 
 # print bookmark
-function bmp {
-    check_help $1
+function _bashmarks_print {
     source $SDIRS
     echo "$(eval $(echo echo $(echo \$DIR_$1)))"
 }
 
 # delete bookmark
-function bmd {
-    check_help $1
+function _bashmarks_delete {
     _bookmark_name_valid "$@"
     if [ -z "$exit_message" ]; then
         _purge_line "$SDIRS" "export DIR_$1="
@@ -90,21 +99,20 @@ function bmd {
 }
 
 # print out help for the forgetful
-function bmh {
-    if [ "$1" = "-h" ] || [ "$1" = "-help" ] || [ "$1" = "--help" ] ; then
-        echo ''
-        echo 'bmn <bookmark_name> - Saves the current directory as "bookmark_name"'
-        echo 'bmg <bookmark_name> - Goes (cd) to the directory associated with "bookmark_name"'
-        echo 'bmp <bookmark_name> - Prints the directory associated with "bookmark_name"'
-        echo 'bmd <bookmark_name> - Deletes the bookmark'
-        echo 'bml                 - Lists all available bookmarks'
-        kill -SIGINT $$
-    fi
+function _bashmarks_help {
+	echo 'usage: bashmarks <command> <bookmark_name>'
+	echo ''
+	echo 'commands:'
+	echo 'new <bookmark_name>		- Saves the current directory as "bookmark_name"'
+	echo 'go <bookmark_name>		- Goes (cd) to the directory associated with "bookmark_name"'
+	echo 'print <bookmark_name>		- Prints the directory associated with "bookmark_name"'
+	echo 'delete <bookmark_name>		- Deletes the bookmark'
+	echo 'list				- Lists all available bookmarks'
+	kill -SIGINT $$
 }
 
 # list bookmarks with dirnam
-function bml {
-    check_help $1
+function _bashmarks_list {
     source $SDIRS
 
     # if color output is not working for you, comment out the line below '\033[1;32m' == "red"
@@ -114,7 +122,7 @@ function bml {
     # env | grep "^DIR_" | cut -c5- | sort |grep "^.*="
 }
 # list bookmarks without dirname
-function _l {
+function _bashmarks_list_names {
     source $SDIRS
     env | grep "^DIR_" | cut -c5- | sort | grep "^.*=" | cut -f1 -d "="
 }
@@ -132,17 +140,17 @@ function _bookmark_name_valid {
 }
 
 # completion command
-function _comp {
+function _bashmarks_comp {
     local curw
     COMPREPLY=()
     curw=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=($(compgen -W '`_l`' -- $curw))
+    COMPREPLY=($(compgen -W '`_bashmarks_list_names`' -- $curw))
     return 0
 }
 
 # ZSH completion command
-function _compzsh {
-    reply=($(_l))
+function _bashmarks_compzsh {
+    reply=($(_bashmarks_list_names))
 }
 
 # safe delete line from sdirs
@@ -162,14 +170,15 @@ function _purge_line {
     fi
 }
 
-# bind completion command for g,p,d to _comp
+alias b='bashmarks'
+
+# bind completion command for g,p,d to _bashmarks_comp
 if [ $ZSH_VERSION ]; then
-    compctl -K _compzsh g
-    compctl -K _compzsh p
-    compctl -K _compzsh d
+    compctl -K _bashmarks_compzsh bashmarks
+    compctl -K _bashmarks_compzsh b
 else
     shopt -s progcomp
-    complete -F _comp g
-    complete -F _comp p
-    complete -F _comp d
+    complete -F _bashmarks_comp bashmarks
+    complete -F _bashmarks_comp b
 fi
+
