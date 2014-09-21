@@ -46,10 +46,9 @@ alias note='vim --cmd "cd ~" +Scratch'
 alias today='vim --cmd "cd ~" +Today'
 
 # bashmarks
-alias b='bmg'
-alias bn='bmn'
-alias bd='bmd'
-alias bl='bml'
+alias bn='bashmarks new'
+alias bd='bashmarks delete'
+alias bl='bashmarks list'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
