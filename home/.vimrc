@@ -57,9 +57,8 @@ filetype plugin indent on
 
 " " Settings
 syntax enable
-"map '\' ' '						" Shuffle leader mapping
 let mapleader=' '				" Set the leader
-let maplocalleader=','			" Set the localleader
+let maplocalleader='\'			" Set the localleader
 set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
 set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trailing space char
