@@ -266,6 +266,8 @@ endif
 let g:vim_markdown_initial_foldlevel=4
 
 " " Plugin: phpcs
+let g:phpqa_messdetector_autorun = 0
+let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
 let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
 let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
