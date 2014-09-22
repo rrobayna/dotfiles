@@ -2,6 +2,9 @@
 
 set nocompatible
 
+" Get The OS Type
+let os = substitute(system('uname'), "\n", "", "")
+
 " " Vundle Initialization
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -26,20 +29,24 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'renamer.vim'					" File renamer
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
-" <Plugins:LUA>
-Plugin 'Shougo/neomru.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/unite-outline'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-php/tagbar-phpctags.vim'
-" </Plugins:LUA>
-" <Plugins:OSX>
-Plugin 'rizzatti/dash.vim'
-" </Plugins:OSX>
+" Tools depends:LUA
+if has('lua')
+	Plugin 'Shougo/neomru.vim'
+	Plugin 'Shougo/vimproc.vim'
+	Plugin 'Shougo/unite.vim'
+	Plugin 'Shougo/unite-outline'
+	Plugin 'Shougo/unite-session'
+	Plugin 'tacroe/unite-mark'
+	Plugin 'Shougo/neocomplete.vim'
+	Plugin 'Shougo/neosnippet'
+	Plugin 'Shougo/neosnippet-snippets'
+	Plugin 'majutsushi/tagbar'
+	Plugin 'vim-php/tagbar-phpctags.vim'
+endif
+" Tools depends:Darwin
+if os == "Darwin"
+	Plugin 'rizzatti/dash.vim'
+endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
 "Plugin 'shawncplus/php.vim'
@@ -86,9 +93,6 @@ set foldlevel=20
 let g:wikis_folder = '~/.wikis'
 let g:todo_path = g:wikis_folder . '/todo.wiki'
 let g:scratch_path = g:wikis_folder . '/scratch.wiki'
-
-" Get The OS Type
-let os = substitute(system('uname'), "\n", "", "")
 
 " Set External File Browser for OS X
 if os == "Darwin"
