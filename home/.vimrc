@@ -31,9 +31,9 @@ Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 " Tools depends:LUA
 if has('lua')
-	Plugin 'Shougo/neomru.vim'
 	Plugin 'Shougo/vimproc.vim'
 	Plugin 'Shougo/unite.vim'
+	Plugin 'Shougo/neomru.vim'
 	Plugin 'Shougo/unite-outline'
 	Plugin 'Shougo/unite-session'
 	Plugin 'tacroe/unite-mark'
@@ -213,7 +213,7 @@ nnoremap <silent><leader>o :<C-u>Unite
 \ -winheight=10 -buffer-name=buffers buffer<CR>
 " Unite Fuzzy File Filter
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -sync -buffer-name=files file_rec/async<CR>
+\ -start-insert -winheight=25 -sync -buffer-name=files neomru/file<CR>
 " Unite Bookmarks
 nnoremap <silent><leader>b :<C-u>Unite
 \ -winheight=10 -buffer-name=bookmarks bookmark<CR>
