@@ -156,7 +156,7 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
 " " Abbreviations
-cabbrev th tab help
+cabbrev h tab help
 " " Commands
 command! Reload source $MYVIMRC
 command! CheatGit tab help git-cheat
@@ -178,16 +178,16 @@ nmap <C-W>l :tabnext<CR>
 nmap <C-W>h :tabprevious<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
+nmap <leader>l :b #<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
-nmap <silent><localleader>. :bd<CR>
+nnoremap <silent><leader>e :NERDTreeToggle<CR>
+nnoremap <silent><leader>t :TagbarToggle<CR>
+nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
-nnoremap <silent><leader>t :TagbarToggle<CR>
 map <leader>d :Dash<CR>
-nnoremap <silent><leader>c :close<CR>
-" Insert maps
+" Delete line in insert mode
 imap <c-d> <esc>ddi
 " Quick Access to vimrc
 nmap <leader>rc :e $MYVIMRC<CR>
@@ -208,27 +208,36 @@ nnoremap [gitter]b :Gblame<CR>
 " " Shortcuts: Unite
 " Unite Buffers
 nnoremap <silent>,, :<C-u>Unite
-\ -winheight=10 -no-split -buffer-name=buffers buffer<CR>
+\ -winheight=10 -buffer-name=buffers buffer<CR>
+nnoremap <silent><leader>o :<C-u>Unite
+\ -winheight=10 -buffer-name=buffers buffer<CR>
 " Unite Fuzzy File Filter
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -no-split -sync -buffer-name=files file_rec/async<CR>
+\ -start-insert -winheight=25 -sync -buffer-name=files file_rec/async<CR>
 " Unite Bookmarks
 nnoremap <silent><leader>b :<C-u>Unite
-\ -no-split -buffer-name=bookmarks bookmark<CR>
+\ -winheight=10 -buffer-name=bookmarks bookmark<CR>
 " Unite Grep
-nnoremap <silent><leader>g :<C-u>Unite
-\ -start-insert -winheight=25 -no-split -buffer-name=grep grep<CR>
+nnoremap <leader>g :<C-u>Unite
+\ -start-insert -no-empty -buffer-name=grep grep<CR>
 " Unite Grep Current Word
-nnoremap <silent><leader>w :<C-u>UniteWithCursorWord
-\ -winheight=30 -buffer-name=grep grep<CR>
+nnoremap <leader>h :<C-u>UniteWithCursorWord
+\ -start-insert -no-empty -buffer-name=grepcurrent grep<CR>
+" Unite Search for vimwiki
+nnoremap <leader>s :<C-u>Unite
+\ -start-insert -no-empty -buffer-name=wikisearch grep:~/.wikis<CR>
+" Unite Search for marks
+nnoremap <leader>m :<C-u>Unite
+\ -no-empty -winheight=10 -buffer-name=marks mark<CR>
 " Unite Outline/Tags
 nnoremap <silent><leader>r :<C-u>Unite
-\ -winheight=25 -no-split -auto-preview -buffer-name=outline outline<CR>
-nnoremap <silent><leader>hh :<C-u>Unite
-\ -winheight=25 -no-split -auto-preview -buffer-name=change change<CR>
-" Unite Search for vimwiki
-nnoremap <silent><leader>s :<C-u>Unite
-\ -buffer-name=vimwiki grep:~/.wikis<CR>
+\ -winheight=20 -auto-preview -buffer-name=outline outline<CR>
+nnoremap <silent><leader>p :<C-u>Unite
+\ -no-empty -buffer-name=sessions session<CR>
+nnoremap <silent><leader>u :<C-u>Unite
+\ -start-insert -buffer-name=unite source<CR>
+nnoremap <C-w>y :<C-u>Unite
+\ -no-empty -buffer-name=tabs tab<CR>
 
 " " Plugin: NERDtree
 let NERDTreeChDirMode = 2
