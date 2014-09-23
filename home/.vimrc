@@ -26,30 +26,30 @@ Plugin 'nvie/vim-togglemouse'
 Plugin 'The-NERD-tree'					" File browser
 Plugin 'tpope/vim-fugitive'				" Git interface
 Plugin 'vimwiki/vimwiki'				" Wiki
-Plugin 'renamer.vim'					" File renamer
+Plugin 'majutsushi/tagbar'				" Taglist sidebar
+Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
+Plugin 'PDV--phpDocumentor-for-Vim'
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
-" Tools depends:LUA
+Plugin 'renamer.vim'					" File renamer
 if has('lua')
 	Plugin 'Shougo/vimproc.vim'
 	Plugin 'Shougo/unite.vim'
 	Plugin 'Shougo/neomru.vim'
-	Plugin 'Shougo/unite-outline'
 	Plugin 'Shougo/unite-session'
 	Plugin 'tacroe/unite-mark'
 	Plugin 'Shougo/neocomplete.vim'
-	Plugin 'Shougo/neosnippet'
-	Plugin 'Shougo/neosnippet-snippets'
-	Plugin 'majutsushi/tagbar'
-	Plugin 'vim-php/tagbar-phpctags.vim'
+	Plugin 'Shougo/unite-outline'
 endif
-" Tools depends:Darwin
+if has('python')
+	Plugin 'SirVer/ultisnips'
+	Plugin 'honza/vim-snippets'
+endif
 if os == "Darwin"
 	Plugin 'rizzatti/dash.vim'
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
-"Plugin 'shawncplus/php.vim'
 " Cheats
 Plugin 'git-cheat'
 call vundle#end()
