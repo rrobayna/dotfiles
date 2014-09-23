@@ -208,36 +208,26 @@ nnoremap [gitter]s :GitGutterStageHunk<CR>
 nnoremap [gitter]b :Gblame<CR>
 
 " " Shortcuts: Unite
-" Unite Buffers
-nnoremap <silent>,, :<C-u>Unite
-\ -winheight=10 -buffer-name=buffers buffer<CR>
 nnoremap <silent><leader>o :<C-u>Unite
 \ -winheight=10 -buffer-name=buffers buffer<CR>
-" Unite Fuzzy File Filter
-nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -sync -buffer-name=files neomru/file<CR>
-" Unite Bookmarks
-nnoremap <silent><leader>b :<C-u>Unite
-\ -winheight=10 -buffer-name=bookmarks bookmark<CR>
-" Unite Grep
-nnoremap <leader>g :<C-u>Unite
-\ -start-insert -no-empty -buffer-name=grep grep<CR>
-" Unite Grep Current Word
-nnoremap <leader>h :<C-u>UniteWithCursorWord
-\ -start-insert -no-empty -buffer-name=grepcurrent grep<CR>
-" Unite Search for vimwiki
-nnoremap <leader>s :<C-u>Unite
-\ -start-insert -no-empty -buffer-name=wikisearch grep:~/.wikis<CR>
-" Unite Search for marks
-nnoremap <leader>m :<C-u>Unite
-\ -no-empty -winheight=10 -buffer-name=marks mark<CR>
-" Unite Outline/Tags
-nnoremap <silent><leader>r :<C-u>Unite
-\ -winheight=20 -auto-preview -buffer-name=outline outline<CR>
 nnoremap <silent><leader>p :<C-u>Unite
 \ -no-empty -buffer-name=sessions session<CR>
+nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
+\ -start-insert -winheight=25 -sync -buffer-name=files neomru/file<CR>
+nnoremap <silent><leader>g :<C-u>Unite
+\ -start-insert -no-empty -buffer-name=grep grep<CR>
+nnoremap <leader>s :<C-u>Unite
+\ -start-insert -no-empty -buffer-name=wikisearch grep:~/.wikis<CR>
 nnoremap <silent><leader>u :<C-u>Unite
-\ -start-insert -buffer-name=unite source<CR>
+\ -start-insert -buffer-name=unitesources source<CR>
+nnoremap <silent><leader>b :<C-u>Unite
+\ -winheight=10 -buffer-name=bookmarks bookmark<CR>
+nnoremap <leader>m :<C-u>Unite
+\ -no-empty -winheight=10 -buffer-name=marks mark<CR>
+nnoremap <leader>h :<C-u>UniteWithCursorWord
+\ -start-insert -no-empty -buffer-name=grepcurrentword grep<CR>
+nnoremap <silent><leader>r :<C-u>Unite
+\ -winheight=20 -auto-preview -buffer-name=outline outline<CR>
 nnoremap <C-w>y :<C-u>Unite
 \ -no-empty -buffer-name=tabs tab<CR>
 
