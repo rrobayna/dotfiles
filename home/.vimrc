@@ -251,7 +251,7 @@ let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.
 let g:tagbar_width = 40
 let g:tagbar_singleclick = 1
 let g:tagbar_phpctags_memory_limit = '512M'
-" Enable cursorline for plugin panes
+" Enable cursorline for tagbar panes
 autocmd FileType tagbar setlocal cursorline
 
 " " Plugin: vimwiki
@@ -267,7 +267,7 @@ endif
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
 
-" " Plugin: phpcs
+" " Plugin: phpqa
 let g:phpqa_messdetector_autorun = 0
 let g:phpqa_codesniffer_autorun = 0
 let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
