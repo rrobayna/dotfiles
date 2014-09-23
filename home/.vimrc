@@ -274,6 +274,20 @@ let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encodin
 let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
 let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
 
+" " Plugin: ultisnips
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+
+function! UltiSnipsCallUnite()
+	Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
+	return ''
+endfunction
+inoremap <silent> <leader>i <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+nnoremap <silent> <leader>i a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+
 " " Functions: Session
 function! FindProjectName()
 	let s:name = getcwd()
