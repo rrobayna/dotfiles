@@ -182,6 +182,8 @@ nmap <leader>l :b #<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
+nnoremap <leader>n :NeoCompleteToggle<CR>
+
 nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
