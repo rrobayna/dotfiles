@@ -32,7 +32,6 @@ install php-code-sniffer
 # Other useful binaries
 install git
 install tmux
-install composer
 install maven
 install node
 install ctags
