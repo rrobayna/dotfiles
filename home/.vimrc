@@ -182,7 +182,6 @@ nmap <leader>l :b #<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
-nnoremap <leader>n :NeoCompleteToggle<CR>
 
 nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
@@ -257,6 +256,38 @@ endif
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
 
+" " Plugin: neocomplete
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist'
+    \ }
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" key mappings
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+noremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><C-e> neocomplete#cancel_popup()
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+
 " " Plugin: phpqa
 let g:phpqa_messdetector_autorun = 0
 let g:phpqa_codesniffer_autorun = 0
@@ -275,8 +306,8 @@ function! UltiSnipsCallUnite()
 	Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
 	return ''
 endfunction
-inoremap <silent> <leader>i <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent> <leader>i a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
 
 " " Functions: Session
 function! FindProjectName()
@@ -341,7 +372,7 @@ command! -nargs=* Session call Session(<q-args>)
 
 " Restore and save sessions automaticaly
 if argc() == 0
-	autocmd VimEnter * call RestoreSession(FindProjectName())
+	"autocmd VimEnter * call RestoreSession(FindProjectName())
 	"autocmd VimLeave * call SaveSession(FindProjectName(), 0)
 end
 
