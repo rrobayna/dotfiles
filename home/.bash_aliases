@@ -14,6 +14,7 @@ alias ltmux='if tmux has-session -t $USER; then tmux attach -t $USER; else tmux 
 # Git
 alias g='git'
 alias gs='git status -s; git submodule status'
+alias gsl="git status --long; git submodule status"
 alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %s %Cgreen(%cr) %Cblue%an <%ae>%Creset" --abbrev-commit --date=relative'
 alias gch='git checkout'
 alias gb='git branch'
@@ -25,6 +26,9 @@ alias gds='git diff --staged'
 alias gdh='git diff HEAD^'
 alias gref='git reflog'
 alias gsh='git show'
+
+# List all git repos under a directory
+alias repos="find . -name .git -type d -prune"
 
 # Docker
 alias d='docker'
@@ -97,6 +101,9 @@ alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.ar
 
 # Sync ntp (useful when working with vms that get halted)
 alias synctime="sudo ntpdate -s pool.ntp.org"
+
+# Search using ddg and display in w3m browser
+function ddg { search=""; bang=""; for term in $@; do if [[ "$term" =~ -([A-Za-z0-9._%+-]*) ]]; then bang="\!${BASH_REMATCH[1]}" ; else search="$search%20$term" ; fi ; done ; w3m "https://www.duckduckgo.com/?q=$bang$search" ;}
 
 # OSX: Lookup definition in dictionary
 function dict { open dict://"$@"; }
