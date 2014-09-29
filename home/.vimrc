@@ -29,7 +29,7 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
-Plugin 'PDV--phpDocumentor-for-Vim'
+"Plugin 'PDV--phpDocumentor-for-Vim'
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 Plugin 'renamer.vim'					" File renamer
 if has('lua')
@@ -248,6 +248,8 @@ let g:vimwiki_folding = "expr"
 let notes = {}
 let notes.path = g:wikis_folder . '/notes/'
 let notes.path_html = g:wikis_folder . '/notes_html/'
+let notes.template_path = '~/.wikis/templates/'
+let notes.template_default = 'index.html'
 let g:vimwiki_list = [notes]
 if !empty(glob('~/.vimwikirc.vim'))
 	source ~/.vimwikirc.vim
@@ -257,10 +259,9 @@ endif
 let g:vim_markdown_initial_foldlevel=4
 
 " " Plugin: neocomplete
-let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#auto_completion_start_length = 4
 let g:neocomplete#sources#dictionary#dictionaries = {
     \ 'default' : '',
     \ 'vimshell' : $HOME.'/.vimshell_hist'
