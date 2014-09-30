@@ -5,12 +5,20 @@
 # Install configs
 function installDotFiles() {
 	echo "Bootstraping $HOME"
+	echo "========================================"
 	echo "Installing dotfiles..."
 	rsync --exclude ".DS_Store" -avh --no-perms $PWD/home/. ~
+	echo ""
 
 	echo "Installing scripts to $HOME/bin"
 	[ ! -d "$HOME"/bin ] && mkdir "$HOME"/bin
 	rsync --exclude ".DS_Store" -avh --no-perms $PWD/bin/. $HOME/bin/
+	echo ""
+
+	echo "Installing submodules"
+	git submodule update --init
+	cd modules/ && make && cd ..
+	echo ""
 
 	if hash vim 2>/dev/null; then
 		echo "Installing Vim Plugins..."
@@ -30,6 +38,7 @@ function installDotFiles() {
 		if [ ! -d "$HOME"/.wikis ]; then
 			mkdir -p "$HOME"/.wikis/notes
 		fi
+		echo ""
 	fi
 
 	echo "Installation complete!"
