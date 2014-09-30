@@ -81,6 +81,9 @@ alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date
 # IP addresses
 alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
 
+# Weather
+alias weather="ansiweather"
+
 # View HTTP traffic
 alias sniff="sudo ngrep -d 'en1' -t '^(GET|POST) '"
 alias sniff80="sudo ngrep -d 'en1' -t '^(GET|POST) ' 'tcp and port 80'"
