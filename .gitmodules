@@ -1,0 +1,3 @@
+[submodule "modules/ansiweather"]
+	path = modules/ansiweather
+	url = https://github.com/fcambus/ansiweather.git
