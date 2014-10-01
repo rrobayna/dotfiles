@@ -17,7 +17,7 @@ function installDotFiles() {
 
 	echo "Installing submodules"
 	git submodule update --init
-	cd modules/ && make && cd ..
+	cd modules/ && make install && cd ..
 	echo ""
 
 	if hash vim 2>/dev/null; then
