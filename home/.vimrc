@@ -38,8 +38,10 @@ if has('lua')
 	Plugin 'Shougo/neomru.vim'
 	Plugin 'Shougo/unite-session'
 	Plugin 'tacroe/unite-mark'
-	Plugin 'Shougo/neocomplete.vim'
-	Plugin 'Shougo/unite-outline'
+	if v:version >= 704
+		Plugin 'Shougo/neocomplete.vim'
+		Plugin 'Shougo/unite-outline'
+	endif
 endif
 if has('python')
 	Plugin 'SirVer/ultisnips'
@@ -259,56 +261,62 @@ endif
 let g:vim_markdown_initial_foldlevel=4
 
 " " Plugin: neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 4
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist'
-    \ }
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+if exists(":NeoCompleteEnable")
+	let g:neocomplete#enable_at_startup = 1
+	let g:neocomplete#enable_smart_case = 1
+	let g:neocomplete#auto_completion_start_length = 4
+	let g:neocomplete#sources#dictionary#dictionaries = {
+		\ 'default' : '',
+		\ 'vimshell' : $HOME.'/.vimshell_hist'
+		\ }
+	if !exists('g:neocomplete#keyword_patterns')
+		let g:neocomplete#keyword_patterns = {}
+	endif
+	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+	" key mappings
+	inoremap <expr><C-g> neocomplete#undo_completion()
+	inoremap <expr><C-l> neocomplete#complete_common_string()
+	noremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+	inoremap <expr><C-y> neocomplete#close_popup()
+	inoremap <expr><C-e> neocomplete#cancel_popup()
+	" Enable omni completion.
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	" Enable heavy omni completion.
+	if !exists('g:neocomplete#sources#omni#input_patterns')
+	  let g:neocomplete#sources#omni#input_patterns = {}
+	endif
+	let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" key mappings
-inoremap <expr><C-g> neocomplete#undo_completion()
-inoremap <expr><C-l> neocomplete#complete_common_string()
-noremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 
 " " Plugin: phpqa
-let g:phpqa_messdetector_autorun = 0
-let g:phpqa_codesniffer_autorun = 0
-let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
-let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
-let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
+if exists("g:phpqa_check")
+	let g:phpqa_messdetector_autorun = 0
+	let g:phpqa_codesniffer_autorun = 0
+	let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
+	let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
+	let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
+endif
 
 " " Plugin: ultisnips
-let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+if exists(':UltiSnipsEdit')
+	let g:UltiSnipsUsePythonVersion = 2
+	let g:UltiSnipsExpandTrigger="<tab>"
+	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+	let g:UltiSnipsEditSplit="vertical"
 
-function! UltiSnipsCallUnite()
-	Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
-	return ''
-endfunction
-inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+	function! UltiSnipsCallUnite()
+		Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
+		return ''
+	endfunction
+	inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+	nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+endif
 
 " " Functions: Session
 function! FindProjectName()
