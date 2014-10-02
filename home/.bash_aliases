@@ -16,6 +16,7 @@ alias g='git'
 alias gs='git status -s; git submodule status'
 alias gsl="git status --long; git submodule status"
 alias gl='git log -m --simplify-merges --color --pretty=format:"%Cred%h%Creset %s %Cgreen(%cr) %Cblue%an <%ae>%Creset" --abbrev-commit --date=relative'
+alias gsmp='git submodule foreach git pull'
 alias gch='git checkout'
 alias gb='git branch'
 alias ga='git add'
