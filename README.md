@@ -58,10 +58,10 @@ in the main Brewfile run:
 ./bootstrap brew
 ```
 
-To install additional Brewfiles, use the following syntax:
+or
 
 ```bash
-brew bundle osx/Brewfile.home
+brew bundle osx/Brewfile
 ```
 
 ### Installing OS X Applications using the Homebrew Cask bundler
@@ -71,12 +71,6 @@ Applications directory:
 
 ```bash
 brew bundle osx/Caskfile
-```
-
-I created a separate Caskfile with apps for my home system:
-
-```bash
-brew bundle osx/Caskfile.home
 ```
 
 ### Sensible OS X defaults
