@@ -1,29 +1,33 @@
 # Install native apps
 # Usage: `brew bundle Caskfile`
 
+# install brew-cask
 install caskroom/cask/brew-cask
-tap caskroom/versions
 
 ## Browsers and Email
-cask install google-chrome 2> /dev/null
-cask install firefox 2> /dev/null
-cask install thunderbird 2> /dev/null
+cask install --appdir="/Applications" google-chrome 2> /dev/null
+cask install --appdir="/Applications" firefox 2> /dev/null
+cask install --appdir="/Applications" thunderbird 2> /dev/null
+#cask install --appdir="/Applications" flash 2> /dev/null
 
 ## Development Tools
-cask install iterm2 2> /dev/null
-cask install sublime-text 2> /dev/null
-cask install virtualbox 2> /dev/null
-cask install dash 2> /dev/null
-cask install sequel-pro 2> /dev/null
-cask install robomongo 2> /dev/null
-cask install vagrant 2> /dev/null
-cask install netbeans 2> /dev/null
+cask install --appdir="/Applications" iterm2 2> /dev/null
+cask install --appdir="/Applications" virtualbox 2> /dev/null
+cask install --appdir="/Applications" dash 2> /dev/null
+cask install --appdir="/Applications" sequel-pro 2> /dev/null
+cask install --appdir="/Applications" robomongo 2> /dev/null
+cask install --appdir="/Applications" vagrant 2> /dev/null
+cask install --appdir="/Applications" gitx 2> /dev/null
+cask install --appdir="/Applications" netbeans 2> /dev/null
 
 ## Utilities
-cask install spectacle 2> /dev/null
-cask install the-unarchiver 2> /dev/null
-cask install vlc 2> /dev/null
+cask install --appdir="/Applications" spectacle 2> /dev/null
+cask install --appdir="/Applications" keepassx 2> /dev/null
+cask install --appdir="/Applications" the-unarchiver 2> /dev/null
+cask install --appdir="/Applications" vlc 2> /dev/null
+cask install --appdir="/Applications" ccleaner 2> /dev/null
+cask install --appdir="/Applications" appcleaner 2> /dev/null
 
 ## Services
-cask install evernote 2> /dev/null
-cask install spotify 2> /dev/null
+cask install --appdir="/Applications" evernote 2> /dev/null
+cask install --appdir="/Applications" spotify 2> /dev/null
