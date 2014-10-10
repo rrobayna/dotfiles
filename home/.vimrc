@@ -90,19 +90,6 @@ set backspace=indent,eol,start
 set foldmethod=syntax
 set foldlevel=20
 
-" Default wiki locations
-let g:wikis_folder = '~/.wikis'
-let g:todo_path = g:wikis_folder . '/todo.wiki'
-let g:scratch_path = g:wikis_folder . '/scratch.wiki'
-
-" Set External File Browser for OS X
-if os == "Darwin"
-	let g:netrw_browsex_viewer='open'
-endif
-
-" Set File Encryption Method
-set cryptmethod=blowfish
-
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowritebackup
@@ -139,6 +126,12 @@ endif
 
 " Display: Force transparent background
 hi NonText ctermfg=105 ctermbg=None cterm=Bold
+
+" Set External File Browser for OS X
+if os == "Darwin"
+	let g:netrw_browsex_viewer='open'
+endif
+
 
 " " Mappings
 " Remap 0 to move to the first string character instead of COL 0
@@ -182,16 +175,15 @@ nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 nmap <leader>l :b #<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
-" Write with sudo permissions
-cmap w!! w !sudo tee > /dev/null %
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
-
 nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
 map <leader>d :Dash<CR>
+" Write with sudo permissions
+cmap w!! w !sudo tee > /dev/null %
 " Delete line in insert mode
 imap <c-d> <esc>ddi
 " Quick Access to vimrc
@@ -248,13 +240,19 @@ let g:tagbar_phpctags_memory_limit = '512M'
 autocmd FileType tagbar setlocal cursorline
 
 " " Plugin: vimwiki
+let g:wikis_folder = '~/.wikis'
 let g:vimwiki_folding = "expr"
+" Single page wikis
+let g:todo_path = g:wikis_folder . '/todo.wiki'
+let g:scratch_path = g:wikis_folder . '/scratch.wiki'
+" Default wiki
 let notes = {}
 let notes.path = g:wikis_folder . '/notes/'
 let notes.path_html = g:wikis_folder . '/notes_html/'
 let notes.template_path = '~/.wikis/templates/'
 let notes.template_default = 'index.html'
 let g:vimwiki_list = [notes]
+" Load optional wiki configurations
 if !empty(glob('~/.vimwikirc.vim'))
 	source ~/.vimwikirc.vim
 endif
