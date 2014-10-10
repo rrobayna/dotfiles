@@ -182,6 +182,8 @@ nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 nmap <leader>l :b #<CR>
 nnoremap <C-W>e :NERDTreeToggle<CR>
+" Write with sudo permissions
+cmap w!! w !sudo tee > /dev/null %
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
 
