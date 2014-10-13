@@ -27,6 +27,8 @@ cask install --appdir="/Applications" the-unarchiver 2> /dev/null
 cask install --appdir="/Applications" vlc 2> /dev/null
 cask install --appdir="/Applications" ccleaner 2> /dev/null
 cask install --appdir="/Applications" appcleaner 2> /dev/null
+cask install --appdir="/Applications" xquartz 2> /dev/null
+cask install --appdir="/Applications" dia 2> /dev/null
 
 ## Services
 cask install --appdir="/Applications" evernote 2> /dev/null
