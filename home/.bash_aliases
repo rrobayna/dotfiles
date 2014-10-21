@@ -33,10 +33,12 @@ alias repos="find . -name .git -type d -prune"
 
 # Docker
 alias d='docker'
-alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
 alias di='docker images'
 alias dps='docker ps -a'
+alias dh='docker history'
+alias dd='docker diff'
 alias dl='docker ps -l -q'
+alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
 
 # mpd, mpc and ncmpcpp
 alias m='ncmpcpp'
