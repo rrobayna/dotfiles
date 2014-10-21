@@ -23,7 +23,7 @@ install bash-completion
 # Install wget with IRI support
 install wget --enable-iri
 # Install more recent versions of some OS X tools
-install vim --with-lua --override-system-vi
+install vim --with-lua --with-python3 --override-system-vi
 install homebrew/dupes/grep
 install homebrew/php/php55 --with-gmp
 # PHP Tools
