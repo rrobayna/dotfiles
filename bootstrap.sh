@@ -1,19 +1,19 @@
 #!/bin/bash
 # written by Rafael Robayna <rrobayna@gmail.com>
-# Quickly backup and install your dotfiles
+# Quickly deploy your dotfiles
 
-# Install configs
 function installDotFiles() {
 	echo "Bootstraping $HOME"
 	echo "========================================"
 	echo "Installing dotfiles..."
-	rsync --exclude ".DS_Store" -avh --no-perms $PWD/home/. ~
-	echo ""
+	linkFiles $PWD/home $HOME
+
+	echo "Installing dotfolders..."
+	linkFiles $PWD/home $HOME d
 
 	echo "Installing scripts to $HOME/bin"
 	[ ! -d "$HOME"/bin ] && mkdir "$HOME"/bin
-	rsync --exclude ".DS_Store" -avh --no-perms $PWD/bin/. $HOME/bin/
-	echo ""
+	linkFiles $PWD/bin $HOME/bin
 
 	echo "Installing submodules"
 	git submodule update --init
@@ -44,20 +44,6 @@ function installDotFiles() {
 	echo "Installation complete!"
 }
 
-function backupDotFiles() {
-	echo "Backing up dotfiles..."
-	# limit backup to files already in the dotfiles/home folder
-	_dotfiles=$(ls -A home/ | egrep '^\.')
-	for _file in $_dotfiles; do
-		[ ! -f "$HOME"/"$_file" ] && continue
-		_diff=$(diff "$HOME"/"$_file" "$PWD"/home/"$_file")
-		if [ -n "$_diff" ]; then
-			rsync -ah --no-perms "$HOME"/"$_file" "$PWD"/home/"$_file" > /dev/null 2>&1
-			echo "M home/$_file"
-		fi
-	done
-}
-
 function installBrew() {
 	if [ `uname` = 'Darwin' ]; then
 		if hash brew 2>/dev/null; then
@@ -83,13 +69,37 @@ function installBrew() {
 
 function displayHelp() {
 	echo "Bootstrap your dotfiles"
-	echo "Usage: bootstrap.sh [OPTION]"
 	echo ""
-	echo "Options:"
-	echo "install or i			install dotfiles, vim plugins and more"
-	echo "backup or b			backup dotfiles"
-	echo "homebrew or br			install tools listed in the Brewfile"
-	exit 0;
+	echo "Usage: bootstrap.sh {install|brew|help}"
+	echo ""
+	echo "options:"
+	echo "install			install dotfiles, vim plugins and more"
+	echo "brew			install tools listed in the Brewfile"
+	echo "help			display this information"
+}
+
+function linkFiles() {
+	if [ $# -lt 2 ] || [ ! -d "$1" ] || [ ! -d "$2" ]; then
+		echo "Error: source and destination paths required."
+		exit
+	fi
+	[ $# -eq 2 ] && t="f"
+	[ $# -eq 3 ] && t=$3
+	s=$1
+	d=$2
+	for file in $(find $s -type $t -depth 1); do
+		filename=$(basename "$file")
+		if [ $filename == ".DS_STORE" ]; then
+			continue
+		fi
+		if [ -"$t" "$d"/"$filename" ]; then
+			rm "$d"/"$filename"
+		fi
+		if [ -L "$d"/"$filename" ]; then
+			unlink "$d"/"$filename"
+		fi
+		ln -s "$s"/"$filename" "$d"/"$filename"
+	done
 }
 
 # Check for parameters
@@ -102,13 +112,10 @@ case $1 in
 	"install"|"i")
 		installDotFiles
 		;;
-	"backup"|"b")
-		backupDotFiles
-		;;
-	"homebrew"|"br")
+	"brew")
 		installBrew
 		;;
-	"help"|"--help")
+	"help"|"h")
 		displayHelp
 		;;
 	*)
