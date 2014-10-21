@@ -164,9 +164,16 @@ command! Today VimwikiMakeDiaryNote
 command! Diary VimwikiDiaryIndex
 command! Gs Gstatus
 command! Gc Gcommit
+command! Gl Git log --simplify-merges --color --date=relative
 command! Gd Git diff
 command! Gds Git diff --staged
 command! Grl Git reflog
+" " Command Maps
+cmap gs Gs
+cmap gd Gd
+cmap gl Gl
+" Write with sudo permissions
+cmap w!! w !sudo tee > /dev/null %
 " " Shortcuts
 nmap <C-W>t :tabnew<CR>
 nmap <C-W>l :tabnext<CR>
@@ -182,8 +189,6 @@ nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
 map <leader>d :Dash<CR>
-" Write with sudo permissions
-cmap w!! w !sudo tee > /dev/null %
 " Delete line in insert mode
 imap <c-d> <esc>ddi
 " Quick Access to vimrc
@@ -297,9 +302,8 @@ endif
 if exists("g:phpqa_check")
 	let g:phpqa_messdetector_autorun = 0
 	let g:phpqa_codesniffer_autorun = 0
-	let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8"
-	let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
-	let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
+	let g:phpqa_messdetector_ruleset = "~/resources/phpmd/ruleset.xml"
+	"let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
 endif
 
 " " Plugin: ultisnips
