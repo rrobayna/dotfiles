@@ -9,8 +9,8 @@ This dotfiles repo contains:
 - an OS X configuration script
 - assorted extras
 
-The bootstrap.sh script is intended to simplify installation and backup actions
-for dotfiles and shell scripts.
+The bootstrap.sh script is intended to simplify the installation
+of dotfiles and shell scripts.
 
 *Warning: Using the bootstrap.sh script to install dotfiles will overwrite existing dotfiles and shell scripts. Proceed with caution! If you want to retain any of your personal dotfiles and scripts, you might want to perform a backup before installing.*
 
@@ -81,40 +81,26 @@ When setting up a new Mac, you may want to set some sensible OS X defaults:
 ./osx/defaults.osx
 ```
 
-## Backup
-
-### Using bootstrap.sh
-
-To backup changes to you dotfiles and shell script:
-
-```bash
-./bootstrap.sh backup
-```
-
-This will only backup the files currently included in the projects home/ directory.
-To add new dotfiles and scripts, just copy the file into the appropriate
-directory. If you want to add a new script or dotfile, copy it over to the repo's home or bin directory and it will be included in any future backups.
-
 
 ## Sources
-This repo is primarily a modified fork of mathiasbynens' dotfiles repo:  
+This repo is primarily a modified fork of mathiasbynens' dotfiles repo:
 https://github.com/mathiasbynens/dotfiles
 
-Thanks to skwp for: ctags, gitignore  
+Thanks to skwp for: ctags, gitignore
 https://github.com/skwp/dotfiles
 
 
 ## Vim Resources
 Lots of useful bits vim bits were lifted from:
 
-Vim Wikia  
+Vim Wikia
 https://vim.wikia.com
 
-Vim Bits  
+Vim Bits
 http://vimbits.com/
 
-Steve Losh's amazing "Learn Vim The Hard Way"  
+Steve Losh's amazing "Learn Vim The Hard Way"
 http://learnvimscriptthehardway.stevelosh.com/
 
-Drew Neil's "Vimcats" Series  
+Drew Neil's "Vimcats" Series
 http://vimcasts.org/
