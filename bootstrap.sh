@@ -15,7 +15,7 @@ function installDotFiles() {
 	[ ! -d "$HOME"/bin ] && mkdir "$HOME"/bin
 	linkFiles $PWD/bin $HOME/bin
 
-	echo "Installing submodules"
+	echo "Installing dotfile submodules"
 	git submodule update --init
 	cd modules/ && make install && cd ..
 	echo ""
@@ -87,13 +87,16 @@ function linkFiles() {
 	[ $# -eq 3 ] && t=$3
 	s=$1
 	d=$2
-	for file in $(find $s -type $t -depth 1); do
+	for file in $(find $s -maxdepth 1 -type $t); do
 		filename=$(basename "$file")
 		if [ $filename == ".DS_STORE" ]; then
 			continue
 		fi
-		if [ -"$t" "$d"/"$filename" ]; then
+		if [ -f "$d"/"$filename" ]; then
 			rm "$d"/"$filename"
+		fi
+		if [ -d "$d"/"$filename" ]; then
+			rm -rf "$d"/"$filename"
 		fi
 		if [ -L "$d"/"$filename" ]; then
 			unlink "$d"/"$filename"
