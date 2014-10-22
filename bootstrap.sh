@@ -19,8 +19,7 @@ function installDotFiles() {
 	git submodule update --init
 	cd modules/ && make install && cd ..
 	echo ""
-
-	if hash vim 2>/dev/null; then
+	if hash vim 2>/dev/null && [ -f $PWD/home/.vimrc ]; then
 		echo "Installing Vim Plugins..."
 
 		if [ ! -d "$HOME"/.vim/bundle/Vundle.vim ]; then
