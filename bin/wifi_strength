@@ -1,17 +1,21 @@
 #!/bin/bash
 
-clear
+if [[ $1 = "help" ]] || [[ $1 = "--help" ]]; then
+	echo "display wifi strength for apple computers"
+	echo "usage: wifi_strength <options>"
+	echo ""
+	echo "options:"
+	echo "-c		enable continuous mode. poll the signal strength every 0.5 seconds."
+	exit
+fi
 
 while x=1; do
     _signal=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep CtlRSSI)
     _s=$(echo $_signal | awk '{print $2}')
-    echo "Wifi Signal Strength: $_s"
 
-    if [[ $1 != "-c" ]]
-    then
-        exit 0;
-    fi
+	[[ $1 = "-c" ]] && clear
+	echo "Wifi Signal Strength: $_s"
+	[[ $1 != "-c" ]] && exit 0
 
     sleep 0.5
-    clear
 done
