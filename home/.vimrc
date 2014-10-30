@@ -29,7 +29,7 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
-"Plugin 'PDV--phpDocumentor-for-Vim'
+Plugin 'PDV--phpDocumentor-for-Vim'
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 Plugin 'renamer.vim'					" File renamer
 if has('lua')
@@ -299,11 +299,13 @@ if exists(":NeoCompleteEnable")
 endif
 
 " " Plugin: phpqa
-if exists("g:phpqa_check")
-	let g:phpqa_messdetector_autorun = 0
-	let g:phpqa_codesniffer_autorun = 0
-	let g:phpqa_messdetector_ruleset = "~/resources/phpmd/ruleset.xml"
-	"let g:phpqa_messdetector_cmd='./vendor/phpmd/phpmd/src/bin/phpmd'
+let g:phpqa_messdetector_ruleset = "~/resources/phpmd/ruleset.xml"
+let g:phpqa_run_on_write = 0
+let g:phpqa_messdetector_autorun = 0
+let g:phpqa_codesniffer_autorun = 0
+let b:phpmd_path = "./vendor/phpmd/phpmd/src/bin/phpmd"
+if filereadable(b:phpmd_path)
+	let g:phpqa_messdetector_cmd = b:phpmd_path
 endif
 
 " " Plugin: ultisnips
