@@ -36,7 +36,6 @@ alias d='docker'
 alias di='docker images'
 alias dps='docker ps -a'
 alias dh='docker history'
-alias dd='docker diff'
 alias dl='docker ps -l -q'
 alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
 
@@ -115,7 +114,7 @@ function ddg { search=""; bang=""; for term in $@; do if [[ "$term" =~ -([A-Za-z
 function dict { open dict://"$@"; }
 
 # OSX: Run OS updates manually
-alias update='sudo softwareupdate -i -a; sudo brew update; sudo brew upgrade; sudo brew cleanup'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
 
 # OSX: Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
