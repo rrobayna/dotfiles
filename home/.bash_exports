@@ -42,6 +42,7 @@ export MANPAGER="less -X"
 [ $(uname) == "Darwin" ] && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Define Application Paths
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export GEM_HOME="$HOME/.gemhome/"
