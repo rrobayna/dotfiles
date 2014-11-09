@@ -15,7 +15,6 @@ Plugin 'Lucius'
 " Visual Enhancements
 Plugin 'maciakl/vim-neatstatus'			" Lightweight status bar
 Plugin 'airblade/vim-gitgutter'			" Display git diff in gutter
-Plugin 'kshenoy/vim-signature'			" Display marks in gutter
 Plugin 'trailing-whitespace'			" Highlight/Fix trailing whitespace
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
@@ -419,3 +418,13 @@ function! LayoutProfile(flag)
 	end
 endfunction
 command! -nargs=* Layout call LayoutProfile(<q-args>)
+
+function! Reg()
+    reg
+    echo "Register: "
+    let char = getchar()
+    execute "normal! \"".nr2char(char)."p"
+    redraw
+    normal! k
+endfunction
+command! -nargs=0 Reg call Reg() | normal <cr>
