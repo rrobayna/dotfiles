@@ -7,7 +7,7 @@ brew update
 # Upgrade any already-installed formulae
 brew upgrade
 
-brew install gcc
+#brew install gcc
 # Install GNU core utilities (those that come with OS X are outdated)
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -38,7 +38,6 @@ brew install node
 brew install ctags
 brew install automake
 brew install autoconf
-brew install atk
 brew install ack
 brew install bfg
 brew install imagemagick --with-webp
@@ -50,8 +49,8 @@ brew install xpdf
 brew install watch
 brew install xz
 # Fuse
-brew install osxfuse
-brew install sshfs
+#brew install osxfuse
+#brew install sshfs
 # Network Tools
 brew install tcpflow
 brew install nmap
@@ -66,6 +65,8 @@ brew install privoxy
 # Email
 brew install mutt
 brew install urlview
+# Brew tools
+brew install brew-cask
 
 # Remove outdated versions from the cellar
 brew cleanup
