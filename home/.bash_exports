@@ -38,17 +38,23 @@ export LESS_TERMCAP_us=$'\E[02;31;4;40m'	# begin underline
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X"
 
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-[ $(uname) == "Darwin" ] && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
 # Define Application Paths
-if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-	export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-fi
 export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export GEM_HOME="$HOME/.gemhome/"
 ## Extend PATH
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$PATH:/usr/local/share/npm/bin"
-export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+
+if [ $(uname) == "Darwin" ]; then
+	if which brew > /dev/null; then
+		# Link Homebrew casks in `/Applications` rather than `~/Applications`
+		[ $(uname) == "Darwin" ] && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+		# Link php
+		export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+	fi
+	# Link Python
+	export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+	# Link android sdk tools
+	export PATH="/Applications/adt-bundle/sdk/platform-tools:$PATH"
+fi
