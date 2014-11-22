@@ -38,4 +38,3 @@ fi;
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
 
 [ -f "$HOME/.bin/bashmarks.sh" ] && source ~/.bin/bashmarks.sh
-# [ -f "$HOME/.bin/tmuxinator.bash" ] && source ~/.bin/tmuxinator.bash
