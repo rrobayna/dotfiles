@@ -86,7 +86,7 @@ function linkFiles() {
 	[ $# -eq 3 ] && t=$3
 	s=$1
 	d=$2
-	for file in $(find $s -maxdepth 1 -type $t); do
+	for file in $(find $s -mindepth 1 -maxdepth 1 -type $t); do
 		filename=$(basename "$file")
 		if [ $filename == ".DS_STORE" ]; then
 			continue
