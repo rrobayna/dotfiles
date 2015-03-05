@@ -30,7 +30,6 @@ Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 Plugin 'PDV--phpDocumentor-for-Vim'
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
-Plugin 'renamer.vim'					" File renamer
 if has('lua')
 	Plugin 'Shougo/vimproc.vim'
 	Plugin 'Shougo/unite.vim'
@@ -45,9 +44,6 @@ endif
 if has('python')
 	Plugin 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
-endif
-if os == "Darwin"
-	Plugin 'rizzatti/dash.vim'
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
@@ -323,7 +319,8 @@ if exists(':UltiSnipsEdit')
 	nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
 endif
 
-function! LayoutProfile(flag)
+" " Switch Between Profiles
+function! ProfileSwitch(flag)
 	if a:flag == "write" || a:flag == "w"
 		set nonumber
 		set colorcolumn=0
@@ -350,8 +347,9 @@ function! LayoutProfile(flag)
 		echo "Specify a display layout: [(w)rite|(d)ev]"
 	end
 endfunction
-command! -nargs=* Layout call LayoutProfile(<q-args>)
+command! -nargs=* Profile call ProfileSwitch(<q-args>)
 
+" " Display Registers
 function! Reg()
     reg
     echo "Register: "
