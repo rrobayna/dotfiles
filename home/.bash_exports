@@ -39,22 +39,22 @@ export LESS_TERMCAP_us=$'\E[02;31;4;40m'	# begin underline
 export MANPAGER="less -X"
 
 # Define Application Paths
-export NODE_PATH="/usr/local/lib/node"
+#export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export GEM_HOME="$HOME/.gemhome/"
 ## Extend PATH
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="$PATH:/usr/local/share/npm/bin"
+#export PATH="$PATH:/usr/local/share/npm/bin"
 
 if [ $(uname) == "Darwin" ]; then
 	if which brew > /dev/null; then
 		# Link Homebrew casks in `/Applications` rather than `~/Applications`
 		[ $(uname) == "Darwin" ] && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 		# Link php
-		export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+		#export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 	fi
 	# Link Python
 	export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
 	# Link android sdk tools
-	export PATH="/Applications/adt-bundle/sdk/platform-tools:$PATH"
+	#export PATH="/Applications/adt-bundle/sdk/platform-tools:$PATH"
 fi
