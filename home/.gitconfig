@@ -14,9 +14,6 @@
 [apply]
     whitespace = fix
 
-[push]
-    default = upstream
-
 [help]
     # Automatically correct and execute mistyped commands
     autocorrect = 1
