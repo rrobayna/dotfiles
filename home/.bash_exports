@@ -50,8 +50,6 @@ if [ $(uname) == "Darwin" ]; then
 	if which brew > /dev/null; then
 		# Link Homebrew casks in `/Applications` rather than `~/Applications`
 		[ $(uname) == "Darwin" ] && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-		# Link php
-		#export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 	fi
 	# Link Python
 	export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
