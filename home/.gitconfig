@@ -93,7 +93,7 @@
     cl = clean
     cldf = clean -df
 
-    doh = reset --soft HEAD~1   # undo last commit 
+    doh = reset --soft HEAD~1   # undo last commit
     done = commit -c ORIG_HEAD  # commit using last commit message
 
     res = reset
@@ -217,7 +217,7 @@
     vim-unmerged = !git vm # deprecated
 
     current = rev-parse --abbrev-ref HEAD
-	ch = rev-parse --verify HEAD 
+	ch = rev-parse --verify HEAD
     br = branch
     brt = branch --track
     brup = branch --set-upstream
@@ -263,3 +263,5 @@
 [user]
 	name = Rafael Robayna
 	email = rrobayna@gmail.com
+[push]
+	default = matching

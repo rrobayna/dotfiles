@@ -28,6 +28,7 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
+Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
 Plugin 'PDV--phpDocumentor-for-Vim'
 Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 if has('lua')
@@ -183,7 +184,6 @@ nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
 nmap <leader>q :Scratch<CR>
-map <leader>d :Dash<CR>
 " Delete line in insert mode
 imap <c-d> <esc>ddi
 " Quick Access to vimrc
@@ -204,11 +204,11 @@ nnoremap [gitter]b :Gblame<CR>
 
 " " Shortcuts: Unite
 nnoremap <silent><leader>o :<C-u>Unite
-\ -winheight=10 -buffer-name=buffers buffer<CR>
+\ -start-insert -winheight=10 -buffer-name=buffers buffer<CR>
 nnoremap <silent><leader>p :<C-u>Unite
 \ -no-empty -buffer-name=sessions session<CR>
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -sync -buffer-name=files neomru/file<CR>
+\ -start-insert -winheight=25 -sync -buffer-name=files file_rec/async<CR>
 nnoremap <silent><leader>g :<C-u>Unite
 \ -start-insert -no-empty -buffer-name=grep grep<CR>
 nnoremap <leader>s :<C-u>Unite
@@ -318,6 +318,10 @@ if exists(':UltiSnipsEdit')
 	inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
 	nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
 endif
+
+" " Plugin: pdv
+nnoremap <C-K> :call PhpDocSingle()<CR>
+vnoremap <C-K> :call PhpDocRange()<CR>
 
 " " Switch Between Profiles
 function! ProfileSwitch(flag)
