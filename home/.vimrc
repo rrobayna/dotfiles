@@ -61,7 +61,7 @@ set encoding=utf-8				" Set default encoding to utf-8
 set nolist						" Set list characters off on load
 set lcs=tab:▸\ ,trail:·			" Set the lcs tab and trailing space char
 set lcs+=eol:¬					" Set the lcs end of line char
-set ffs=unix,dos,mac			" Set unix as the standard file type
+set ffs=unix,dos				" Set unix as the standard file type
 set foldcolumn=0				" Explicitly unset foldcolumn
 set number						" Line Numbers
 set hlsearch					" Highlight Search
@@ -171,6 +171,7 @@ cmap gl Gl
 " Write with sudo permissions
 cmap w!! w !sudo tee > /dev/null %
 " " Shortcuts
+nmap <C-B> :!php -l %<CR>
 nmap <C-W>t :tabnew<CR>
 nmap <C-W>l :tabnext<CR>
 nmap <C-W>h :tabprevious<CR>
@@ -204,7 +205,7 @@ nnoremap [gitter]b :Gblame<CR>
 
 " " Shortcuts: Unite
 nnoremap <silent><leader>o :<C-u>Unite
-\ -start-insert -winheight=10 -buffer-name=buffers buffer<CR>
+\ -winheight=10 -buffer-name=buffers buffer<CR>
 nnoremap <silent><leader>p :<C-u>Unite
 \ -no-empty -buffer-name=sessions session<CR>
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
@@ -294,13 +295,16 @@ if exists(":NeoCompleteEnable")
 endif
 
 " " Plugin: phpqa
-let g:phpqa_messdetector_ruleset = "~/resources/phpmd/ruleset.xml"
 let g:phpqa_run_on_write = 0
 let g:phpqa_messdetector_autorun = 0
 let g:phpqa_codesniffer_autorun = 0
-let b:phpmd_path = "./vendor/phpmd/phpmd/src/bin/phpmd"
+let b:phpmd_path = "./vendor/bin/phpmd"
+let b:phpcs_path = "./vendor/bin/phpcs"
 if filereadable(b:phpmd_path)
 	let g:phpqa_messdetector_cmd = b:phpmd_path
+	let g:phpqa_codesniffer_cmd= b:phpcs_path
+	let g:phpqa_messdetector_ruleset = "./contrib/phpmd/ruleset.xml"
+	let g:phpqa_codesniffer_args = "--standard=./contrib/phpcs/ruleset.xml --encoding=utf-8 -n -p"
 endif
 
 " " Plugin: ultisnips

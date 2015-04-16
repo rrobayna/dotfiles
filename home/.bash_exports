@@ -42,8 +42,10 @@ export MANPAGER="less -X"
 #export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export GEM_HOME="$HOME/.gemhome/"
+export GOPATH="/home/rafael/gocode"
 ## Extend PATH
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/gocode/bin:$PATH"
 #export PATH="$PATH:/usr/local/share/npm/bin"
 
 if [ $(uname) == "Darwin" ]; then
@@ -56,3 +58,4 @@ if [ $(uname) == "Darwin" ]; then
 	# Link android sdk tools
 	#export PATH="/Applications/adt-bundle/sdk/platform-tools:$PATH"
 fi
+

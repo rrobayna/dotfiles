@@ -51,6 +51,10 @@ alias todo='vim --cmd "cd ~" +Todo'
 alias note='vim --cmd "cd ~" +Scratch'
 alias today='vim --cmd "cd ~" +Today'
 
+alias vig="vim `git status | grep modified | awk '{print $3}'`"
+
+
+
 # bashmarks
 alias bn='bashmarks new'
 alias bd='bashmarks delete'
