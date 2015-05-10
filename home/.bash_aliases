@@ -38,6 +38,7 @@ alias dps='docker ps -a'
 alias dh='docker history'
 alias dl='docker ps -l -q'
 alias dip='boot2docker ssh ip addr show dev eth1 | grep inet'
+alias dsh='docker start -ai'
 
 # mpd, mpc and ncmpcpp
 alias m='ncmpcpp'
