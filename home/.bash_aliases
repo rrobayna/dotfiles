@@ -27,6 +27,7 @@ alias gds='git diff --staged'
 alias gdh='git diff HEAD^'
 alias gref='git reflog'
 alias gsh='git show'
+alias gpom='git pull origin master'
 
 # List all git repos under a directory
 alias repos="find . -name .git -type d -prune"
@@ -79,6 +80,10 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 # Show hidden
 alias lsh='ls -ld .??*'
 
+# Ecrypt fs
+alias mp="ecryptfs-mount-private"
+alias ump="ecryptfs-unmount-private"
+
 # Display the total size of a directory in MB
 alias duh="du -d 1 -h | sort -gr"
 
@@ -119,7 +124,8 @@ function ddg { search=""; bang=""; for term in $@; do if [[ "$term" =~ -([A-Za-z
 function dict { open dict://"$@"; }
 
 # OSX: Run OS updates manually
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
+#alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
+alias update='sudo apt-get update; sudo apt-get upgrade; vim +PluginUpdate'
 
 # OSX: Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"

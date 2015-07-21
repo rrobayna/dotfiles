@@ -3,6 +3,15 @@
 # Quickly deploy your dotfiles
 
 function installDotFiles() {
+
+	if hash apt-get 2> /dev/null; then
+		echo "Debian Detected";
+		if [ ! -f ./bootstrap.lock ]; then
+			./debian/developer.sh
+			touch ./bootstrap.lock
+		fi
+	fi
+
 	echo "Bootstraping $HOME"
 	echo "========================================"
 	echo "Installing dotfiles..."
