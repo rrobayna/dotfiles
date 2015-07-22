@@ -65,6 +65,8 @@
     insteadOf = "gist:"
 
 [alias]
+	edit = "!vim `git ls-files -m` -p"
+
     root = rev-parse --show-toplevel
     cdroot = !cd `git root`
 
@@ -80,7 +82,6 @@
     cobf = "!f() { git brd $1; git cob $1; }; f"
     col = checkout HEAD~1
 
-	edit = "!vim `git ls-files -m` -p"
 
     ours = checkout --ours
     theirs = checkout --theirs
