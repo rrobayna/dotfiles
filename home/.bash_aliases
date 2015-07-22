@@ -27,6 +27,7 @@ alias gds='git diff --staged'
 alias gdh='git diff HEAD^'
 alias gref='git reflog'
 alias gsh='git show'
+alias gball='for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci %cr" $branch | head -n 1` \\t$branch; done | sort -r'
 
 # List all git repos under a directory
 alias repos="find . -name .git -type d -prune"

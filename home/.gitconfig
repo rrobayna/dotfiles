@@ -80,6 +80,8 @@
     cobf = "!f() { git brd $1; git cob $1; }; f"
     col = checkout HEAD~1
 
+	edit = "!vim `git ls-files -m` -p"
+
     ours = checkout --ours
     theirs = checkout --theirs
     aours = "!f() { (git reset $* >/dev/null); git ours $* && git add $*; }; f"
