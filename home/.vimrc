@@ -18,9 +18,8 @@ Plugin 'airblade/vim-gitgutter'			" Display git diff in gutter
 Plugin 'trailing-whitespace'			" Highlight/Fix trailing whitespace
 " Vim Vocabulary Enhancements
 Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-surround'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'nvie/vim-togglemouse'
+Plugin 'tomtom/tcomment_vim'			" use gcc or <visual> gc to toggle comments
+"Plugin 'tpope/vim-surround'
 " Tools
 Plugin 'The-NERD-tree'					" File browser
 Plugin 'tpope/vim-fugitive'				" Git interface
@@ -28,23 +27,23 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
-Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
-Plugin 'PDV--phpDocumentor-for-Vim'
-Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
+"Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
+"Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
+"Plugin 'PDV--phpDocumentor-for-Vim'
+"Plugin 'Xdebug'
+Plugin 'klen/python-mode'
 if has('lua')
 	Plugin 'Shougo/vimproc.vim'
 	Plugin 'Shougo/unite.vim'
 	Plugin 'Shougo/neomru.vim'
-	Plugin 'Shougo/unite-session'
-	Plugin 'tacroe/unite-mark'
 	if v:version >= 704
-		Plugin 'Shougo/neocomplete.vim'
-		Plugin 'Shougo/unite-outline'
+		"Plugin 'Shougo/neocomplete.vim'
+		"Plugin 'Shougo/unite-outline'
 	endif
 endif
 if has('python')
-	Plugin 'SirVer/ultisnips'
-	Plugin 'honza/vim-snippets'
+	"Plugin 'SirVer/ultisnips'
+	"Plugin 'honza/vim-snippets'
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
@@ -164,10 +163,6 @@ command! Gl Git log --simplify-merges --color --date=relative
 command! Gd Git diff
 command! Gds Git diff --staged
 command! Grl Git reflog
-" " Command Maps
-cmap gs Gs
-cmap gd Gd
-cmap gl Gl
 " Write with sudo permissions
 cmap w!! w !sudo tee > /dev/null %
 " " Shortcuts
@@ -178,7 +173,6 @@ nmap <C-W>h :tabprevious<CR>
 nmap <leader>j :bn<CR>
 nmap <leader>k :bp<CR>
 nmap <leader>l :b #<CR>
-nnoremap <C-W>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
 nmap <silent><leader>. :bd<CR>
@@ -209,7 +203,7 @@ nnoremap <silent><leader>o :<C-u>Unite
 nnoremap <silent><leader>p :<C-u>Unite
 \ -no-empty -buffer-name=sessions session<CR>
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -sync -buffer-name=files file_rec/async<CR>
+\ -start-insert -winheight=25 -sync -buffer-name=files file_rec<CR>
 nnoremap <silent><leader>g :<C-u>Unite
 \ -start-insert -no-empty -buffer-name=grep grep<CR>
 nnoremap <leader>s :<C-u>Unite
@@ -224,8 +218,6 @@ nnoremap <leader>h :<C-u>UniteWithCursorWord
 \ -start-insert -no-empty -buffer-name=grepcurrentword grep<CR>
 nnoremap <silent><leader>r :<C-u>Unite
 \ -winheight=20 -auto-preview -buffer-name=outline outline<CR>
-nnoremap <C-w>y :<C-u>Unite
-\ -no-empty -buffer-name=tabs tab<CR>
 
 " " Plugin: NERDtree
 let NERDTreeChDirMode = 2
@@ -262,37 +254,37 @@ endif
 let g:vim_markdown_initial_foldlevel=4
 
 " " Plugin: neocomplete
-if exists(":NeoCompleteEnable")
-	let g:neocomplete#enable_at_startup = 1
-	let g:neocomplete#enable_smart_case = 1
-	let g:neocomplete#auto_completion_start_length = 4
-	let g:neocomplete#sources#dictionary#dictionaries = {
-		\ 'default' : '',
-		\ 'vimshell' : $HOME.'/.vimshell_hist'
-		\ }
-	if !exists('g:neocomplete#keyword_patterns')
-		let g:neocomplete#keyword_patterns = {}
-	endif
-	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-	" key mappings
-	inoremap <expr><C-g> neocomplete#undo_completion()
-	inoremap <expr><C-l> neocomplete#complete_common_string()
-	noremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-	inoremap <expr><C-y> neocomplete#close_popup()
-	inoremap <expr><C-e> neocomplete#cancel_popup()
-	" Enable omni completion.
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	" Enable heavy omni completion.
-	if !exists('g:neocomplete#sources#omni#input_patterns')
-	  let g:neocomplete#sources#omni#input_patterns = {}
-	endif
-	let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-endif
+" if exists(":NeoCompleteEnable")
+" 	let g:neocomplete#enable_at_startup = 1
+" 	let g:neocomplete#enable_smart_case = 1
+" 	let g:neocomplete#auto_completion_start_length = 4
+" 	let g:neocomplete#sources#dictionary#dictionaries = {
+" 		\ 'default' : '',
+" 		\ 'vimshell' : $HOME.'/.vimshell_hist'
+" 		\ }
+" 	if !exists('g:neocomplete#keyword_patterns')
+" 		let g:neocomplete#keyword_patterns = {}
+" 	endif
+" 	let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" 	" key mappings
+" 	inoremap <expr><C-g> neocomplete#undo_completion()
+" 	inoremap <expr><C-l> neocomplete#complete_common_string()
+" 	noremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" 	inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" 	inoremap <expr><C-y> neocomplete#close_popup()
+" 	inoremap <expr><C-e> neocomplete#cancel_popup()
+" 	" Enable omni completion.
+" 	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" 	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" 	autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" 	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" 	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" 	" Enable heavy omni completion.
+" 	if !exists('g:neocomplete#sources#omni#input_patterns')
+" 	  let g:neocomplete#sources#omni#input_patterns = {}
+" 	endif
+" 	let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+" endif
 
 " " Plugin: phpqa
 let g:phpqa_run_on_write = 0
@@ -308,24 +300,24 @@ if filereadable(b:phpmd_path)
 endif
 
 " " Plugin: ultisnips
-if exists(':UltiSnipsEdit')
-	let g:UltiSnipsUsePythonVersion = 2
-	let g:UltiSnipsExpandTrigger="<tab>"
-	let g:UltiSnipsJumpForwardTrigger="<c-b>"
-	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-	let g:UltiSnipsEditSplit="vertical"
-
-	function! UltiSnipsCallUnite()
-		Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
-		return ''
-	endfunction
-	inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-	nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
-endif
-
-" " Plugin: pdv
-nnoremap <C-K> :call PhpDocSingle()<CR>
-vnoremap <C-K> :call PhpDocRange()<CR>
+" if exists(':UltiSnipsEdit')
+" 	let g:UltiSnipsUsePythonVersion = 2
+" 	let g:UltiSnipsExpandTrigger="<tab>"
+" 	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" 	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" 	let g:UltiSnipsEditSplit="vertical"
+"
+" 	function! UltiSnipsCallUnite()
+" 		Unite -start-insert -winheight=100 -immediately -no-empty ultisnips
+" 		return ''
+" 	endfunction
+" 	inoremap <silent> <F11> <C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+" 	nnoremap <silent> <F11> a<C-R>=(pumvisible()? "\<LT>C-E>":"")<CR><C-R>=UltiSnipsCallUnite()<CR>
+" endif
+"
+" " " Plugin: pdv
+" nnoremap <C-K> :call PhpDocSingle()<CR>
+" vnoremap <C-K> :call PhpDocRange()<CR>
 
 " " Switch Between Profiles
 function! ProfileSwitch(flag)
@@ -367,3 +359,32 @@ function! Reg()
     normal! k
 endfunction
 command! -nargs=0 Reg call Reg() | normal <cr>
+
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
