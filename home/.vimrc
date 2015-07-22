@@ -47,8 +47,6 @@ if has('python')
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
-" Cheats
-Plugin 'git-cheat'
 call vundle#end()
 filetype plugin indent on
 
