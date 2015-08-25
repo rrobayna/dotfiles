@@ -31,7 +31,7 @@ Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 "Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
 "Plugin 'PDV--phpDocumentor-for-Vim'
 "Plugin 'Xdebug'
-Plugin 'klen/python-mode'
+Plugin 'ervandew/supertab'				" Tab Completion (testing)
 if has('lua')
 	Plugin 'Shougo/vimproc.vim'
 	Plugin 'Shougo/unite.vim'
@@ -47,6 +47,7 @@ if has('python')
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
+Plugin 'klen/python-mode'
 call vundle#end()
 filetype plugin indent on
 
@@ -201,7 +202,7 @@ nnoremap <silent><leader>o :<C-u>Unite
 nnoremap <silent><leader>p :<C-u>Unite
 \ -no-empty -buffer-name=sessions session<CR>
 nnoremap <silent><leader>f :<C-u>UniteWithCurrentDir
-\ -start-insert -winheight=25 -sync -buffer-name=files file_rec<CR>
+\ -start-insert -winheight=25 -sync -buffer-name=files file_rec/async<CR>
 nnoremap <silent><leader>g :<C-u>Unite
 \ -start-insert -no-empty -buffer-name=grep grep<CR>
 nnoremap <leader>s :<C-u>Unite

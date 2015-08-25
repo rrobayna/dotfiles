@@ -126,7 +126,7 @@ function dict { open dict://"$@"; }
 
 # OSX: Run OS updates manually
 #alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup'
-alias update='sudo apt-get update; sudo apt-get upgrade; vim +PluginUpdate'
+alias update='sudo apt-get update; sudo apt-get upgrade; vim +PluginUpdate +qall'
 
 # OSX: Show/hide hidden files in Finder
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
