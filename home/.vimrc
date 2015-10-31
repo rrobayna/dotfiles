@@ -194,6 +194,7 @@ nmap <C-x> [gitter]
 nnoremap [gitter]n :GitGutterNextHunk<CR>
 nnoremap [gitter]p :GitGutterPrevHunk<CR>
 nnoremap [gitter]s :GitGutterStageHunk<CR>
+nnoremap [gitter]r :GitGutterRevertHunk<CR>
 nnoremap [gitter]b :Gblame<CR>
 
 " " Shortcuts: Unite
