@@ -268,5 +268,6 @@
 [user]
 	name = Rafael Robayna
 	email = rrobayna@gmail.com
+	signingkey = 2A30F09B
 [push]
 	default = matching
