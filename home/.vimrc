@@ -27,6 +27,7 @@ Plugin 'vimwiki/vimwiki'				" Wiki
 Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
+Plugin 'fatih/vim-go'
 "Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 "Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
 "Plugin 'PDV--phpDocumentor-for-Vim'
@@ -47,7 +48,7 @@ if has('python')
 endif
 " Syntax
 Plugin 'plasticboy/vim-markdown'
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 call vundle#end()
 filetype plugin indent on
 

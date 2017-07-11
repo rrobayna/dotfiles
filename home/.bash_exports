@@ -20,9 +20,6 @@ export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; histor
 export LANG="en_US.UTF-8"
 [ $(uname) == "Darwin" ] && export LC_ALL="en_US.UTF-8"
 
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto"
-
 # Colors for ls
 export LS_COLORS="ow=103;30;01:di=31;1:ln=36;1:ex=31;1:*~=31;1"
 
@@ -42,10 +39,11 @@ export MANPAGER="less -X"
 #export NODE_PATH="/usr/local/lib/node"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 export GEM_HOME="$HOME/.gemhome/"
-export GOPATH="/home/rafael/gocode"
+export GOPATH="/home/rafael/working/go"
 ## Extend PATH
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/gocode/bin:$PATH"
+export PATH="$HOME/Applications/jdk1.8.0_91/bin:$PATH"
 #export PATH="$PATH:/usr/local/share/npm/bin"
 
 if [ $(uname) == "Darwin" ]; then

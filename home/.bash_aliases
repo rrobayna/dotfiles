@@ -79,7 +79,7 @@ alias lsh='ls -ld .??*'
 
 # Ecrypt fs
 alias mp="ecryptfs-mount-private"
-alias ump="ecryptfs-unmount-private"
+alias ump="ecryptfs-umount-private"
 
 # Display the total size of a directory in MB
 alias duh="du -d 1 -h | sort -gr"
