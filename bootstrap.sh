@@ -49,6 +49,10 @@ function installDotFiles() {
 		echo ""
 	fi
 
+	echo "Setting Git Config"
+	git config --global user.name "Rafael Robayna"
+	git config --global user.email "rrobayna@gmail.com"
+
 	echo "Installation complete!"
 }
 

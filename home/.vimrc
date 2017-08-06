@@ -39,7 +39,7 @@ if has('lua')
 	Plugin 'Shougo/neomru.vim'
 	if v:version >= 704
 		"Plugin 'Shougo/neocomplete.vim'
-		"Plugin 'Shougo/unite-outline'
+		Plugin 'Shougo/unite-outline'
 	endif
 endif
 if has('python')
@@ -93,6 +93,9 @@ set noswapfile
 " Enhanced wildmenu: Display long list on first tab and nav menu on second
 set wildmenu
 set wildmode=list:longest,full
+
+" Fix display with tmux
+set t_ut=
 
 " Display: Set extra options when running in GUI mode
 if has("gui_running")
@@ -175,6 +178,7 @@ nmap <leader>k :bp<CR>
 nmap <leader>l :b #<CR>
 nnoremap <silent><leader>e :NERDTreeToggle<CR>
 nnoremap <silent><leader>t :TagbarToggle<CR>
+
 nmap <silent><leader>. :bd<CR>
 nmap <silent><leader>, :nohls<CR>
 nmap <leader>a :Todo<CR>
@@ -227,8 +231,10 @@ let NERDTreeShowHidden = 1
 let NERDTreeIgnore = ['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
 
 " " Plugin: tagbar
-let g:tagbar_width = 40
+" let g:tagbar_width = 40
 let g:tagbar_singleclick = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 1
 let g:tagbar_phpctags_memory_limit = '512M'
 " Enable cursorline for tagbar panes
 autocmd FileType tagbar setlocal cursorline
@@ -253,6 +259,11 @@ endif
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
+
+" " Plugin: vim-go
+set foldmethod=syntax
+let g:go_addtags_transform = 'camelcase'
+let g:go_fold_enable = ['block', 'import', 'varconst']
 
 " " Plugin: neocomplete
 " if exists(":NeoCompleteEnable")
