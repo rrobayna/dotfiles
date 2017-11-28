@@ -28,6 +28,7 @@ Plugin 'majutsushi/tagbar'				" Taglist sidebar
 Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 Plugin 'fatih/vim-go'
+Plugin 'leafgarland/typescript-vim'
 "Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 "Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
 "Plugin 'PDV--phpDocumentor-for-Vim'
@@ -94,7 +95,7 @@ set noswapfile
 set wildmenu
 set wildmode=list:longest,full
 
-" Fix display with tmux
+" Fix background in tmux
 set t_ut=
 
 " Display: Set extra options when running in GUI mode

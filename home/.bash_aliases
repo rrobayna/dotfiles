@@ -7,6 +7,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 
 # General
 alias h='history'
+alias open='see'
 
 # Tmux
 alias ltmux='if tmux has-session -t $USER; then tmux attach -t $USER; else tmux new -s $USER; fi'
