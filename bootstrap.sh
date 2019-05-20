@@ -36,7 +36,7 @@ function installDotFiles() {
 			git clone https://github.com/gmarik/Vundle.vim.git "$HOME"/.vim/bundle/Vundle.vim
 		fi
 
-		vim +PluginInstall +qall
+		vim +PluginInstall +qall +GoInstallBinaries
 
 		if [ -d "$HOME"/.vim/bundle/vimproc.vim ] && hash make 2>/dev/null; then
 			echo "Building vimproc..."
