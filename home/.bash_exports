@@ -44,6 +44,7 @@ export GEM_HOME="$HOME/working/ruby"
 export HTTPDOC=1
 ## Extend PATH
 export PATH="$GOPATH/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$HOME/gocode/bin:$PATH"
 export PATH="$HOME/Applications/jdk1.8.0_91/bin:$PATH"
