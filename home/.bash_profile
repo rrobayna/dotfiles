@@ -40,3 +40,4 @@ fi;
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
 
 [ -f "$HOME/.bin/bashmarks.sh" ] && source ~/.bin/bashmarks.sh
+if [ -e /home/rafael/.nix-profile/etc/profile.d/nix.sh ]; then . /home/rafael/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

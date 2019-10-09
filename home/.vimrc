@@ -8,6 +8,7 @@ let os = substitute(system('uname'), "\n", "", "")
 " " Vundle Initialization
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
+set rtp+=~/.fzf
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " Themes
@@ -29,6 +30,9 @@ Plugin 'vim-php/tagbar-phpctags.vim'	" Tagbar extension for php
 Plugin 'joonty/vim-phpqa'				" PHP code quality tools interface
 Plugin 'fatih/vim-go'
 Plugin 'leafgarland/typescript-vim'
+
+Plugin 'alok/notational-fzf-vim'
+
 "Plugin 'Shutnik/jshint2.vim'			" Javascript code quality tool
 "Plugin 'mikehaertl/pdv-standalone'		" PHP Documenter
 "Plugin 'PDV--phpDocumentor-for-Vim'
@@ -257,6 +261,9 @@ let g:vimwiki_list = [notes]
 if !empty(glob('~/.vimwikirc.vim'))
 	source ~/.vimwikirc.vim
 endif
+
+" " Plugin: notational velocity
+let g:nv_search_paths = ['~/.wikis']
 
 " " Plugin: markdown
 let g:vim_markdown_initial_foldlevel=4
